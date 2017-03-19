@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Six&#39;s a Coder</title>
   
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="http://www.zhiyupan.me/blog/"/>
+  <link href="http://yoursite.com/"/>
   <updated>2017-03-19T16:00:15.817Z</updated>
-  <id>http://www.zhiyupan.me/blog/</id>
+  <id>http://yoursite.com/</id>
   
   <author>
     <name>Six</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>MakeFile</title>
-    <link href="http://www.zhiyupan.me/blog/2017/03/19/MakeFile/"/>
-    <id>http://www.zhiyupan.me/blog/2017/03/19/MakeFile/</id>
+    <link href="http://yoursite.com/2017/03/19/MakeFile/"/>
+    <id>http://yoursite.com/2017/03/19/MakeFile/</id>
     <published>2017-03-19T14:43:38.000Z</published>
     <updated>2017-03-19T16:00:15.817Z</updated>
     
@@ -38,16 +38,16 @@
     </summary>
     
     
-      <category term="工具" scheme="http://www.zhiyupan.me/blog/tags/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
-      <category term="MakeFile" scheme="http://www.zhiyupan.me/blog/tags/MakeFile/"/>
+      <category term="MakeFile" scheme="http://yoursite.com/tags/MakeFile/"/>
     
   </entry>
   
   <entry>
     <title>索引堆</title>
-    <link href="http://www.zhiyupan.me/blog/2017/03/19/IndexHeap/"/>
-    <id>http://www.zhiyupan.me/blog/2017/03/19/IndexHeap/</id>
+    <link href="http://yoursite.com/2017/03/19/IndexHeap/"/>
+    <id>http://yoursite.com/2017/03/19/IndexHeap/</id>
     <published>2017-03-19T14:00:36.000Z</published>
     <updated>2017-03-19T16:00:30.670Z</updated>
     
@@ -132,7 +132,7 @@
     </summary>
     
     
-      <category term="算法 堆 图论" scheme="http://www.zhiyupan.me/blog/tags/%E7%AE%97%E6%B3%95-%E5%A0%86-%E5%9B%BE%E8%AE%BA/"/>
+      <category term="算法 堆 图论" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95-%E5%A0%86-%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
