@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -84,9 +84,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="算法 堆 图论," />
@@ -95,12 +95,12 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Six's a Coder" type="application/atom+xml" />
+  <link rel="alternate" href="/blog/atom.xml" title="Six's a Coder" type="application/atom+xml" />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.0" />
 
 
 
@@ -121,7 +121,7 @@
 这个时候就需要另外一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="索引堆">
-<meta property="og:url" content="http://yoursite.com/2017/03/19/IndexHeap/index.html">
+<meta property="og:url" content="http://www.zhiyupan.me/blog/2017/03/19/IndexHeap/index.html">
 <meta property="og:site_name" content="Six's a Coder">
 <meta property="og:description" content="这里主要讨论的是，数组化的实现堆的经典方法。
 
@@ -135,7 +135,7 @@
 这也是就是索引堆的意义，或者说索引堆的核心价值。
 就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
 这个时候就需要另外一个">
-<meta property="og:updated_time" content="2017-03-19T14:01:55.088Z">
+<meta property="og:updated_time" content="2017-03-19T16:00:30.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="索引堆">
 <meta name="twitter:description" content="这里主要讨论的是，数组化的实现堆的经典方法。
@@ -156,8 +156,8 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
+    root: '/blog/',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -177,7 +177,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/19/IndexHeap/"/>
+  <link rel="canonical" href="http://www.zhiyupan.me/blog/2017/03/19/IndexHeap/"/>
 
 
 
@@ -217,7 +217,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/blog/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Six's a Coder</span>
         <span class="logo-line-after"><i></i></span>
@@ -245,7 +245,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/blog/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -255,7 +255,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/blog/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -265,7 +265,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/blog/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -275,7 +275,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/blog/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -285,7 +285,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/blog/about" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -322,12 +322,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/IndexHeap/">
+    <link itemprop="mainEntityOfPage" href="http://www.zhiyupan.me/blog/blog/2017/03/19/IndexHeap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="image" content="/blog/uploads/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -414,6 +414,7 @@
 <p>在普通堆中，<code>shiftUp</code>和<code>shiftDown</code>中都要进行一步交换两个节点之间的值的步骤，但是如果节点值只是简单的数字，也是交换操作不会造成太大的影响，但是如果不是数字呢，而是一个字符串，或者一个更大的数据类型时，那么交换带来的副作用将会被大大提升。</p>
 <p>p.s. 当然这里交换的操作，我们可以简单的通过一些技术手段来替代。</p>
 <p>所以，这时，我们的英雄登场了：索引堆，先来看看它的数据结构。</p>
+<a id="more"></a>
 <h2 id="2-索引堆的数据结构"><a href="#2-索引堆的数据结构" class="headerlink" title="2 索引堆的数据结构"></a>2 索引堆的数据结构</h2><p>索引堆在普通堆的基础之上，其实多维护了一个<code>indexes</code>数组而已，它记录着<code>data</code>中的索引，在堆中的位置，也就是indexes[i] = x 的意思就是，data[x]这个元素，在堆中的实际位置是 i。</p>
 <p>看下索引堆的数据结构：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Item&gt;</div><div class="line"><span class="keyword">class</span> IndexMinHeap&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Item * data;</div><div class="line">    <span class="keyword">int</span>  * indexes;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <h2 id="3-索引堆过程"><a href="#3-索引堆过程" class="headerlink" title="3 索引堆过程"></a>3 索引堆过程</h2><p>索引堆的整个操作中，并没有对原始数据进行任何操作（只是用来比较），而真正处理的索引数组<code>indexes</code>中的索引，把索引进行了一次堆排序。</p>
@@ -447,7 +448,6 @@
 <p>对索引堆的使用，在图论中关于有权图，单源最短路径问题的算法中，比如<code>Dijkstra</code>算法和<code>Bellman-Ford</code>算法中都有使用，用来维护最短权值的数组。</p>
 </blockquote>
 <h2 id="最后，附上源码"><a href="#最后，附上源码" class="headerlink" title="最后，附上源码"></a>最后，附上源码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> INDEXMINHEAP_INDEXMINHEAP_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INDEXMINHEAP_INDEXMINHEAP_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Item&gt;</div><div class="line"><span class="keyword">class</span> IndexMinHeap&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line"></div><div class="line">    <span class="comment">// 原始数据，对原始数据并不需要进行实际的操作，下标不变</span></div><div class="line">    Item * data;</div><div class="line"></div><div class="line">    <span class="comment">// indexes[i]表示堆中第i个元素在data中索引</span></div><div class="line">    <span class="comment">// 比如indexes[1] = 10，也就是说，堆的根节点，是data中的10号元素</span></div><div class="line">    <span class="keyword">int</span>  * indexes;</div><div class="line"></div><div class="line">    <span class="comment">// reverse[i]表示索引i在indexes(堆)中的位置</span></div><div class="line">    <span class="comment">// reverse[10] = 1，也就是说，10号索引在堆中的位置是1号元素，也就是根节点</span></div><div class="line">    <span class="comment">// reverse[x] = 0; 表示索引不存在</span></div><div class="line">    <span class="keyword">int</span>  * reverse;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> count;</div><div class="line">    <span class="keyword">int</span> capacity;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shiftUp</span><span class="params">( <span class="keyword">int</span> k )</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>( k &gt; <span class="number">1</span> &amp;&amp; data[indexes[k]] &lt; data[indexes[k/<span class="number">2</span>]] )&#123;</div><div class="line">            <span class="built_in">std</span>::swap( indexes[k] , indexes[k/<span class="number">2</span>] );</div><div class="line">            reverse[indexes[k]] = k;</div><div class="line">            reverse[indexes[k/<span class="number">2</span>]] = k/<span class="number">2</span>;</div><div class="line">            k /= <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shiftDown</span><span class="params">( <span class="keyword">int</span> k )</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>( <span class="number">2</span>*k &lt;= count )&#123;</div><div class="line">            <span class="keyword">int</span> i = <span class="number">2</span>*k;</div><div class="line">            <span class="keyword">if</span>( i+<span class="number">1</span> &lt;= count &amp;&amp; data[indexes[i]] &gt; data[indexes[i+<span class="number">1</span>]] )</div><div class="line">                i += <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>( data[indexes[k]] &lt;= data[indexes[i]] )</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="built_in">std</span>::swap( indexes[k] , indexes[i] );</div><div class="line">            reverse[indexes[k]] = k;</div><div class="line">            reverse[indexes[i]] = i;</div><div class="line">            k = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    IndexMinHeap( <span class="keyword">int</span> capacity )&#123;</div><div class="line">        data = <span class="keyword">new</span> Item[capacity+<span class="number">1</span>];</div><div class="line">        indexes = <span class="keyword">new</span> <span class="keyword">int</span>[capacity+<span class="number">1</span>];</div><div class="line">        reverse = <span class="keyword">new</span> <span class="keyword">int</span>[capacity+<span class="number">1</span>];</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; capacity ; ++ i )</div><div class="line">            reverse[i] = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>-&gt;capacity = capacity;</div><div class="line">        <span class="keyword">this</span>-&gt;count = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ~MinHeap()&#123;</div><div class="line">        <span class="keyword">delete</span>[] data;</div><div class="line">        <span class="keyword">delete</span>[] indexes;</div><div class="line">        <span class="keyword">delete</span>[] reverse;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> count == <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 传入的i对于用户而言，是从0开始索引的</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">( <span class="keyword">int</span> i , Item item )</span></span>&#123;</div><div class="line"></div><div class="line">        assert( count + <span class="number">1</span> &lt;= capacity );</div><div class="line">        assert( i + <span class="number">1</span> &gt;= <span class="number">1</span> &amp;&amp; i + <span class="number">1</span> &lt;= capacity );</div><div class="line"></div><div class="line">        i += <span class="number">1</span>;</div><div class="line">        count += <span class="number">1</span>;</div><div class="line"></div><div class="line">        data[i] = item;</div><div class="line">        indexes[count] = i;<span class="comment">// 把data中的索引i，放入indexes数组</span></div><div class="line">        reverse[i] = count;<span class="comment">// 把indexes中的索引i，放入reverse数组</span></div><div class="line"></div><div class="line">        shiftUp( count );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">Item <span class="title">extractMin</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line"></div><div class="line">        Item ret = data[indexes[<span class="number">1</span>]];</div><div class="line">        <span class="built_in">std</span>::swap( indexes[<span class="number">1</span>] , indexes[count] );</div><div class="line">        reverse[indexes[<span class="number">1</span>]] = <span class="number">1</span>;</div><div class="line">        reverse[indexes[count]] = <span class="number">0</span>;</div><div class="line">        count --;</div><div class="line">        shiftDown( <span class="number">1</span> );</div><div class="line"></div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">extractMinIndex</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line"></div><div class="line">        <span class="keyword">int</span> ret = indexes[<span class="number">1</span>] - <span class="number">1</span>;<span class="comment">// 返回从0开始的索引值</span></div><div class="line">        <span class="built_in">std</span>::swap( indexes[<span class="number">1</span>] , indexes[count] );</div><div class="line">        reverse[indexes[<span class="number">1</span>]] = <span class="number">1</span>;</div><div class="line">        reverse[indexes[count]] = <span class="number">0</span>;</div><div class="line">        count --;</div><div class="line">        shiftDown( <span class="number">1</span> );</div><div class="line"></div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">Item <span class="title">getMin</span><span class="params">()</span></span>&#123;</div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line">        <span class="keyword">return</span> data[indexes[<span class="number">1</span>]];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMinIndex</span><span class="params">()</span></span>&#123;</div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line">        <span class="keyword">return</span> indexes[<span class="number">1</span>] - <span class="number">1</span>;<span class="comment">// 返回从0开始的索引值</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 对用户而言，参入的参数就是实际的数据的下标，且是从0开始的索引</span></div><div class="line">    <span class="function">Item <span class="title">getItem</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</div><div class="line">        assert( i+<span class="number">1</span> &gt;= <span class="number">1</span> &amp;&amp; i+<span class="number">1</span> &lt;= capacity );</div><div class="line">        <span class="keyword">return</span> data[i+<span class="number">1</span>];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contain</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</div><div class="line">        assert( i + <span class="number">1</span> &gt;= <span class="number">1</span> &amp;&amp; i + <span class="number">1</span> &lt;= capacity );</div><div class="line">        <span class="keyword">return</span> reverse[i+<span class="number">1</span>] != <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">( <span class="keyword">int</span> i , Item newItem )</span></span>&#123;</div><div class="line"></div><div class="line">        i += <span class="number">1</span>;</div><div class="line">        data[i] = newItem;</div><div class="line"></div><div class="line">        <span class="comment">// 找到indexes[j] = i, j表示data[i]在堆中的位置</span></div><div class="line">        <span class="comment">// 之后shiftUp，再shiftDown ( 先shiftDown，再shiftUp也可以 )</span></div><div class="line"></div><div class="line"><span class="comment">//        for( int j = 1 ; j &lt;= count ; ++ j )</span></div><div class="line"><span class="comment">//            if( indexes[j] == i )&#123;</span></div><div class="line"><span class="comment">//                shiftUp( j );</span></div><div class="line"><span class="comment">//                shiftDown( j );</span></div><div class="line"><span class="comment">//                return;</span></div><div class="line"><span class="comment">//            &#125;</span></div><div class="line"></div><div class="line">        <span class="keyword">int</span> j = reverse[i];</div><div class="line">        shiftUp( j );</div><div class="line">        shiftDown( j );</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//INDEXMINHEAP_INDEXMINHEAP_H</span></span></div></pre></td></tr></table></figure>
-
       
     </div>
 
@@ -476,7 +476,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法-堆-图论/" rel="tag"># 算法 堆 图论</a>
+            <a href="/blog/tags/算法-堆-图论/" rel="tag"># 算法 堆 图论</a>
           
         </div>
       
@@ -489,15 +489,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/18/postName/" rel="next" title="postName">
-                <i class="fa fa-chevron-left"></i> postName
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/03/19/MakeFile/" rel="prev" title="MakeFile">
+                MakeFile <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -557,19 +557,19 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
+               src="/blog/uploads/avatar.jpg"
                alt="Six" />
           <p class="site-author-name" itemprop="name">Six</p>
            
-              <p class="site-description motion-element" itemprop="description">stay foolish.</p>
+              <p class="site-description motion-element" itemprop="description">Dream Big, Work Hard.</p>
           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">3</span>
+              <a href="/blog/archives">
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -581,10 +581,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">2</span>
+              <a href="/blog/tags/index.html">
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -592,7 +592,7 @@
 
         
           <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
+            <a href="/blog/atom.xml" rel="alternate">
               <i class="fa fa-rss"></i>
               RSS
             </a>
@@ -673,7 +673,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
 
@@ -715,46 +715,46 @@
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
