@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法 堆 图论," />
 
 
 
@@ -107,15 +107,49 @@
 
 
 
-<meta name="description" content="stay foolish.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Six's a Coder">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="这里主要讨论的是，数组化的实现堆的经典方法。
+
+1 为什么要使用索引堆
+索引堆从名称也可以看得出来，是堆的一种高级形态
+
+有这样一个基础概念，想在此强调一下，那就是：
+
+对于堆化的过程中，原来数组的索引将被破坏掉。
+
+这也是就是索引堆的意义，或者说索引堆的核心价值。
+就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
+这个时候就需要另外一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="索引堆">
+<meta property="og:url" content="http://yoursite.com/2017/03/19/IndexHeap/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="stay foolish.">
+<meta property="og:description" content="这里主要讨论的是，数组化的实现堆的经典方法。
+
+1 为什么要使用索引堆
+索引堆从名称也可以看得出来，是堆的一种高级形态
+
+有这样一个基础概念，想在此强调一下，那就是：
+
+对于堆化的过程中，原来数组的索引将被破坏掉。
+
+这也是就是索引堆的意义，或者说索引堆的核心价值。
+就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
+这个时候就需要另外一个">
+<meta property="og:updated_time" content="2017-03-19T14:01:55.088Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Six's a Coder">
-<meta name="twitter:description" content="stay foolish.">
+<meta name="twitter:title" content="索引堆">
+<meta name="twitter:description" content="这里主要讨论的是，数组化的实现堆的经典方法。
+
+1 为什么要使用索引堆
+索引堆从名称也可以看得出来，是堆的一种高级形态
+
+有这样一个基础概念，想在此强调一下，那就是：
+
+对于堆化的过程中，原来数组的索引将被破坏掉。
+
+这也是就是索引堆的意义，或者说索引堆的核心价值。
+就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
+这个时候就需要另外一个">
 
 
 
@@ -143,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/19/IndexHeap/"/>
 
 
 
 
 
-  <title> Six's a Coder </title>
+  <title> 索引堆 | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -174,9 +208,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,9 +311,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -311,10 +343,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/03/19/IndexHeap/" itemprop="url">
-                  索引堆
-                </a>
+                索引堆
               
             
           </h1>
@@ -365,9 +394,7 @@
       
 
       
-        
-          
-            <blockquote>
+        <blockquote>
 <p>这里主要讨论的是，数组化的实现堆的经典方法。</p>
 </blockquote>
 <h2 id="1-为什么要使用索引堆"><a href="#1-为什么要使用索引堆" class="headerlink" title="1 为什么要使用索引堆"></a>1 为什么要使用索引堆</h2><blockquote>
@@ -421,292 +448,72 @@
 </blockquote>
 <h2 id="最后，附上源码"><a href="#最后，附上源码" class="headerlink" title="最后，附上源码"></a>最后，附上源码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> INDEXMINHEAP_INDEXMINHEAP_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INDEXMINHEAP_INDEXMINHEAP_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Item&gt;</div><div class="line"><span class="keyword">class</span> IndexMinHeap&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line"></div><div class="line">    <span class="comment">// 原始数据，对原始数据并不需要进行实际的操作，下标不变</span></div><div class="line">    Item * data;</div><div class="line"></div><div class="line">    <span class="comment">// indexes[i]表示堆中第i个元素在data中索引</span></div><div class="line">    <span class="comment">// 比如indexes[1] = 10，也就是说，堆的根节点，是data中的10号元素</span></div><div class="line">    <span class="keyword">int</span>  * indexes;</div><div class="line"></div><div class="line">    <span class="comment">// reverse[i]表示索引i在indexes(堆)中的位置</span></div><div class="line">    <span class="comment">// reverse[10] = 1，也就是说，10号索引在堆中的位置是1号元素，也就是根节点</span></div><div class="line">    <span class="comment">// reverse[x] = 0; 表示索引不存在</span></div><div class="line">    <span class="keyword">int</span>  * reverse;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> count;</div><div class="line">    <span class="keyword">int</span> capacity;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shiftUp</span><span class="params">( <span class="keyword">int</span> k )</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>( k &gt; <span class="number">1</span> &amp;&amp; data[indexes[k]] &lt; data[indexes[k/<span class="number">2</span>]] )&#123;</div><div class="line">            <span class="built_in">std</span>::swap( indexes[k] , indexes[k/<span class="number">2</span>] );</div><div class="line">            reverse[indexes[k]] = k;</div><div class="line">            reverse[indexes[k/<span class="number">2</span>]] = k/<span class="number">2</span>;</div><div class="line">            k /= <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shiftDown</span><span class="params">( <span class="keyword">int</span> k )</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>( <span class="number">2</span>*k &lt;= count )&#123;</div><div class="line">            <span class="keyword">int</span> i = <span class="number">2</span>*k;</div><div class="line">            <span class="keyword">if</span>( i+<span class="number">1</span> &lt;= count &amp;&amp; data[indexes[i]] &gt; data[indexes[i+<span class="number">1</span>]] )</div><div class="line">                i += <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>( data[indexes[k]] &lt;= data[indexes[i]] )</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="built_in">std</span>::swap( indexes[k] , indexes[i] );</div><div class="line">            reverse[indexes[k]] = k;</div><div class="line">            reverse[indexes[i]] = i;</div><div class="line">            k = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    IndexMinHeap( <span class="keyword">int</span> capacity )&#123;</div><div class="line">        data = <span class="keyword">new</span> Item[capacity+<span class="number">1</span>];</div><div class="line">        indexes = <span class="keyword">new</span> <span class="keyword">int</span>[capacity+<span class="number">1</span>];</div><div class="line">        reverse = <span class="keyword">new</span> <span class="keyword">int</span>[capacity+<span class="number">1</span>];</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; capacity ; ++ i )</div><div class="line">            reverse[i] = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>-&gt;capacity = capacity;</div><div class="line">        <span class="keyword">this</span>-&gt;count = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ~MinHeap()&#123;</div><div class="line">        <span class="keyword">delete</span>[] data;</div><div class="line">        <span class="keyword">delete</span>[] indexes;</div><div class="line">        <span class="keyword">delete</span>[] reverse;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> count == <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 传入的i对于用户而言，是从0开始索引的</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">( <span class="keyword">int</span> i , Item item )</span></span>&#123;</div><div class="line"></div><div class="line">        assert( count + <span class="number">1</span> &lt;= capacity );</div><div class="line">        assert( i + <span class="number">1</span> &gt;= <span class="number">1</span> &amp;&amp; i + <span class="number">1</span> &lt;= capacity );</div><div class="line"></div><div class="line">        i += <span class="number">1</span>;</div><div class="line">        count += <span class="number">1</span>;</div><div class="line"></div><div class="line">        data[i] = item;</div><div class="line">        indexes[count] = i;<span class="comment">// 把data中的索引i，放入indexes数组</span></div><div class="line">        reverse[i] = count;<span class="comment">// 把indexes中的索引i，放入reverse数组</span></div><div class="line"></div><div class="line">        shiftUp( count );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">Item <span class="title">extractMin</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line"></div><div class="line">        Item ret = data[indexes[<span class="number">1</span>]];</div><div class="line">        <span class="built_in">std</span>::swap( indexes[<span class="number">1</span>] , indexes[count] );</div><div class="line">        reverse[indexes[<span class="number">1</span>]] = <span class="number">1</span>;</div><div class="line">        reverse[indexes[count]] = <span class="number">0</span>;</div><div class="line">        count --;</div><div class="line">        shiftDown( <span class="number">1</span> );</div><div class="line"></div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">extractMinIndex</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line"></div><div class="line">        <span class="keyword">int</span> ret = indexes[<span class="number">1</span>] - <span class="number">1</span>;<span class="comment">// 返回从0开始的索引值</span></div><div class="line">        <span class="built_in">std</span>::swap( indexes[<span class="number">1</span>] , indexes[count] );</div><div class="line">        reverse[indexes[<span class="number">1</span>]] = <span class="number">1</span>;</div><div class="line">        reverse[indexes[count]] = <span class="number">0</span>;</div><div class="line">        count --;</div><div class="line">        shiftDown( <span class="number">1</span> );</div><div class="line"></div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">Item <span class="title">getMin</span><span class="params">()</span></span>&#123;</div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line">        <span class="keyword">return</span> data[indexes[<span class="number">1</span>]];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMinIndex</span><span class="params">()</span></span>&#123;</div><div class="line">        assert( count &gt; <span class="number">0</span> );</div><div class="line">        <span class="keyword">return</span> indexes[<span class="number">1</span>] - <span class="number">1</span>;<span class="comment">// 返回从0开始的索引值</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 对用户而言，参入的参数就是实际的数据的下标，且是从0开始的索引</span></div><div class="line">    <span class="function">Item <span class="title">getItem</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</div><div class="line">        assert( i+<span class="number">1</span> &gt;= <span class="number">1</span> &amp;&amp; i+<span class="number">1</span> &lt;= capacity );</div><div class="line">        <span class="keyword">return</span> data[i+<span class="number">1</span>];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contain</span><span class="params">( <span class="keyword">int</span> i )</span></span>&#123;</div><div class="line">        assert( i + <span class="number">1</span> &gt;= <span class="number">1</span> &amp;&amp; i + <span class="number">1</span> &lt;= capacity );</div><div class="line">        <span class="keyword">return</span> reverse[i+<span class="number">1</span>] != <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">( <span class="keyword">int</span> i , Item newItem )</span></span>&#123;</div><div class="line"></div><div class="line">        i += <span class="number">1</span>;</div><div class="line">        data[i] = newItem;</div><div class="line"></div><div class="line">        <span class="comment">// 找到indexes[j] = i, j表示data[i]在堆中的位置</span></div><div class="line">        <span class="comment">// 之后shiftUp，再shiftDown ( 先shiftDown，再shiftUp也可以 )</span></div><div class="line"></div><div class="line"><span class="comment">//        for( int j = 1 ; j &lt;= count ; ++ j )</span></div><div class="line"><span class="comment">//            if( indexes[j] == i )&#123;</span></div><div class="line"><span class="comment">//                shiftUp( j );</span></div><div class="line"><span class="comment">//                shiftDown( j );</span></div><div class="line"><span class="comment">//                return;</span></div><div class="line"><span class="comment">//            &#125;</span></div><div class="line"></div><div class="line">        <span class="keyword">int</span> j = reverse[i];</div><div class="line">        shiftUp( j );</div><div class="line">        shiftDown( j );</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//INDEXMINHEAP_INDEXMINHEAP_H</span></span></div></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/18/postName/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Six">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Six's a Coder">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/18/postName/" itemprop="url">
-                  postName
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-18T18:49:48+08:00">
-                2017-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/算法-堆-图论/" rel="tag"># 算法 堆 图论</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-            <h2 id="算法面试"><a href="#算法面试" class="headerlink" title="算法面试"></a>算法面试</h2><p>这里开始使用markdown格式输入你的正文。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/18/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Six">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Six's a Coder">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/18/postName/" rel="next" title="postName">
+                <i class="fa fa-chevron-left"></i> postName
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2017/03/18/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-18T18:20:45+08:00">
-                2017-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -714,6 +521,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -733,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -805,6 +625,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为什么要使用索引堆"><span class="nav-number">1.</span> <span class="nav-text">1 为什么要使用索引堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-索引堆的数据结构"><span class="nav-number">2.</span> <span class="nav-text">2 索引堆的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-索引堆过程"><span class="nav-number">3.</span> <span class="nav-text">3 索引堆过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-调整优先级"><span class="nav-number">4.</span> <span class="nav-text">4 调整优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Reverse-数组"><span class="nav-number">5.</span> <span class="nav-text">5 Reverse 数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-不断维护Reverse和Indexes数组"><span class="nav-number">6.</span> <span class="nav-text">6 不断维护Reverse和Indexes数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-应用"><span class="nav-number">7.</span> <span class="nav-text">7 应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后，附上源码"><span class="nav-number">8.</span> <span class="nav-text">最后，附上源码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -910,6 +746,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
