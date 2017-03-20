@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Fira Code:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,图论基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Six's a Coder" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="我不能说我不珍重这些荣誉，并且我承认它很有价值，不过我却从来不曾为追求这些荣誉而工作。—— 法拉第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈算法 之 并查集">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/浅谈算法-之-并查集/index.html">
+<meta property="og:site_name" content="Six's a Coder">
+<meta property="og:description" content="我不能说我不珍重这些荣誉，并且我承认它很有价值，不过我却从来不曾为追求这些荣誉而工作。—— 法拉第">
+<meta property="og:updated_time" content="2017-03-20T16:29:15.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈算法 之 并查集">
+<meta name="twitter:description" content="我不能说我不珍重这些荣誉，并且我承认它很有价值，不过我却从来不曾为追求这些荣誉而工作。—— 法拉第">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/20/浅谈算法-之-并查集/"/>
+
+
+
+
+
+  <title> 浅谈算法 之 并查集 | Six's a Coder </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Six's a Coder</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/浅谈算法-之-并查集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Six">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Six's a Coder">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浅谈算法 之 并查集
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T21:35:20+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>我不能说我不珍重这些荣誉，并且我承认它很有价值，不过我却从来不曾为追求这些荣誉而工作。<br>—— <strong>法拉第</strong><br></blockquote><br><a id="more"></a></p>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1 概念"></a>1 概念</h3><blockquote>
+<p>并查集本身是一种特殊的树形结构,看似有点奇怪,因为它某些实现方式可能并没有使用到关于树的任何节点之类的东西,但是原理上,就是这样.</p>
+</blockquote>
+<h3 id="2-基础"><a href="#2-基础" class="headerlink" title="2 基础"></a>2 基础</h3><p>并查集存在的最大意义就是为了,<code>高效</code>地回答一个问题:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">isConnect ( int p , int q )</div></pre></td></tr></table></figure></p>
+<p>也就是判断 <code>两个节点是否连接</code> 问题.<br>正是这一点,也是它作为图论基础的一个重要原因,图论关于路径问题很多时候,都会使用并查集这种概念来解决其中一些逻辑.</p>
+<h4 id="2-1-连接问题-与-路径问题"><a href="#2-1-连接问题-与-路径问题" class="headerlink" title="2.1 连接问题 与 路径问题"></a>2.1 连接问题 与 路径问题</h4><blockquote>
+<p>连接问题相比路径问题,回答的问题要少很多,因为它只关心两个节点是否相连,这也正是并查集高效的根本原因.</p>
+</blockquote>
+<p><strong>一个算法可以回答问题越多,其实不见得这个算法越高效,反而,可能这个算法是越低效的,这一点特别重要.<br>或者说, 一个算法如果回答的问题越少, 其实也是提升算法效率的一个重要思路.</strong></p>
+<p>比如:</p>
+<blockquote>
+<p>二分查找法 和 顺序查找法 相比<br>快速排序 partition<br>堆</p>
+</blockquote>
+<p>再看什么是连接的问题?</p>
+<blockquote>
+<p>网络中节点的连接状态<br>用户之间形成的网络<br>道路交通<br>航班调度</p>
+</blockquote>
+<h4 id="2-2-并查集的两个基本操作-是的-就两个"><a href="#2-2-并查集的两个基本操作-是的-就两个" class="headerlink" title="2.2 并查集的两个基本操作,是的,就两个:"></a>2.2 并查集的两个基本操作,是的,就两个:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">find( int p )</div><div class="line">union( int p , int q)</div><div class="line"></div><div class="line">// 注意,这里的union不是联合体的意思,是合并操作的意思</div></pre></td></tr></table></figure>
+<h3 id="2-3-另外"><a href="#2-3-另外" class="headerlink" title="2.3 另外"></a>2.3 另外</h3><blockquote>
+<p>并查集也可以实现数学中的集合类.</p>
+</blockquote>
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3 实现"></a>3 实现</h2><p>这里介绍的并查集底层实现方式都是使用数组来实现的.</p>
+<h3 id="3-1-QuickFind"><a href="#3-1-QuickFind" class="headerlink" title="3.1 QuickFind"></a>3.1 QuickFind</h3><p>QuickFind见名知义,就是find操作的实现比较快.<br>问题: 效率太低.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UnionFind&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> * id;</div><div class="line">    <span class="keyword">int</span> count;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// O(1)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    <span class="keyword">return</span> id[p];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q)</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    assert( q &gt;= <span class="number">0</span> &amp;&amp; q &lt; count );</div><div class="line">    <span class="keyword">return</span> id[p] == id[q];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// O(n)</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> pID = find(p);</div><div class="line">    <span class="keyword">int</span> qID = find(q);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( qID == pID)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; count ; ++ i )</div><div class="line">        <span class="keyword">if</span>( qID == id[i] )</div><div class="line">            id[i] = pID;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其实从代码我们也可以看出,其实find操作,在图中的,其实就是查找当前节点所在的连通分量的值.<br>union的操作其实就是合并两个连通分量. 因为对于两个连通分量来说, 只要各自有一个点相连接了, 那么两个连通分量都连在一起了.</p>
+<h3 id="3-2-QuickUnion"><a href="#3-2-QuickUnion" class="headerlink" title="3.2 QuickUnion"></a>3.2 QuickUnion</h3><p>QuickUnion见名知义,就是union操作的实现比较快.<br>思路上,发生了一点变化:</p>
+<blockquote>
+<p>每个节点缓存了自己的父节点的值<br>其实这个思路,就是类似于树的父节点的概念,但是实现了并没有引入指针的概念</p>
+</blockquote>
+<p>问题: 一定程度上,缓解了QuickFind的效率低下的问题,但是还不够</p>
+<p>实现如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UnionFind&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> * parent;</div><div class="line">    <span class="keyword">int</span> count;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    </div><div class="line">    <span class="keyword">while</span>( p != parent[p] )</div><div class="line">        p = parent[p];</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> find(p) == find(q);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> pRoot = find(p);</div><div class="line">    <span class="keyword">int</span> qRoot = find(q);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( qRoot == pRoot)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line"></div><div class="line">    <span class="comment">// q节点的根节点, 指向p节点的根节点    </span></div><div class="line">    parent[pRoot] = qRoot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>虽然实现上并没有引入根节点,或者使用指针概念( 因为并查集中的节点只有父节点概念, 所以用数组来保存节点值即可 ), 但是本质上, 在开头也提到了, 并查集虽然是一棵特殊的树, 但是还是具有树的性质: </p>
+<blockquote>
+<p>当树高度很深时, 树的遍历效率会大大降低. 类似于普通平衡二叉树也有类似的问题,所以才引入了2-3树和红黑树的概念.</p>
+</blockquote>
+<p>在并查集中,也存在这样类似的问题, 所以便有了下面的两种优化</p>
+<h3 id="3-2-1-基于size的优化"><a href="#3-2-1-基于size的优化" class="headerlink" title="3.2.1 基于size的优化"></a>3.2.1 基于size的优化</h3><p>思路也很简单,就是在union操作中,不是随意的将两个连通分量直接合并,而是根据元素的个数,优先将元素少的集合, 合并到元素多的连通分量中.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> UNIONFIND_UNIONFIND3_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> UNIONFIND_UNIONFIND3_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> UF3&#123;</div><div class="line">    <span class="keyword">class</span> UnionFind&#123;</div><div class="line">    <span class="keyword">private</span>:</div><div class="line">        <span class="keyword">int</span> * parent;</div><div class="line">        <span class="keyword">int</span> count;</div><div class="line">        <span class="keyword">int</span> * sz;<span class="comment">// sz[i] 表示i为根节点的集合中元素个数</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        UnionFind( <span class="keyword">int</span> count )&#123;</div><div class="line">            parent = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            sz = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            <span class="keyword">this</span>-&gt;count = count;</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; count ; ++i )&#123;</div><div class="line">                parent[i] = i;</div><div class="line">                sz[i] = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ~UnionFind()&#123;</div><div class="line">            <span class="keyword">delete</span>[] parent;</div><div class="line">            <span class="keyword">delete</span>[] sz;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">            assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line"></div><div class="line">            <span class="keyword">while</span>( p != parent[p] )</div><div class="line">                p = parent[p];</div><div class="line"></div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> find(p) == find(q);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> pRoot = find(p);</div><div class="line">            <span class="keyword">int</span> qRoot = find(q);</div><div class="line"></div><div class="line">            <span class="keyword">if</span>( pRoot == qRoot )</div><div class="line">                <span class="keyword">return</span>;</div><div class="line"></div><div class="line">            <span class="comment">// 节点少的并到节点多的集合中</span></div><div class="line">            <span class="keyword">if</span>( sz[pRoot] &gt; sz[qRoot] ) &#123;</div><div class="line">                parent[qRoot] = pRoot;</div><div class="line">                sz[pRoot] += sz[qRoot];</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                parent[pRoot] = qRoot;</div><div class="line">                sz[pRoot] += sz[qRoot];</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//UNIONFIND_UNIONFIND3_H</span></span></div></pre></td></tr></table></figure>
+<h3 id="3-2-1-基于rank的优化"><a href="#3-2-1-基于rank的优化" class="headerlink" title="3.2.1 基于rank的优化"></a>3.2.1 基于rank的优化</h3><p>关于size的优化其实可以解决大部分的场景, 但是其实还是不够,还是以上那个情况,就是元素个数,其实并不能完全解决并查集的树高度过深的问题,所以再次修改代码如下:<br>思路很简单, 一句话, 就是把树的高度低的集合合并到高的树的集合中.</p>
+<p>100万量级可以做到1s内处理 – union和 判断连接 两个操作.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> INC_05_OPTIMIZE_BY_RANK_UNIONFIND3_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INC_05_OPTIMIZE_BY_RANK_UNIONFIND3_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> UF3&#123;</div><div class="line"></div><div class="line">    <span class="keyword">class</span> UnionFind&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span>:</div><div class="line">        <span class="keyword">int</span>* parent;</div><div class="line">        <span class="keyword">int</span>* rank; <span class="comment">// rank[i]表示以i为根的集合所表示的树的层数</span></div><div class="line">        <span class="keyword">int</span> count;</div><div class="line"></div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        UnionFind(<span class="keyword">int</span> count)&#123;</div><div class="line">            parent = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            rank = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            <span class="keyword">this</span>-&gt;count = count;</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; count ; i ++ )&#123;</div><div class="line">                parent[i] = i;</div><div class="line">                rank[i] = <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ~UnionFind()&#123;</div><div class="line">            <span class="keyword">delete</span>[] parent;</div><div class="line">            <span class="keyword">delete</span>[] rank;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</div><div class="line">            assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">            <span class="keyword">while</span>( p != parent[p] )</div><div class="line">                p = parent[p];</div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> find(p) == find(q);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span>&#123;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> pRoot = find(p);</div><div class="line">            <span class="keyword">int</span> qRoot = find(q);</div><div class="line"></div><div class="line">            <span class="keyword">if</span>( pRoot == qRoot )</div><div class="line">                <span class="keyword">return</span>;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>( rank[pRoot] &lt; rank[qRoot] )&#123;<span class="comment">// 树的高度不变, 仔细琢磨一下</span></div><div class="line">                parent[pRoot] = qRoot;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( rank[qRoot] &lt; rank[pRoot])&#123;<span class="comment">// 同理, 树的高度也不变</span></div><div class="line">                parent[qRoot] = pRoot;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123; </div><div class="line">                <span class="comment">// rank[pRoot] == rank[qRoot]</span></div><div class="line">                <span class="comment">// else的逻辑是整段代码的核心</span></div><div class="line">                <span class="comment">// 高度相等时候的合并, 最后的高度 += 1 即可</span></div><div class="line">                parent[pRoot] = qRoot;</div><div class="line">                rank[qRoot] += <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//INC_05_OPTIMIZE_BY_RANK_UNIONFIND3_H</span></span></div></pre></td></tr></table></figure>
+<h3 id="3-2-3-路径压缩"><a href="#3-2-3-路径压缩" class="headerlink" title="3.2.3 路径压缩"></a>3.2.3 路径压缩</h3><p>其实,也是基于QuickUnion的一个优化,但是优化的重点,放在find上.</p>
+<p>在find的过程中,再次通过技术手段,降低树的高度.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    <span class="keyword">while</span>( p != parent[p] )&#123;</div><div class="line">        <span class="comment">// p的父节点指向当前父节点的父节点, 这就是路径压缩的核心, 没了</span></div><div class="line">        <span class="comment">// 需要注意的就是,即使当前距离根节点只有一个位置了,下面代码依然成立</span></div><div class="line">        <span class="comment">// 因为根节点的父节点仍然等于自己</span></div><div class="line">        parent[p] = parent[parent[p]];</div><div class="line">        p = parent[p];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继续优化:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">int find( int p )&#123;</div><div class="line">    assert( p &gt;= 0 &amp;&amp; p &lt; count );</div><div class="line">    </div><div class="line">    // 这段代码的作用, 是把所有除根节点外的节点,都直接优化成是根节点的第一子节点</div><div class="line">    // 也就是说,除了根节点外, 所有节点都在一层, 而树的高度就是两层.</div><div class="line">    // 这样的做法,查找效率就是最高的.</div><div class="line">    if( p != parent[p] )</div><div class="line">        parent[p] = find( parent[p] );</div><div class="line">    return p;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是, 这只是理论上的分析,实际上,第一个版本的路径压缩优化,在时间效率上其实是高于递归版本的路径压缩优化方法,虽然递归版本中,从逻辑上,树高度上的优化,其实已经做到了极致, 就差把树变成了一个数组, 看似是应该更快的.. 但是, 这其中的消耗其实主要来自递归的开销.</p>
+<p>所以,有时候从逻辑上分析之后,我们还应该手动的检验一下最后的结果.</p>
+<p>算法, 是不是很有意思呢?</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/图论基础/" rel="tag"># 图论基础</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/20/Dynamic-Static-Library/" rel="next" title="Dynamic & Static Library">
+                <i class="fa fa-chevron-left"></i> Dynamic & Static Library
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Six" />
+          <p class="site-author-name" itemprop="name">Six</p>
+           
+              <p class="site-description motion-element" itemprop="description">Dream Big, Work Hard.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/OldSix" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">1.</span> <span class="nav-text">并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概念"><span class="nav-number">1.1.</span> <span class="nav-text">1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基础"><span class="nav-number">1.2.</span> <span class="nav-text">2 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-连接问题-与-路径问题"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 连接问题 与 路径问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-并查集的两个基本操作-是的-就两个"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 并查集的两个基本操作,是的,就两个:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-另外"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 另外</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-实现"><span class="nav-number">2.</span> <span class="nav-text">3 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-QuickFind"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 QuickFind</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-QuickUnion"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 QuickUnion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-基于size的优化"><span class="nav-number">2.3.</span> <span class="nav-text">3.2.1 基于size的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-基于rank的优化"><span class="nav-number">2.4.</span> <span class="nav-text">3.2.1 基于rank的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-路径压缩"><span class="nav-number">2.5.</span> <span class="nav-text">3.2.3 路径压缩</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Six</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

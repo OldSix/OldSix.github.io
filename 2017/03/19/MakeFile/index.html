@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MakeFile,开发工具," />
+  <meta name="keywords" content="开发工具,MakeFile," />
 
 
 
@@ -107,18 +107,18 @@
 
 
 
-<meta name="description" content="人的一切痛苦,本质上都是对自己的无能的愤怒王小波">
+<meta name="description" content="人的一切痛苦,本质上都是对自己的无能的愤怒—— 王小波">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MakeFile">
 <meta property="og:url" content="http://yoursite.com/2017/03/19/MakeFile/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="人的一切痛苦,本质上都是对自己的无能的愤怒王小波">
+<meta property="og:description" content="人的一切痛苦,本质上都是对自己的无能的愤怒—— 王小波">
 <meta property="og:image" content="http://static.zybuluo.com/zhiyu/lkgsnw3rgty6b7b54dvd912b/2.png">
 <meta property="og:image" content="http://static.zybuluo.com/zhiyu/o979hd4x1lb9q0tm7wxeprxq/3.png">
-<meta property="og:updated_time" content="2017-03-19T18:34:46.653Z">
+<meta property="og:updated_time" content="2017-03-20T13:39:46.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MakeFile">
-<meta name="twitter:description" content="人的一切痛苦,本质上都是对自己的无能的愤怒王小波">
+<meta name="twitter:description" content="人的一切痛苦,本质上都是对自己的无能的愤怒—— 王小波">
 <meta name="twitter:image" content="http://static.zybuluo.com/zhiyu/lkgsnw3rgty6b7b54dvd912b/2.png">
 
 
@@ -388,24 +388,30 @@
       
         <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>人的一切痛苦,本质上都是对自己的无能的愤怒<br><strong>王小波</strong><br></blockquote><br><a id="more"></a></p>
+<p><blockquote class="blockquote-center"><br>人的一切痛苦,本质上都是对自己的无能的愤怒<br>—— <strong>王小波</strong><br></blockquote><br><a id="more"></a></p>
 <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1 定义"></a>1 定义</h2><p>MakeFile 是一种经典的项目管理工具.其实也是一种脚本,有着自己独特的语法.</p>
-<h2 id="2-基本元素"><a href="#2-基本元素" class="headerlink" title="2 基本元素"></a>2 基本元素</h2><p>Makefile元素:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">目标: 依赖</div><div class="line">        命令</div></pre></td></tr></table></figure></p>
+<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2 基本使用"></a>2 基本使用</h2><p>Makefile元素:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">目标: 依赖</div><div class="line">    (tab 缩进)命令</div></pre></td></tr></table></figure></p>
 <p>目标可以有多个依赖,依赖有传递性.<code>make</code>命令去执行Makefile,Makefile的名字固定为<code>Makefile</code>或者<code>makefile</code>,也可以自定义名字,但需要<code>-f</code>指定.</p>
-<p>make默认生成第一个依赖项.如果想生成其他依赖项,直接在make后跟依赖项即可.比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; make clean</div><div class="line"></div><div class="line"># 一般可能还要配合sudo命令来使用</div><div class="line">&gt; make install</div><div class="line">&gt; make uninstall</div><div class="line"></div><div class="line"></div><div class="line"># 主要用来测试</div><div class="line"># echo $(CC)</div><div class="line">&gt; make test</div></pre></td></tr></table></figure></p>
+<p>make默认生成第一个依赖项.如果想生成其他依赖项,直接在make后跟依赖项即可.比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; make clean</div><div class="line"># .PHONY: ALL clean</div><div class="line"></div><div class="line"># 一般可能还要配合sudo命令来使用</div><div class="line">&gt; make install</div><div class="line">&gt; make uninstall</div><div class="line"></div><div class="line"></div><div class="line"># 主要用来测试</div><div class="line"># echo $(CC)</div><div class="line">&gt; make test</div></pre></td></tr></table></figure></p>
 <p>一般的,把第一个目标叫做<code>all</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 首次查看,切记要执行, 输出具体指令, 防止误操作造成不可逆转的行为</div><div class="line"></div><div class="line">&gt; make -n</div></pre></td></tr></table></figure>
 <h2 id="3-变量"><a href="#3-变量" class="headerlink" title="3 变量"></a>3 变量</h2><p>可以使用变量来简化Makefile,定义变量可以使用</p>
 <h3 id="定义一个变量"><a href="#定义一个变量" class="headerlink" title="定义一个变量"></a>定义一个变量</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># := 表示立即赋值,推荐使用</span></div><div class="line"><span class="comment"># 也可以使用 = , 使用时才赋值</span></div><div class="line">libname := libxxx.so </div><div class="line"></div><div class="line">objs := a.o b.o c.o</div><div class="line"></div><div class="line">a.out: $(objs)</div><div class="line">    gcc $^</div></pre></td></tr></table></figure>
 <h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p><code>shell</code>中的环境变量可以在makefile脚本中直接使用.比如 <code>PATH</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 注意空格需要转义才行</div><div class="line">export objs = a.o\ b.o\ c.o</div></pre></td></tr></table></figure>
 <p>另外,当本地变量与环境变量重名时,本地变量会覆盖环境变量.</p>
-<h3 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$^ 表示所有依赖项</div><div class="line">$&lt; 表示第一个依赖项</div><div class="line">$@ 表示目标</div><div class="line"></div><div class="line">$? </div><div class="line">表示所有比目标文件更&quot;新&quot;的依赖文件列表</div><div class="line">用于文件拷贝时,有特殊的用途</div></pre></td></tr></table></figure>
+<h3 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$^ 在规则的命令中, 表示所有依赖项</div><div class="line">$&lt; 在规则的命令中, 表示第一个依赖项. 在模式规则中, 可以将依赖项依次取出.</div><div class="line">$@ 在规则的命令中, 表示目标</div><div class="line"></div><div class="line">$? </div><div class="line">表示所有比目标文件更&quot;新&quot;的依赖文件列表</div><div class="line">用于文件拷贝时,有特殊的用途</div></pre></td></tr></table></figure>
+<p>模式规则:<br>    %: %.c<br>        gcc $&lt; -o $@ -Wall -g</p>
+<p>静态模式规则:<br>    $(target):%: %.o<br>        gcc $&lt; -o $@ -L$(lib_path) -l$(libname) -I$(inc_path)</p>
 <h2 id="4-缺省规则"><a href="#4-缺省规则" class="headerlink" title="4 缺省规则"></a>4 缺省规则</h2><p>缺省规则是make系统提供的默认的规则,比如 x.o<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">%.o: %.c</div><div class="line">    $(CC) -c $(CPPFLAGS) $(CFLAGS) $&lt;</div><div class="line"></div><div class="line"><span class="comment"># % 是通配符的意思,表示任意的.o文件</span></div><div class="line"></div><div class="line"><span class="comment"># $(CC) 就是cc,也就是gcc</span></div><div class="line">ls -al /usr/bin/cc 可以看出, cc就是gcc的一个软链接而已</div></pre></td></tr></table></figure></p>
-<h2 id="5-函数的使用"><a href="#5-函数的使用" class="headerlink" title="5 函数的使用"></a>5 函数的使用</h2><p>主要是shell命令的内置用法</p>
+<h2 id="5-函数的使用"><a href="#5-函数的使用" class="headerlink" title="5 函数的使用"></a>5 函数的使用</h2><p>两个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 获取含有某一特征的文件组成列表</div><div class="line">$(wildcard 参数1)</div><div class="line"></div><div class="line">使用:</div><div class="line">srcs = $(wildcard *.c)   # srcs = a.c b.c s.c</div><div class="line"></div><div class="line">----------------</div><div class="line"></div><div class="line"># 替换</div><div class="line">objs = $(patsubst %.c, %.o , $(srcs)) # 将第三个参数中的,第一个参数的部分,替换为第二个参数</div><div class="line">objs = a.o b.o s.o</div></pre></td></tr></table></figure>
+<h2 id="6-一些高级用法"><a href="#6-一些高级用法" class="headerlink" title="6 一些高级用法"></a>6 一些高级用法</h2><p>主要是shell命令的内置用法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">srcs := `ls *.c`</div><div class="line">srcs :=  $(shell ls *.c)</div><div class="line"></div><div class="line">objs := $(srcs:.c=.o)</div></pre></td></tr></table></figure>
 <p><a href="http://blog.csdn.net/caspiansea/article/details/27580571" target="_blank" rel="external">案例1</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CXX = g++  </div><div class="line">CXXFLAGS = -g -I. -Wall  </div><div class="line">SRCS = $(shell find -name &quot;*.cpp&quot;)  </div><div class="line">OBJECTS = $(SRCS:%.cpp=%.o)  </div><div class="line">TARGETS = $(SRCS:%.cpp=%)  </div><div class="line"></div><div class="line">all: $(TARGETS)  </div><div class="line">    @for target in $(TARGETS); \  </div><div class="line">    do                        \  </div><div class="line">    $(CXX) $(CXXFLAGS) -o target</div><div class="line">    target.cpp; \  </div><div class="line">    done</div><div class="line"></div><div class="line">clean:  </div><div class="line">    -rm -f $(TARGETS) $(OBJECTS)</div></pre></td></tr></table></figure></p>
 <p><a href="http://blog.csdn.net/njnu_mjn/article/details/12971753" target="_blank" rel="external">案例2</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">files=main.exe a.exe b.exe  </div><div class="line">  </div><div class="line">all:  </div><div class="line">    for name in `echo $(files) | sed s/.exe//g`; \  </div><div class="line">    do \  </div><div class="line">        rm -f &quot;$$name&quot;.o; \  </div><div class="line">    done</div></pre></td></tr></table></figure></p>
-<h2 id="6-常见操作"><a href="#6-常见操作" class="headerlink" title="6 常见操作"></a>6 常见操作</h2><h3 id="目录迭代问题"><a href="#目录迭代问题" class="headerlink" title="目录迭代问题"></a>目录迭代问题</h3><p>解决方案:<br>(1) 在目录中继续生成一个Makefile文件<br>(2) make -C sub</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">src = $(wildcard ./src/*.c)</div><div class="line">obj = $(patsubst ./src/%.c, ./obj/%.o, $(src))			</div><div class="line">target = $(patsubst ./src/%.c, ./%, $(src))</div><div class="line"></div><div class="line">inc_path = ./inc</div><div class="line">lib_paht = ./lib</div><div class="line">libname = xxxsocket</div><div class="line"></div><div class="line">ALL:$(target)</div><div class="line"></div><div class="line">$(target):./%:./obj/%.o</div><div class="line">	gcc $&lt; -o $@  -L$(lib_paht) -l$(libname) -I$(inc_path)</div><div class="line"></div><div class="line">$(obj):./obj/%.o:./src/%.c</div><div class="line">	gcc -c $&lt; -o $@ -L$(lib_paht) -l$(libname) -I$(inc_path)</div><div class="line"></div><div class="line">clean:</div><div class="line">	-rm -rf $(obj) $(target)</div><div class="line"></div><div class="line">.PHONY: ALL clean</div></pre></td></tr></table></figure>
+<h2 id="7-常见操作"><a href="#7-常见操作" class="headerlink" title="7 常见操作"></a>7 常见操作</h2><h3 id="目录迭代问题"><a href="#目录迭代问题" class="headerlink" title="目录迭代问题"></a>目录迭代问题</h3><p>解决方案:<br>(1) 在目录中继续生成一个Makefile文件<br>(2) make -C sub</p>
 <p>示例:<img src="http://static.zybuluo.com/zhiyu/lkgsnw3rgty6b7b54dvd912b/2.png" alt="2.png-52kB"></p>
 <h3 id="子Makefile问题"><a href="#子Makefile问题" class="headerlink" title="子Makefile问题"></a>子Makefile问题</h3><p>将一些常用的修改属性合并到一个子文件中去<br>命名: def.mk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-include def.mk</div><div class="line"># 前面的 - 号指的是,如果文件不存在,自动忽略,不要报错</div></pre></td></tr></table></figure></p>
 <h3 id="自动推导"><a href="#自动推导" class="headerlink" title="自动推导"></a>自动推导</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; gcc -MM a.c</div><div class="line">&gt; # 查看a.c的文件依赖命令</div></pre></td></tr></table></figure>
@@ -444,9 +450,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MakeFile/" rel="tag"># MakeFile</a>
-          
             <a href="/tags/开发工具/" rel="tag"># 开发工具</a>
+          
+            <a href="/tags/MakeFile/" rel="tag"># MakeFile</a>
           
         </div>
       
@@ -459,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/IndexHeap/" rel="next" title="索引堆">
-                <i class="fa fa-chevron-left"></i> 索引堆
+              <a href="/2017/03/19/IndexHeap/" rel="next" title="浅谈算法 之 索引堆">
+                <i class="fa fa-chevron-left"></i> 浅谈算法 之 索引堆
               </a>
             
           </div>
@@ -468,6 +474,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/20/Dynamic-Static-Library/" rel="prev" title="Dynamic & Static Library">
+                Dynamic & Static Library <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -539,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -561,7 +571,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -614,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-number">1.</span> <span class="nav-text">1 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-基本元素"><span class="nav-number">2.</span> <span class="nav-text">2 基本元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-变量"><span class="nav-number">3.</span> <span class="nav-text">3 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义一个变量"><span class="nav-number">3.1.</span> <span class="nav-text">定义一个变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量"><span class="nav-number">3.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动变量"><span class="nav-number">3.3.</span> <span class="nav-text">自动变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-缺省规则"><span class="nav-number">4.</span> <span class="nav-text">4 缺省规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-函数的使用"><span class="nav-number">5.</span> <span class="nav-text">5 函数的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-常见操作"><span class="nav-number">6.</span> <span class="nav-text">6 常见操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录迭代问题"><span class="nav-number">6.1.</span> <span class="nav-text">目录迭代问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子Makefile问题"><span class="nav-number">6.2.</span> <span class="nav-text">子Makefile问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动推导"><span class="nav-number">6.3.</span> <span class="nav-text">自动推导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-其他用途"><span class="nav-number">7.</span> <span class="nav-text">7 其他用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-最后"><span class="nav-number">8.</span> <span class="nav-text">8 最后</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-number">1.</span> <span class="nav-text">1 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-基本使用"><span class="nav-number">2.</span> <span class="nav-text">2 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-变量"><span class="nav-number">3.</span> <span class="nav-text">3 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义一个变量"><span class="nav-number">3.1.</span> <span class="nav-text">定义一个变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量"><span class="nav-number">3.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动变量"><span class="nav-number">3.3.</span> <span class="nav-text">自动变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-缺省规则"><span class="nav-number">4.</span> <span class="nav-text">4 缺省规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-函数的使用"><span class="nav-number">5.</span> <span class="nav-text">5 函数的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-一些高级用法"><span class="nav-number">6.</span> <span class="nav-text">6 一些高级用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-常见操作"><span class="nav-number">7.</span> <span class="nav-text">7 常见操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录迭代问题"><span class="nav-number">7.1.</span> <span class="nav-text">目录迭代问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子Makefile问题"><span class="nav-number">7.2.</span> <span class="nav-text">子Makefile问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动推导"><span class="nav-number">7.3.</span> <span class="nav-text">自动推导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-其他用途"><span class="nav-number">8.</span> <span class="nav-text">7 其他用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-最后"><span class="nav-number">9.</span> <span class="nav-text">8 最后</span></a></li></ol></div>
             
 
           </div>

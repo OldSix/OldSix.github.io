@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法 堆 图论," />
+  <meta name="keywords" content="算法,图论基础,堆/优先队列," />
 
 
 
@@ -107,49 +107,16 @@
 
 
 
-<meta name="description" content="这里主要讨论的是，数组化的实现堆的经典方法。
-
-1 为什么要使用索引堆
-索引堆从名称也可以看得出来，是堆的一种高级形态
-
-有这样一个基础概念，想在此强调一下，那就是：
-
-对于堆化的过程中，原来数组的索引将被破坏掉。
-
-这也是就是索引堆的意义，或者说索引堆的核心价值。
-就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
-这个时候就需要另外一个">
+<meta name="description" content="没有人不爱惜他的生命，但很少人珍视他的时间。—— 梁实秋">
 <meta property="og:type" content="article">
-<meta property="og:title" content="索引堆">
+<meta property="og:title" content="浅谈算法 之 索引堆">
 <meta property="og:url" content="http://yoursite.com/2017/03/19/IndexHeap/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="这里主要讨论的是，数组化的实现堆的经典方法。
-
-1 为什么要使用索引堆
-索引堆从名称也可以看得出来，是堆的一种高级形态
-
-有这样一个基础概念，想在此强调一下，那就是：
-
-对于堆化的过程中，原来数组的索引将被破坏掉。
-
-这也是就是索引堆的意义，或者说索引堆的核心价值。
-就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
-这个时候就需要另外一个">
-<meta property="og:updated_time" content="2017-03-19T18:35:02.865Z">
+<meta property="og:description" content="没有人不爱惜他的生命，但很少人珍视他的时间。—— 梁实秋">
+<meta property="og:updated_time" content="2017-03-20T13:43:01.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="索引堆">
-<meta name="twitter:description" content="这里主要讨论的是，数组化的实现堆的经典方法。
-
-1 为什么要使用索引堆
-索引堆从名称也可以看得出来，是堆的一种高级形态
-
-有这样一个基础概念，想在此强调一下，那就是：
-
-对于堆化的过程中，原来数组的索引将被破坏掉。
-
-这也是就是索引堆的意义，或者说索引堆的核心价值。
-就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。
-这个时候就需要另外一个">
+<meta name="twitter:title" content="浅谈算法 之 索引堆">
+<meta name="twitter:description" content="没有人不爱惜他的生命，但很少人珍视他的时间。—— 梁实秋">
 
 
 
@@ -183,7 +150,7 @@
 
 
 
-  <title> 索引堆 | Six's a Coder </title>
+  <title> 浅谈算法 之 索引堆 | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -343,7 +310,7 @@
             
             
               
-                索引堆
+                浅谈算法 之 索引堆
               
             
           </h1>
@@ -416,7 +383,10 @@
       
 
       
-        <blockquote>
+        <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>没有人不爱惜他的生命，但很少人珍视他的时间。<br>—— <strong>梁实秋</strong><br></blockquote><br><a id="more"></a></p>
+<blockquote>
 <p>这里主要讨论的是，数组化的实现堆的经典方法。</p>
 </blockquote>
 <h2 id="1-为什么要使用索引堆"><a href="#1-为什么要使用索引堆" class="headerlink" title="1 为什么要使用索引堆"></a>1 为什么要使用索引堆</h2><blockquote>
@@ -436,7 +406,6 @@
 <p>在普通堆中，<code>shiftUp</code>和<code>shiftDown</code>中都要进行一步交换两个节点之间的值的步骤，但是如果节点值只是简单的数字，也是交换操作不会造成太大的影响，但是如果不是数字呢，而是一个字符串，或者一个更大的数据类型时，那么交换带来的副作用将会被大大提升。</p>
 <p>p.s. 当然这里交换的操作，我们可以简单的通过一些技术手段来替代。</p>
 <p>所以，这时，我们的英雄登场了：索引堆，先来看看它的数据结构。</p>
-<a id="more"></a>
 <h2 id="2-索引堆的数据结构"><a href="#2-索引堆的数据结构" class="headerlink" title="2 索引堆的数据结构"></a>2 索引堆的数据结构</h2><p>索引堆在普通堆的基础之上，其实多维护了一个<code>indexes</code>数组而已，它记录着<code>data</code>中的索引，在堆中的位置，也就是indexes[i] = x 的意思就是，data[x]这个元素，在堆中的实际位置是 i。</p>
 <p>看下索引堆的数据结构：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Item&gt;</div><div class="line"><span class="keyword">class</span> IndexMinHeap&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Item * data;</div><div class="line">    <span class="keyword">int</span>  * indexes;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <h2 id="3-索引堆过程"><a href="#3-索引堆过程" class="headerlink" title="3 索引堆过程"></a>3 索引堆过程</h2><p>索引堆的整个操作中，并没有对原始数据进行任何操作（只是用来比较），而真正处理的索引数组<code>indexes</code>中的索引，把索引进行了一次堆排序。</p>
@@ -498,7 +467,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法-堆-图论/" rel="tag"># 算法 堆 图论</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/图论基础/" rel="tag"># 图论基础</a>
+          
+            <a href="/tags/堆-优先队列/" rel="tag"># 堆/优先队列</a>
           
         </div>
       
@@ -591,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -613,7 +586,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-19T18:34:46.653Z</updated>
+  <updated>2017-03-20T16:29:15.478Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,32 +16,170 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>浅谈算法 之 并查集</title>
+    <link href="http://yoursite.com/2017/03/20/%E6%B5%85%E8%B0%88%E7%AE%97%E6%B3%95-%E4%B9%8B-%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    <id>http://yoursite.com/2017/03/20/浅谈算法-之-并查集/</id>
+    <published>2017-03-20T13:35:20.000Z</published>
+    <updated>2017-03-20T16:29:15.478Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>我不能说我不珍重这些荣誉，并且我承认它很有价值，不过我却从来不曾为追求这些荣誉而工作。<br>—— <strong>法拉第</strong><br></blockquote><br><a id="more"></a></p>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1 概念"></a>1 概念</h3><blockquote>
+<p>并查集本身是一种特殊的树形结构,看似有点奇怪,因为它某些实现方式可能并没有使用到关于树的任何节点之类的东西,但是原理上,就是这样.</p>
+</blockquote>
+<h3 id="2-基础"><a href="#2-基础" class="headerlink" title="2 基础"></a>2 基础</h3><p>并查集存在的最大意义就是为了,<code>高效</code>地回答一个问题:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">isConnect ( int p , int q )</div></pre></td></tr></table></figure></p>
+<p>也就是判断 <code>两个节点是否连接</code> 问题.<br>正是这一点,也是它作为图论基础的一个重要原因,图论关于路径问题很多时候,都会使用并查集这种概念来解决其中一些逻辑.</p>
+<h4 id="2-1-连接问题-与-路径问题"><a href="#2-1-连接问题-与-路径问题" class="headerlink" title="2.1 连接问题 与 路径问题"></a>2.1 连接问题 与 路径问题</h4><blockquote>
+<p>连接问题相比路径问题,回答的问题要少很多,因为它只关心两个节点是否相连,这也正是并查集高效的根本原因.</p>
+</blockquote>
+<p><strong>一个算法可以回答问题越多,其实不见得这个算法越高效,反而,可能这个算法是越低效的,这一点特别重要.<br>或者说, 一个算法如果回答的问题越少, 其实也是提升算法效率的一个重要思路.</strong></p>
+<p>比如:</p>
+<blockquote>
+<p>二分查找法 和 顺序查找法 相比<br>快速排序 partition<br>堆</p>
+</blockquote>
+<p>再看什么是连接的问题?</p>
+<blockquote>
+<p>网络中节点的连接状态<br>用户之间形成的网络<br>道路交通<br>航班调度</p>
+</blockquote>
+<h4 id="2-2-并查集的两个基本操作-是的-就两个"><a href="#2-2-并查集的两个基本操作-是的-就两个" class="headerlink" title="2.2 并查集的两个基本操作,是的,就两个:"></a>2.2 并查集的两个基本操作,是的,就两个:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">find( int p )</div><div class="line">union( int p , int q)</div><div class="line"></div><div class="line">// 注意,这里的union不是联合体的意思,是合并操作的意思</div></pre></td></tr></table></figure>
+<h3 id="2-3-另外"><a href="#2-3-另外" class="headerlink" title="2.3 另外"></a>2.3 另外</h3><blockquote>
+<p>并查集也可以实现数学中的集合类.</p>
+</blockquote>
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3 实现"></a>3 实现</h2><p>这里介绍的并查集底层实现方式都是使用数组来实现的.</p>
+<h3 id="3-1-QuickFind"><a href="#3-1-QuickFind" class="headerlink" title="3.1 QuickFind"></a>3.1 QuickFind</h3><p>QuickFind见名知义,就是find操作的实现比较快.<br>问题: 效率太低.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UnionFind&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> * id;</div><div class="line">    <span class="keyword">int</span> count;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// O(1)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    <span class="keyword">return</span> id[p];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q)</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    assert( q &gt;= <span class="number">0</span> &amp;&amp; q &lt; count );</div><div class="line">    <span class="keyword">return</span> id[p] == id[q];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// O(n)</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> pID = find(p);</div><div class="line">    <span class="keyword">int</span> qID = find(q);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( qID == pID)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; count ; ++ i )</div><div class="line">        <span class="keyword">if</span>( qID == id[i] )</div><div class="line">            id[i] = pID;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其实从代码我们也可以看出,其实find操作,在图中的,其实就是查找当前节点所在的连通分量的值.<br>union的操作其实就是合并两个连通分量. 因为对于两个连通分量来说, 只要各自有一个点相连接了, 那么两个连通分量都连在一起了.</p>
+<h3 id="3-2-QuickUnion"><a href="#3-2-QuickUnion" class="headerlink" title="3.2 QuickUnion"></a>3.2 QuickUnion</h3><p>QuickUnion见名知义,就是union操作的实现比较快.<br>思路上,发生了一点变化:</p>
+<blockquote>
+<p>每个节点缓存了自己的父节点的值<br>其实这个思路,就是类似于树的父节点的概念,但是实现了并没有引入指针的概念</p>
+</blockquote>
+<p>问题: 一定程度上,缓解了QuickFind的效率低下的问题,但是还不够</p>
+<p>实现如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UnionFind&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> * parent;</div><div class="line">    <span class="keyword">int</span> count;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    </div><div class="line">    <span class="keyword">while</span>( p != parent[p] )</div><div class="line">        p = parent[p];</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> find(p) == find(q);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> pRoot = find(p);</div><div class="line">    <span class="keyword">int</span> qRoot = find(q);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( qRoot == pRoot)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line"></div><div class="line">    <span class="comment">// q节点的根节点, 指向p节点的根节点    </span></div><div class="line">    parent[pRoot] = qRoot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>虽然实现上并没有引入根节点,或者使用指针概念( 因为并查集中的节点只有父节点概念, 所以用数组来保存节点值即可 ), 但是本质上, 在开头也提到了, 并查集虽然是一棵特殊的树, 但是还是具有树的性质: </p>
+<blockquote>
+<p>当树高度很深时, 树的遍历效率会大大降低. 类似于普通平衡二叉树也有类似的问题,所以才引入了2-3树和红黑树的概念.</p>
+</blockquote>
+<p>在并查集中,也存在这样类似的问题, 所以便有了下面的两种优化</p>
+<h3 id="3-2-1-基于size的优化"><a href="#3-2-1-基于size的优化" class="headerlink" title="3.2.1 基于size的优化"></a>3.2.1 基于size的优化</h3><p>思路也很简单,就是在union操作中,不是随意的将两个连通分量直接合并,而是根据元素的个数,优先将元素少的集合, 合并到元素多的连通分量中.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> UNIONFIND_UNIONFIND3_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> UNIONFIND_UNIONFIND3_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> UF3&#123;</div><div class="line">    <span class="keyword">class</span> UnionFind&#123;</div><div class="line">    <span class="keyword">private</span>:</div><div class="line">        <span class="keyword">int</span> * parent;</div><div class="line">        <span class="keyword">int</span> count;</div><div class="line">        <span class="keyword">int</span> * sz;<span class="comment">// sz[i] 表示i为根节点的集合中元素个数</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        UnionFind( <span class="keyword">int</span> count )&#123;</div><div class="line">            parent = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            sz = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            <span class="keyword">this</span>-&gt;count = count;</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; count ; ++i )&#123;</div><div class="line">                parent[i] = i;</div><div class="line">                sz[i] = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ~UnionFind()&#123;</div><div class="line">            <span class="keyword">delete</span>[] parent;</div><div class="line">            <span class="keyword">delete</span>[] sz;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">            assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line"></div><div class="line">            <span class="keyword">while</span>( p != parent[p] )</div><div class="line">                p = parent[p];</div><div class="line"></div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> find(p) == find(q);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> pRoot = find(p);</div><div class="line">            <span class="keyword">int</span> qRoot = find(q);</div><div class="line"></div><div class="line">            <span class="keyword">if</span>( pRoot == qRoot )</div><div class="line">                <span class="keyword">return</span>;</div><div class="line"></div><div class="line">            <span class="comment">// 节点少的并到节点多的集合中</span></div><div class="line">            <span class="keyword">if</span>( sz[pRoot] &gt; sz[qRoot] ) &#123;</div><div class="line">                parent[qRoot] = pRoot;</div><div class="line">                sz[pRoot] += sz[qRoot];</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                parent[pRoot] = qRoot;</div><div class="line">                sz[pRoot] += sz[qRoot];</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//UNIONFIND_UNIONFIND3_H</span></span></div></pre></td></tr></table></figure>
+<h3 id="3-2-1-基于rank的优化"><a href="#3-2-1-基于rank的优化" class="headerlink" title="3.2.1 基于rank的优化"></a>3.2.1 基于rank的优化</h3><p>关于size的优化其实可以解决大部分的场景, 但是其实还是不够,还是以上那个情况,就是元素个数,其实并不能完全解决并查集的树高度过深的问题,所以再次修改代码如下:<br>思路很简单, 一句话, 就是把树的高度低的集合合并到高的树的集合中.</p>
+<p>100万量级可以做到1s内处理 – union和 判断连接 两个操作.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> INC_05_OPTIMIZE_BY_RANK_UNIONFIND3_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INC_05_OPTIMIZE_BY_RANK_UNIONFIND3_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> UF3&#123;</div><div class="line"></div><div class="line">    <span class="keyword">class</span> UnionFind&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span>:</div><div class="line">        <span class="keyword">int</span>* parent;</div><div class="line">        <span class="keyword">int</span>* rank; <span class="comment">// rank[i]表示以i为根的集合所表示的树的层数</span></div><div class="line">        <span class="keyword">int</span> count;</div><div class="line"></div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        UnionFind(<span class="keyword">int</span> count)&#123;</div><div class="line">            parent = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            rank = <span class="keyword">new</span> <span class="keyword">int</span>[count];</div><div class="line">            <span class="keyword">this</span>-&gt;count = count;</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; count ; i ++ )&#123;</div><div class="line">                parent[i] = i;</div><div class="line">                rank[i] = <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ~UnionFind()&#123;</div><div class="line">            <span class="keyword">delete</span>[] parent;</div><div class="line">            <span class="keyword">delete</span>[] rank;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</div><div class="line">            assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">            <span class="keyword">while</span>( p != parent[p] )</div><div class="line">                p = parent[p];</div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">isConnected</span><span class="params">( <span class="keyword">int</span> p , <span class="keyword">int</span> q )</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> find(p) == find(q);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">unionElements</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span>&#123;</div><div class="line"></div><div class="line">            <span class="keyword">int</span> pRoot = find(p);</div><div class="line">            <span class="keyword">int</span> qRoot = find(q);</div><div class="line"></div><div class="line">            <span class="keyword">if</span>( pRoot == qRoot )</div><div class="line">                <span class="keyword">return</span>;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>( rank[pRoot] &lt; rank[qRoot] )&#123;<span class="comment">// 树的高度不变, 仔细琢磨一下</span></div><div class="line">                parent[pRoot] = qRoot;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( rank[qRoot] &lt; rank[pRoot])&#123;<span class="comment">// 同理, 树的高度也不变</span></div><div class="line">                parent[qRoot] = pRoot;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123; </div><div class="line">                <span class="comment">// rank[pRoot] == rank[qRoot]</span></div><div class="line">                <span class="comment">// else的逻辑是整段代码的核心</span></div><div class="line">                <span class="comment">// 高度相等时候的合并, 最后的高度 += 1 即可</span></div><div class="line">                parent[pRoot] = qRoot;</div><div class="line">                rank[qRoot] += <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//INC_05_OPTIMIZE_BY_RANK_UNIONFIND3_H</span></span></div></pre></td></tr></table></figure>
+<h3 id="3-2-3-路径压缩"><a href="#3-2-3-路径压缩" class="headerlink" title="3.2.3 路径压缩"></a>3.2.3 路径压缩</h3><p>其实,也是基于QuickUnion的一个优化,但是优化的重点,放在find上.</p>
+<p>在find的过程中,再次通过技术手段,降低树的高度.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    <span class="keyword">while</span>( p != parent[p] )&#123;</div><div class="line">        <span class="comment">// p的父节点指向当前父节点的父节点, 这就是路径压缩的核心, 没了</span></div><div class="line">        <span class="comment">// 需要注意的就是,即使当前距离根节点只有一个位置了,下面代码依然成立</span></div><div class="line">        <span class="comment">// 因为根节点的父节点仍然等于自己</span></div><div class="line">        parent[p] = parent[parent[p]];</div><div class="line">        p = parent[p];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继续优化:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">int find( int p )&#123;</div><div class="line">    assert( p &gt;= 0 &amp;&amp; p &lt; count );</div><div class="line">    </div><div class="line">    // 这段代码的作用, 是把所有除根节点外的节点,都直接优化成是根节点的第一子节点</div><div class="line">    // 也就是说,除了根节点外, 所有节点都在一层, 而树的高度就是两层.</div><div class="line">    // 这样的做法,查找效率就是最高的.</div><div class="line">    if( p != parent[p] )</div><div class="line">        parent[p] = find( parent[p] );</div><div class="line">    return p;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是, 这只是理论上的分析,实际上,第一个版本的路径压缩优化,在时间效率上其实是高于递归版本的路径压缩优化方法,虽然递归版本中,从逻辑上,树高度上的优化,其实已经做到了极致, 就差把树变成了一个数组, 看似是应该更快的.. 但是, 这其中的消耗其实主要来自递归的开销.</p>
+<p>所以,有时候从逻辑上分析之后,我们还应该手动的检验一下最后的结果.</p>
+<p>算法, 是不是很有意思呢?</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;我不能说我不珍重这些荣誉，并且我承认它很有价值，不过我却从来不曾为追求这些荣誉而工作。&lt;br&gt;—— &lt;strong&gt;法拉第&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="图论基础" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dynamic &amp; Static Library</title>
+    <link href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/"/>
+    <id>http://yoursite.com/2017/03/20/Dynamic-Static-Library/</id>
+    <published>2017-03-19T18:42:12.000Z</published>
+    <updated>2017-03-20T13:39:43.210Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>Microsoft isn’t evil, they just make really crappy operating systems.<br>—— <strong>Linus Torvalds</strong><br></blockquote><br><a id="more"></a></p>
+<blockquote>
+<p>本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.</p>
+</blockquote>
+<h2 id="0-动态库基础"><a href="#0-动态库基础" class="headerlink" title="0 动态库基础"></a>0 动态库基础</h2><pre><code>1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
+2. Linux下,动态库 --- xxx.so xxx.h -L -l
+</code></pre><h2 id="1-Linux"><a href="#1-Linux" class="headerlink" title="1 Linux"></a>1 Linux</h2><p>(1) 制作Linux动态库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c xxx.c -o xxx.o -fPIC</div><div class="line">gcc -shared -o libxxxtest.so xxx.o</div></pre></td></tr></table></figure>
+<p>多文件项目中,可以参看我的另一篇关于 makefile 的介绍</p>
+<p>(2) 动态库的使用</p>
+<p>lib库名.so 文件本身不能执行</p>
+<p>项目目录结构如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">src/  -- xxx.c</div><div class="line">obj/  -- xxx.o 用于tia</div><div class="line">inc/  -- xxx.h 头文件</div><div class="line">lib/  -- xxx.so / xxx.a 库</div><div class="line">media/ -- 媒体文件</div><div class="line">Makefile</div></pre></td></tr></table></figure></p>
+<p>执行命令如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">链接器:  工作于生成可重定位文件阶段,也就是生成.o文件.任务:数据合并 和 地址回填(数据位置重定位)</div><div class="line"></div><div class="line">动态链接器: 工作于加载器加载可执行文件到内存后,程序运行时查找库函数期间.加载库函数到内存,重定位函数地址(绝对地址),用LD_LIBRARY_PATH.</div></pre></td></tr></table></figure></p>
+<p>运行: ./a.out —&gt;报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原因: 动态链接器找不到加载库函数的目录位置.</div><div class="line">ldd a.out 查看链接依赖情况, 是否存在&apos;not found&apos;字样</div></pre></td></tr></table></figure></p>
+<p>解决方案:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(1) 将自定义的动态库 cp 放到 标准 c库所在目录位置: /usr/bin/lib (不推荐)</div><div class="line">(2) 在可执行文件所在目录的位置, 执行命令: export LD_LIBRARY_PATH = 库路径 (临时生效)</div><div class="line">(3) export LD_LIBRAY_PATH = 库路径 写入 ~/.bash_profile 中, source 一下 令其即时生效, 或重启.</div><div class="line"></div><div class="line">ldd 再次查看,成功显示动态库位置 ./a.out 运行即可</div></pre></td></tr></table></figure></p>
+<h2 id="2-Windows"><a href="#2-Windows" class="headerlink" title="2 Windows"></a>2 Windows</h2><p>(1) 动态库的制作:</p>
+<blockquote>
+<ol>
+<li>打开vs2013 , 创建<code>win32 生成dll项目</code></li>
+<li>动态库的命名不要使用中文名</li>
+<li>导入src文件</li>
+<li>API函数导出即可<br> 只将用户使用的指定某几个函数从动态库中导出。   — xxx.lib<br> 使用 <code>__declspec(dllexport)</code> 宏，提示编译器。在编译程序的时候，需特殊处理的函数。<br> 注意： <code>.c 文件</code> 和 <code>.h 文件</code> 均需要添加该宏！！ （VS2013 要求）<br> 默认生成的动态库位于上层目录下的 Debug 目录内。</li>
+</ol>
+</blockquote>
+<p>(2) 动态库的制作结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xxx.dll  二进制目标函数集, 可被操作系统加载</div><div class="line">xxx.lib  是对dll的描述文件( 包含多少函数, 哪些被导出 )</div><div class="line">xxx.h </div><div class="line"></div><div class="line">以上三个文件提供给用户使用即可</div></pre></td></tr></table></figure></p>
+<p>(3) 动态库的调用和调试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">通知VS2013编译器，使用提供的动态库。</div><div class="line"></div><div class="line">将.dll .lib .h三个文件放置在 .c同级目录下。</div><div class="line"></div><div class="line">右键项目“属性”---“配置属性”---“链接器”---“输入”--- “附加依赖项”---下拉菜单“编辑”</div><div class="line"></div><div class="line">---- 输入【描述dll信息lib文件  xxxxx.lib】</div></pre></td></tr></table></figure></p>
+<p>常见错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1. 若xxx.lib配置错误，则VS编译器无法找到所用函数。 </div><div class="line"></div><div class="line">2. 如若在运行111.exe时，说明操作系统找不到动态库加载路径。 </div><div class="line"></div><div class="line">	(1)配置PATH;(2)将exe和动态库dll置于同一目录下即可。</div><div class="line"></div><div class="line">VS2015：</div><div class="line"></div><div class="line">	xxxx.lib  ---&gt; .c 源码 .h 头文件所在目录位置</div><div class="line"></div><div class="line">	xxxx.dll ---&gt; .exe 可执行文件所在目录位置。</div></pre></td></tr></table></figure></p>
+<p>动态库内存释放：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">遵循一个原则：谁分配，谁释放。</div><div class="line">调用动态库函数分配的内存，也一定要调用动态库函数来释放内存。</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;Microsoft isn’t evil, they just make really crappy operating systems.&lt;br&gt;—— &lt;strong&gt;Linus Torvalds&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="编程基础" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MakeFile</title>
     <link href="http://yoursite.com/2017/03/19/MakeFile/"/>
     <id>http://yoursite.com/2017/03/19/MakeFile/</id>
     <published>2017-03-19T14:43:38.000Z</published>
-    <updated>2017-03-19T18:34:46.653Z</updated>
+    <updated>2017-03-20T13:39:46.346Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>人的一切痛苦,本质上都是对自己的无能的愤怒<br><strong>王小波</strong><br></blockquote><br><a id="more"></a></p>
+<p><blockquote class="blockquote-center"><br>人的一切痛苦,本质上都是对自己的无能的愤怒<br>—— <strong>王小波</strong><br></blockquote><br><a id="more"></a></p>
 <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1 定义"></a>1 定义</h2><p>MakeFile 是一种经典的项目管理工具.其实也是一种脚本,有着自己独特的语法.</p>
-<h2 id="2-基本元素"><a href="#2-基本元素" class="headerlink" title="2 基本元素"></a>2 基本元素</h2><p>Makefile元素:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">目标: 依赖</div><div class="line">        命令</div></pre></td></tr></table></figure></p>
+<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2 基本使用"></a>2 基本使用</h2><p>Makefile元素:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">目标: 依赖</div><div class="line">    (tab 缩进)命令</div></pre></td></tr></table></figure></p>
 <p>目标可以有多个依赖,依赖有传递性.<code>make</code>命令去执行Makefile,Makefile的名字固定为<code>Makefile</code>或者<code>makefile</code>,也可以自定义名字,但需要<code>-f</code>指定.</p>
-<p>make默认生成第一个依赖项.如果想生成其他依赖项,直接在make后跟依赖项即可.比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; make clean</div><div class="line"></div><div class="line"># 一般可能还要配合sudo命令来使用</div><div class="line">&gt; make install</div><div class="line">&gt; make uninstall</div><div class="line"></div><div class="line"></div><div class="line"># 主要用来测试</div><div class="line"># echo $(CC)</div><div class="line">&gt; make test</div></pre></td></tr></table></figure></p>
+<p>make默认生成第一个依赖项.如果想生成其他依赖项,直接在make后跟依赖项即可.比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; make clean</div><div class="line"># .PHONY: ALL clean</div><div class="line"></div><div class="line"># 一般可能还要配合sudo命令来使用</div><div class="line">&gt; make install</div><div class="line">&gt; make uninstall</div><div class="line"></div><div class="line"></div><div class="line"># 主要用来测试</div><div class="line"># echo $(CC)</div><div class="line">&gt; make test</div></pre></td></tr></table></figure></p>
 <p>一般的,把第一个目标叫做<code>all</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 首次查看,切记要执行, 输出具体指令, 防止误操作造成不可逆转的行为</div><div class="line"></div><div class="line">&gt; make -n</div></pre></td></tr></table></figure>
 <h2 id="3-变量"><a href="#3-变量" class="headerlink" title="3 变量"></a>3 变量</h2><p>可以使用变量来简化Makefile,定义变量可以使用</p>
 <h3 id="定义一个变量"><a href="#定义一个变量" class="headerlink" title="定义一个变量"></a>定义一个变量</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># := 表示立即赋值,推荐使用</span></div><div class="line"><span class="comment"># 也可以使用 = , 使用时才赋值</span></div><div class="line">libname := libxxx.so </div><div class="line"></div><div class="line">objs := a.o b.o c.o</div><div class="line"></div><div class="line">a.out: $(objs)</div><div class="line">    gcc $^</div></pre></td></tr></table></figure>
 <h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p><code>shell</code>中的环境变量可以在makefile脚本中直接使用.比如 <code>PATH</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 注意空格需要转义才行</div><div class="line">export objs = a.o\ b.o\ c.o</div></pre></td></tr></table></figure>
 <p>另外,当本地变量与环境变量重名时,本地变量会覆盖环境变量.</p>
-<h3 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$^ 表示所有依赖项</div><div class="line">$&lt; 表示第一个依赖项</div><div class="line">$@ 表示目标</div><div class="line"></div><div class="line">$? </div><div class="line">表示所有比目标文件更&quot;新&quot;的依赖文件列表</div><div class="line">用于文件拷贝时,有特殊的用途</div></pre></td></tr></table></figure>
+<h3 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$^ 在规则的命令中, 表示所有依赖项</div><div class="line">$&lt; 在规则的命令中, 表示第一个依赖项. 在模式规则中, 可以将依赖项依次取出.</div><div class="line">$@ 在规则的命令中, 表示目标</div><div class="line"></div><div class="line">$? </div><div class="line">表示所有比目标文件更&quot;新&quot;的依赖文件列表</div><div class="line">用于文件拷贝时,有特殊的用途</div></pre></td></tr></table></figure>
+<p>模式规则:<br>    %: %.c<br>        gcc $&lt; -o $@ -Wall -g</p>
+<p>静态模式规则:<br>    $(target):%: %.o<br>        gcc $&lt; -o $@ -L$(lib_path) -l$(libname) -I$(inc_path)</p>
 <h2 id="4-缺省规则"><a href="#4-缺省规则" class="headerlink" title="4 缺省规则"></a>4 缺省规则</h2><p>缺省规则是make系统提供的默认的规则,比如 x.o<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">%.o: %.c</div><div class="line">    $(CC) -c $(CPPFLAGS) $(CFLAGS) $&lt;</div><div class="line"></div><div class="line"><span class="comment"># % 是通配符的意思,表示任意的.o文件</span></div><div class="line"></div><div class="line"><span class="comment"># $(CC) 就是cc,也就是gcc</span></div><div class="line">ls -al /usr/bin/cc 可以看出, cc就是gcc的一个软链接而已</div></pre></td></tr></table></figure></p>
-<h2 id="5-函数的使用"><a href="#5-函数的使用" class="headerlink" title="5 函数的使用"></a>5 函数的使用</h2><p>主要是shell命令的内置用法</p>
+<h2 id="5-函数的使用"><a href="#5-函数的使用" class="headerlink" title="5 函数的使用"></a>5 函数的使用</h2><p>两个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 获取含有某一特征的文件组成列表</div><div class="line">$(wildcard 参数1)</div><div class="line"></div><div class="line">使用:</div><div class="line">srcs = $(wildcard *.c)   # srcs = a.c b.c s.c</div><div class="line"></div><div class="line">----------------</div><div class="line"></div><div class="line"># 替换</div><div class="line">objs = $(patsubst %.c, %.o , $(srcs)) # 将第三个参数中的,第一个参数的部分,替换为第二个参数</div><div class="line">objs = a.o b.o s.o</div></pre></td></tr></table></figure>
+<h2 id="6-一些高级用法"><a href="#6-一些高级用法" class="headerlink" title="6 一些高级用法"></a>6 一些高级用法</h2><p>主要是shell命令的内置用法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">srcs := `ls *.c`</div><div class="line">srcs :=  $(shell ls *.c)</div><div class="line"></div><div class="line">objs := $(srcs:.c=.o)</div></pre></td></tr></table></figure>
 <p><a href="http://blog.csdn.net/caspiansea/article/details/27580571" target="_blank" rel="external">案例1</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CXX = g++  </div><div class="line">CXXFLAGS = -g -I. -Wall  </div><div class="line">SRCS = $(shell find -name &quot;*.cpp&quot;)  </div><div class="line">OBJECTS = $(SRCS:%.cpp=%.o)  </div><div class="line">TARGETS = $(SRCS:%.cpp=%)  </div><div class="line"></div><div class="line">all: $(TARGETS)  </div><div class="line">    @for target in $(TARGETS); \  </div><div class="line">    do                        \  </div><div class="line">    $(CXX) $(CXXFLAGS) -o target</div><div class="line">    target.cpp; \  </div><div class="line">    done</div><div class="line"></div><div class="line">clean:  </div><div class="line">    -rm -f $(TARGETS) $(OBJECTS)</div></pre></td></tr></table></figure></p>
 <p><a href="http://blog.csdn.net/njnu_mjn/article/details/12971753" target="_blank" rel="external">案例2</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">files=main.exe a.exe b.exe  </div><div class="line">  </div><div class="line">all:  </div><div class="line">    for name in `echo $(files) | sed s/.exe//g`; \  </div><div class="line">    do \  </div><div class="line">        rm -f &quot;$$name&quot;.o; \  </div><div class="line">    done</div></pre></td></tr></table></figure></p>
-<h2 id="6-常见操作"><a href="#6-常见操作" class="headerlink" title="6 常见操作"></a>6 常见操作</h2><h3 id="目录迭代问题"><a href="#目录迭代问题" class="headerlink" title="目录迭代问题"></a>目录迭代问题</h3><p>解决方案:<br>(1) 在目录中继续生成一个Makefile文件<br>(2) make -C sub</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">src = $(wildcard ./src/*.c)</div><div class="line">obj = $(patsubst ./src/%.c, ./obj/%.o, $(src))			</div><div class="line">target = $(patsubst ./src/%.c, ./%, $(src))</div><div class="line"></div><div class="line">inc_path = ./inc</div><div class="line">lib_paht = ./lib</div><div class="line">libname = xxxsocket</div><div class="line"></div><div class="line">ALL:$(target)</div><div class="line"></div><div class="line">$(target):./%:./obj/%.o</div><div class="line">	gcc $&lt; -o $@  -L$(lib_paht) -l$(libname) -I$(inc_path)</div><div class="line"></div><div class="line">$(obj):./obj/%.o:./src/%.c</div><div class="line">	gcc -c $&lt; -o $@ -L$(lib_paht) -l$(libname) -I$(inc_path)</div><div class="line"></div><div class="line">clean:</div><div class="line">	-rm -rf $(obj) $(target)</div><div class="line"></div><div class="line">.PHONY: ALL clean</div></pre></td></tr></table></figure>
+<h2 id="7-常见操作"><a href="#7-常见操作" class="headerlink" title="7 常见操作"></a>7 常见操作</h2><h3 id="目录迭代问题"><a href="#目录迭代问题" class="headerlink" title="目录迭代问题"></a>目录迭代问题</h3><p>解决方案:<br>(1) 在目录中继续生成一个Makefile文件<br>(2) make -C sub</p>
 <p>示例:<img src="http://static.zybuluo.com/zhiyu/lkgsnw3rgty6b7b54dvd912b/2.png" alt="2.png-52kB"></p>
 <h3 id="子Makefile问题"><a href="#子Makefile问题" class="headerlink" title="子Makefile问题"></a>子Makefile问题</h3><p>将一些常用的修改属性合并到一个子文件中去<br>命名: def.mk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-include def.mk</div><div class="line"># 前面的 - 号指的是,如果文件不存在,自动忽略,不要报错</div></pre></td></tr></table></figure></p>
 <h3 id="自动推导"><a href="#自动推导" class="headerlink" title="自动推导"></a>自动推导</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; gcc -MM a.c</div><div class="line">&gt; # 查看a.c的文件依赖命令</div></pre></td></tr></table></figure>
@@ -57,27 +195,30 @@
     
       &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
 &lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
-&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;人的一切痛苦,本质上都是对自己的无能的愤怒&lt;br&gt;&lt;strong&gt;王小波&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;人的一切痛苦,本质上都是对自己的无能的愤怒&lt;br&gt;—— &lt;strong&gt;王小波&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
     
     </summary>
     
       <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="MakeFile" scheme="http://yoursite.com/tags/MakeFile/"/>
-    
       <category term="开发工具" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="MakeFile" scheme="http://yoursite.com/tags/MakeFile/"/>
     
   </entry>
   
   <entry>
-    <title>索引堆</title>
+    <title>浅谈算法 之 索引堆</title>
     <link href="http://yoursite.com/2017/03/19/IndexHeap/"/>
     <id>http://yoursite.com/2017/03/19/IndexHeap/</id>
     <published>2017-03-19T14:00:36.000Z</published>
-    <updated>2017-03-19T18:35:02.865Z</updated>
+    <updated>2017-03-20T13:43:01.125Z</updated>
     
-    <content type="html"><![CDATA[<blockquote>
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>没有人不爱惜他的生命，但很少人珍视他的时间。<br>—— <strong>梁实秋</strong><br></blockquote><br><a id="more"></a></p>
+<blockquote>
 <p>这里主要讨论的是，数组化的实现堆的经典方法。</p>
 </blockquote>
 <h2 id="1-为什么要使用索引堆"><a href="#1-为什么要使用索引堆" class="headerlink" title="1 为什么要使用索引堆"></a>1 为什么要使用索引堆</h2><blockquote>
@@ -97,7 +238,6 @@
 <p>在普通堆中，<code>shiftUp</code>和<code>shiftDown</code>中都要进行一步交换两个节点之间的值的步骤，但是如果节点值只是简单的数字，也是交换操作不会造成太大的影响，但是如果不是数字呢，而是一个字符串，或者一个更大的数据类型时，那么交换带来的副作用将会被大大提升。</p>
 <p>p.s. 当然这里交换的操作，我们可以简单的通过一些技术手段来替代。</p>
 <p>所以，这时，我们的英雄登场了：索引堆，先来看看它的数据结构。</p>
-<a id="more"></a>
 <h2 id="2-索引堆的数据结构"><a href="#2-索引堆的数据结构" class="headerlink" title="2 索引堆的数据结构"></a>2 索引堆的数据结构</h2><p>索引堆在普通堆的基础之上，其实多维护了一个<code>indexes</code>数组而已，它记录着<code>data</code>中的索引，在堆中的位置，也就是indexes[i] = x 的意思就是，data[x]这个元素，在堆中的实际位置是 i。</p>
 <p>看下索引堆的数据结构：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Item&gt;</div><div class="line"><span class="keyword">class</span> IndexMinHeap&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Item * data;</div><div class="line">    <span class="keyword">int</span>  * indexes;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <h2 id="3-索引堆过程"><a href="#3-索引堆过程" class="headerlink" title="3 索引堆过程"></a>3 索引堆过程</h2><p>索引堆的整个操作中，并没有对原始数据进行任何操作（只是用来比较），而真正处理的索引数组<code>indexes</code>中的索引，把索引进行了一次堆排序。</p>
@@ -134,33 +274,20 @@
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;这里主要讨论的是，数组化的实现堆的经典方法。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;1-为什么要使用索引堆&quot;&gt;&lt;a href=&quot;#1-为什么要使用索引堆&quot; class=&quot;headerlink&quot; title=&quot;1 为什么要使用索引堆&quot;&gt;&lt;/a&gt;1 为什么要使用索引堆&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;索引堆从名称也可以看得出来，是堆的一种高级形态&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;有这样一个基础概念，想在此强调一下，那就是：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对于堆化的过程中，原来数组的索引将被破坏掉。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这也是就是&lt;strong&gt;索引堆的意义&lt;/strong&gt;，或者说索引堆的&lt;strong&gt;核心价值&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;就是因为普通堆在成堆之后，数组的高效索引能力被严重破坏掉，因为成堆之后的下标与原始数据之后没有做关系维护。&lt;/p&gt;
-&lt;p&gt;这个时候就需要另外一个数组来维护原始数据和成堆后的数据之间的关系。&lt;/p&gt;
-&lt;p&gt;另外，还有一个问题：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;shiftUp&lt;/code&gt;和&lt;code&gt;shiftDown&lt;/code&gt;中的交换操作&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;在普通堆中，&lt;code&gt;shiftUp&lt;/code&gt;和&lt;code&gt;shiftDown&lt;/code&gt;中都要进行一步交换两个节点之间的值的步骤，但是如果节点值只是简单的数字，也是交换操作不会造成太大的影响，但是如果不是数字呢，而是一个字符串，或者一个更大的数据类型时，那么交换带来的副作用将会被大大提升。&lt;/p&gt;
-&lt;p&gt;p.s. 当然这里交换的操作，我们可以简单的通过一些技术手段来替代。&lt;/p&gt;
-&lt;p&gt;所以，这时，我们的英雄登场了：索引堆，先来看看它的数据结构。&lt;/p&gt;
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;没有人不爱惜他的生命，但很少人珍视他的时间。&lt;br&gt;—— &lt;strong&gt;梁实秋&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
     
     </summary>
     
       <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="算法 堆 图论" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95-%E5%A0%86-%E5%9B%BE%E8%AE%BA/"/>
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="图论基础" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="堆/优先队列" scheme="http://yoursite.com/tags/%E5%A0%86-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
     
   </entry>
   
