@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T16:29:15.478Z</updated>
+  <updated>2017-03-20T16:39:37.384Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/20/%E6%B5%85%E8%B0%88%E7%AE%97%E6%B3%95-%E4%B9%8B-%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     <id>http://yoursite.com/2017/03/20/浅谈算法-之-并查集/</id>
     <published>2017-03-20T13:35:20.000Z</published>
-    <updated>2017-03-20T16:29:15.478Z</updated>
+    <updated>2017-03-20T16:39:37.384Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -72,7 +72,8 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> p )</span></span>&#123;</div><div class="line">    assert( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</div><div class="line">    <span class="keyword">while</span>( p != parent[p] )&#123;</div><div class="line">        <span class="comment">// p的父节点指向当前父节点的父节点, 这就是路径压缩的核心, 没了</span></div><div class="line">        <span class="comment">// 需要注意的就是,即使当前距离根节点只有一个位置了,下面代码依然成立</span></div><div class="line">        <span class="comment">// 因为根节点的父节点仍然等于自己</span></div><div class="line">        parent[p] = parent[parent[p]];</div><div class="line">        p = parent[p];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>继续优化:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">int find( int p )&#123;</div><div class="line">    assert( p &gt;= 0 &amp;&amp; p &lt; count );</div><div class="line">    </div><div class="line">    // 这段代码的作用, 是把所有除根节点外的节点,都直接优化成是根节点的第一子节点</div><div class="line">    // 也就是说,除了根节点外, 所有节点都在一层, 而树的高度就是两层.</div><div class="line">    // 这样的做法,查找效率就是最高的.</div><div class="line">    if( p != parent[p] )</div><div class="line">        parent[p] = find( parent[p] );</div><div class="line">    return p;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>但是, 这只是理论上的分析,实际上,第一个版本的路径压缩优化,在时间效率上其实是高于递归版本的路径压缩优化方法,虽然递归版本中,从逻辑上,树高度上的优化,其实已经做到了极致, 就差把树变成了一个数组, 看似是应该更快的.. 但是, 这其中的消耗其实主要来自递归的开销.</p>
-<p>所以,有时候从逻辑上分析之后,我们还应该手动的检验一下最后的结果.</p>
+<p>所以,有时候从逻辑上分析之后,我们还应该手动的检验一下最后的结果, 因为理论有时候往往不一定可靠.</p>
+<h2 id="4-时间复杂度"><a href="#4-时间复杂度" class="headerlink" title="4 时间复杂度"></a>4 时间复杂度</h2><p>最终优化后的并查集的操作, 时间复杂度近乎是 O(1) 的, 准确的说不是O(1), 因为其实在操作的过程中, 还是会有一定的开销, 这个消耗的具体内容, 感兴趣的读者可以自行谷歌一下.</p>
 <p>算法, 是不是很有意思呢?</p>
 ]]></content>
     
