@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T16:41:48.742Z</updated>
+  <updated>2017-03-20T19:06:17.272Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,132 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建自己的Blog</title>
+    <link href="http://yoursite.com/2017/03/21/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Blog/"/>
+    <id>http://yoursite.com/2017/03/21/搭建自己的Blog/</id>
+    <published>2017-03-20T18:03:14.000Z</published>
+    <updated>2017-03-20T19:06:17.272Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>思想以自己的言语喂养它自己，而成长起来。<br>—— <strong>泰戈尔</strong><br></blockquote><br><a id="more"></a></p>
+<h2 id="Hexo搭建记"><a href="#Hexo搭建记" class="headerlink" title="Hexo搭建记"></a>Hexo搭建记</h2><p>现在想想, 搭建个人的Blog真心是一件麻烦的事情, 每遇到一个问题, 那种痛苦的感觉, 解决了之后, 那种爽快的感觉, 其实跟编程给人的感觉差不多少.</p>
+<p>在很久之前就一直想做一个自己的blog, 也买了域名, 折腾了一会, 但是就是感觉没有一篇文章是给小白, 纯小白看的, 就好像说, <strong>把大象关进冰箱一样, 打开冰箱门, 你肯定知道, 然后大神们就告诉你说, 然后把大象放进冰箱里就行, 最后把冰箱门关上, done! 成功了有没有</strong>!<br>….<br>有些夸张, 但是有时候感受是这样的</p>
+<p>前几天,偶然的一次访问到了一位<a href="http://wuchong.me/" target="_blank" rel="external">网友的博客</a>, 博客的页面简单, 美观, 实用, 又一次燃起了我对个人主页的向往, 于是, 折腾开始了..</p>
+<p>其实, 网上也参考不少好的资料, 在本文末尾, 也一一列出, 并在此感谢各位大神的著作, 让我度过了坎坷但又很值得的几天, 人生就是要浪费在这种美好的事物上呀!</p>
+<p>下面, 我来给出我的详细搭建过程中, 遇到关于域名解析的一些问题, 进行一下简单的说明. 像简单的一些页面配置, 文章最后, 我列出的参考文献之中, 均有详细无比的配置方法, 就不在此赘述.</p>
+<h3 id="1-1-购买域名"><a href="#1-1-购买域名" class="headerlink" title="1.1 购买域名"></a>1.1 购买域名</h3><blockquote>
+<p>我是直接去<a href="https://sg.godaddy.com/zh/" target="_blank" rel="external">狗爹</a>上, 搜索到自己想要的<a href="http://www.zhiyupan.me" target="_blank" rel="external">域名</a>, 然后购买就可以, 简单, 而且可以直接支付宝付款.</p>
+</blockquote>
+<h3 id="1-2-域名解析"><a href="#1-2-域名解析" class="headerlink" title="1.2 域名解析"></a>1.2 域名解析</h3><p>啥意思呢? 就是说, 你虽然买了一个域名, 但是还是要解析才能使用, 比如说, 我自己买了一个域名是<br>xxxx.me, 但是实际上你托管代码的服务器, 只让你通过www.xxxx.me来访问, 不允许你直接访问自己的域名, 怎么破?<br>这个时候就需要一个dns解析服务, 来帮助, 而且还有一个CNAME的概念.</p>
+<blockquote>
+<p>我使用的DNS解析服务是来自<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>, 注册简单, 使用也比较方便, 在域名解析标签下, 添加自己的购买的域名, 然后再根据<a href="https://support.dnspod.cn/Kb/showarticle/tsid/42" target="_blank" rel="external">设置向导, 修改狗爹上的一些配置</a>, 其实就是访问自己的域名时, 狗爹的服务器优先感知到, 然后再反向通知到你刚刚注册的DNSPod的NameServer上去, 进而进行解析, 其实也就是再一步的跳转到你设置的那个真实的服务器的ip地址上去, 获取到你页面文件, 浏览器才能进行展示.</p>
+</blockquote>
+<p>这个再跳转的过程就是 要配置的 CNAME<br>我是使用的<a href="https://github.com" target="_blank" rel="external">GitHub</a>提供的代码托管服务.<br>DNSPod中的CNAME选项按照要求GitHub配置上就好, ‘<br>过程就是, </p>
+<blockquote>
+<p>访问 www.xxx.me , 狗爹服务器响应, 然后跳转到DnsPod服务器, 然后根据CNAME再跳一次, 跳到GitHub的服务器上面, 最后才算是完成了一次访问.</p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/zhiyu/f9ald7n944q3h69ti5w50al5/E9DGQNMC5YCIO@X8K%7B%5B7FX8.png" alt="E9DGQNMC5YCIO@X8K7FX8.png-5.2kB"></p>
+<h2 id="1-3-直接访问域名"><a href="#1-3-直接访问域名" class="headerlink" title="1.3 直接访问域名"></a>1.3 直接访问域名</h2><p>其实我还有一个问题, 一直没有解决, 就是我CNAME虽然按照DNSPod的方式配置, GitHub的二级域名也填好了, 是直接访问的方式, 但是我直接访问时, 却一直会跳转到狗爹的页面上去, 而不会跳转的GitHub上的部署服务器上, 但是如果使用www访问,就可以直接访问成功.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">不知道是不是我购买的域名不支持?</div><div class="line">还是DNSPod的配置还是有问题?</div><div class="line">还是GitHub上不支持?</div></pre></td></tr></table></figure></p>
+<p>唉 , 以后再慢慢来弄吧~ 先好好写点文章先..</p>
+<p><img src="http://static.zybuluo.com/zhiyu/0j064hadchlhx1uunx4xxi4x/QQ%E6%88%AA%E5%9B%BE20170321025214.png" alt="QQ截图20170321025214.png-18.1kB"></p>
+<ul>
+<li>参考文献<ul>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">Hexo你的博客</a></li>
+<li><a href="http://wuchong.me/blog/2013/12/13/hello-%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">Hexo独立博客</a></li>
+<li><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexTGitHub</a></li>
+<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next使用文档</a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;思想以自己的言语喂养它自己，而成长起来。&lt;br&gt;—— &lt;strong&gt;泰戈尔&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="写作" scheme="http://yoursite.com/categories/%E5%86%99%E4%BD%9C/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux多线程传参问题</title>
+    <link href="http://yoursite.com/2017/03/21/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BC%A0%E5%8F%82%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/03/21/Linux多线程传参问题/</id>
+    <published>2017-03-20T16:49:40.000Z</published>
+    <updated>2017-03-20T17:48:46.302Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<p><blockquote class="blockquote-center"><br>寿命的缩短与思想的虚耗成正比。<br>—— <strong>达尔文</strong><br></blockquote><br><a id="more"></a></p>
+<p>在Linux多线程创建函数<code>pthread_create</code>中, 它的最后一个参数, 允许线程回调函数中传入一个参数, 一直以来, 我们被警告尽量不要在这个参数中传递指针, 尽量进行值传递.. 但是为什么呢?</p>
+<p>下面, 我们来看这样一段代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ThreadInfo_&#123;</div><div class="line">    <span class="keyword">void</span> *handle;</div><div class="line">    <span class="keyword">int</span> iLoop;</div><div class="line">    <span class="keyword">int</span> iArrayIndex;</div><div class="line">&#125; ThreadInfo;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">start_routine</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>&#123;</div><div class="line"></div><div class="line">    ThreadInfo *threadInfo = (ThreadInfo *)arg;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; threadInfo-&gt;iLoop ; ++ i )</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"第%d线程, 第%d圈"</span>, threadInfo-&gt;iArrayIndex, i+<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">pthread_t</span> pidArray[<span class="number">1024</span>];</div><div class="line">    </div><div class="line">    ThreadInfo threadInfo;</div><div class="line">    <span class="built_in">memset</span>( &amp;threadInfo , <span class="number">0</span> , <span class="keyword">sizeof</span>(ThreadInfo) );</div><div class="line">    </div><div class="line">    <span class="keyword">void</span> *handle = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> iLoop = <span class="number">2</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )&#123;</div><div class="line">    </div><div class="line">        threadInfo.handle = handle;</div><div class="line">        threadInfo.iLoop = iLoop;</div><div class="line">        threadInfo.iArrayIndex = i+<span class="number">1</span>;</div><div class="line">        </div><div class="line">        pthread_create( &amp;pidArray[i] , <span class="literal">NULL</span> , start_routine , (<span class="keyword">void</span>*)&amp;threadInfo );</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )</div><div class="line">        pthread_join( pidArray[i] , <span class="literal">NULL</span> );</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很简单的一段逻辑, 我们有这样一个需求:</p>
+<blockquote>
+<p>创建10个线程,每个线程打印: 当前线程在处理第几圈, 打印顺序当然是不确定的</p>
+</blockquote>
+<p>预期:</p>
+<blockquote>
+<p>“第1线程, 第1圈”<br>“第2线程, 第1圈”<br>“第3线程, 第2圈”<br>“第4线程, 第1圈”<br>“第5线程, 第2圈”<br>…</p>
+</blockquote>
+<p>实际上:</p>
+<blockquote>
+<p>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第2圈”<br>…</p>
+</blockquote>
+<p>打印的结果, 大大的出乎我们的意料, 没有按照我们之前的预想, 都是打印出第10个线程在做事.为什么会这样呢?</p>
+<p>原因其实也不难分析:</p>
+<p>我们仔细再回顾一下代码, 不难发现一个问题, 那就是threadInfo这个东西, 在主线程中, 其实只被创建了一次, 而每次for循环中, 进行修改它的内容而已.</p>
+<p>貌似问题是出在这里, 这还不够.</p>
+<p>我们还知道这样几个事实, 那就是这段代码中:</p>
+<blockquote>
+<ol>
+<li>主线程函数栈和子线程函数栈其实都是同一个进程的栈空间内的;</li>
+<li>主线程在创建10个子线程的整个过程中, 一直是不会被打断的;</li>
+<li>10个子线程看似是一个个创建出来的, 但是其实相当于10个线程并发着创建出来, 然后一起去抢占cpu的资源的;</li>
+<li>主线程和子线程抢占cpu的能力上, 大概是 主线程会优先90%抢占, 理论依据不足, 这里主要是经验值.</li>
+</ol>
+</blockquote>
+<p>好, 这几个事实的基础上, 我们知道了10个子线程一起创建好了, 然后去抢占资源, 抢到了然后去执行回调函数, 处理相关的逻辑.</p>
+<p>而且, 主线程也不会等待或阻塞, 依次继续执行, 那么, 控制线程编号的变量, iArrayIndex其实本质上, 是在主线程自己的栈帧中的, 开辟关于threadInfo的一段空间, 空间里有一个 iArrayIndex 变量的内容.</p>
+<p>再看子线程空间, 线程空间中, 由于是通过指针的方式获取到 threadInfo的值, 那么,线程不断的抢占, 然后通过指针访问主线程栈帧中的一个变量中的一个属性内容, 而且, 这个内容在主线程中不断的自增变化.</p>
+<p>而且, 主线程有90%的几率优先抢占到资源, 所以整个for循环执行完, iArraryIndex 已经自增为10, 这时, 子线程们才陆陆续续抢到cpu, 然后去回调, 而且, 还是通过指针, 访问主线程的栈帧中的iArrayIndex变量, 所以打印结果当然全是<code>线程10</code>咯~~</p>
+<h2 id="如何解决呢"><a href="#如何解决呢" class="headerlink" title="如何解决呢?"></a>如何解决呢?</h2><h3 id="1-方法很简单-尽量不要指针传递"><a href="#1-方法很简单-尽量不要指针传递" class="headerlink" title="1 方法很简单, 尽量不要指针传递"></a>1 方法很简单, 尽量不要指针传递</h3><p>因为创建过程中, 被指向的对象很可能已经在主线程中发生变化, 比如本题中.<br>不变化的话, 就可以传了吗? 接着看.</p>
+<h3 id="2-一定要使用怎么办"><a href="#2-一定要使用怎么办" class="headerlink" title="2. 一定要使用怎么办"></a>2. 一定要使用怎么办</h3><blockquote>
+<p>答案就是: 内存冗余法.</p>
+</blockquote>
+<p>啥意思呢?<br>说白了, 就是避免麻烦, 避免出现本文中的出现的类似的问题, 我给每个子线程生成一个变量就好了, 每人一份, 不用抢. 当然, 这一份变量要开辟在堆空间上.</p>
+<p>其实也就是类似, 参考了 多进程中的做法, 就是fork之后, 原来父进程有的, 我几乎全copy一份( 有些PCB中的内容不会拷贝到子进程中去 ), 互不干扰.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程中的使用中, 这个传参的过程还是有点小坑的, 很多问题, 同一个线程中, 似乎很简单, 但是多线程, 而且感觉看不到摸不到, 调用时机也不明确, 会让我们觉得有点困扰. 但是仔细分析, 画图辅助, 其实问题解决起来也不难.</p>
+<hr>
+<h3 id="示意图如下"><a href="#示意图如下" class="headerlink" title="示意图如下:"></a>示意图如下:</h3><p><img src="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png" alt="3.png-67.9kB"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;寿命的缩短与思想的虚耗成正比。&lt;br&gt;—— &lt;strong&gt;达尔文&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="小坑套老坑" scheme="http://yoursite.com/tags/%E5%B0%8F%E5%9D%91%E5%A5%97%E8%80%81%E5%9D%91/"/>
+    
+      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>浅谈算法 之 并查集</title>
@@ -99,7 +225,7 @@
     <link href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/"/>
     <id>http://yoursite.com/2017/03/20/Dynamic-Static-Library/</id>
     <published>2017-03-19T18:42:12.000Z</published>
-    <updated>2017-03-20T13:39:43.210Z</updated>
+    <updated>2017-03-20T18:01:48.883Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -144,7 +270,7 @@
       <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="编程基础" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+      <category term="开发工具" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -153,7 +279,7 @@
     <link href="http://yoursite.com/2017/03/19/MakeFile/"/>
     <id>http://yoursite.com/2017/03/19/MakeFile/</id>
     <published>2017-03-19T14:43:38.000Z</published>
-    <updated>2017-03-20T13:39:46.346Z</updated>
+    <updated>2017-03-20T17:58:54.530Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -161,7 +287,8 @@
 <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1 定义"></a>1 定义</h2><p>MakeFile 是一种经典的项目管理工具.其实也是一种脚本,有着自己独特的语法.</p>
 <h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2 基本使用"></a>2 基本使用</h2><p>Makefile元素:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">目标: 依赖</div><div class="line">    (tab 缩进)命令</div></pre></td></tr></table></figure></p>
 <p>目标可以有多个依赖,依赖有传递性.<code>make</code>命令去执行Makefile,Makefile的名字固定为<code>Makefile</code>或者<code>makefile</code>,也可以自定义名字,但需要<code>-f</code>指定.</p>
-<p>make默认生成第一个依赖项.如果想生成其他依赖项,直接在make后跟依赖项即可.比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; make clean</div><div class="line"># .PHONY: ALL clean</div><div class="line"></div><div class="line"># 一般可能还要配合sudo命令来使用</div><div class="line">&gt; make install</div><div class="line">&gt; make uninstall</div><div class="line"></div><div class="line"></div><div class="line"># 主要用来测试</div><div class="line"># echo $(CC)</div><div class="line">&gt; make test</div></pre></td></tr></table></figure></p>
+<p>原理:<br>    当依赖文件, 有更新时, 就会生成新的目标文件, 否则make指令不做什么操作.</p>
+<p>make默认生成第一个依赖项.如果想生成其他依赖项,直接在make后跟依赖项即可.比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; make clean</div><div class="line"></div><div class="line"># 当makefile文件夹中, 恰好有一个文件名就叫 clean , 那么此时, make clean 动作会失效.</div><div class="line"># 为什么失效呢?</div><div class="line"># 因为, 如果目录中出现了&quot;clean&quot;文件，则规则失效了：没有依赖文件，文件&quot;clean&quot;始终是最新的，命令永远不会执行</div><div class="line"># 也就是, 编译器把 clean 当作了要生成的一个目标文件, </div><div class="line"># 比如 最简单的 a.out:</div><div class="line">#  					gcc a.c -o $@</div><div class="line"># 如果文件夹中恰好有这样一个 a.out 时, 那么 make 命令就是失效. 同时 clean 的失效也是来自这个道理. </div><div class="line">clean: </div><div class="line">	rm $@ $(objs) -rf</div><div class="line">.PHONY: ALL clean</div><div class="line"># .PHONY: ALL clean 的意思就是强制执行 clean 下的命令, 无视同名文件</div><div class="line"></div><div class="line"># 一般可能还要配合sudo命令来使用</div><div class="line">&gt; make install</div><div class="line">&gt; make uninstall</div><div class="line"></div><div class="line"></div><div class="line"># 主要用来测试</div><div class="line"># echo $(CC)</div><div class="line">&gt; make test</div></pre></td></tr></table></figure></p>
 <p>一般的,把第一个目标叫做<code>all</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 首次查看,切记要执行, 输出具体指令, 防止误操作造成不可逆转的行为</div><div class="line"></div><div class="line">&gt; make -n</div></pre></td></tr></table></figure>
 <h2 id="3-变量"><a href="#3-变量" class="headerlink" title="3 变量"></a>3 变量</h2><p>可以使用变量来简化Makefile,定义变量可以使用</p>
@@ -286,9 +413,9 @@
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="图论基础" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"/>
-    
       <category term="堆/优先队列" scheme="http://yoursite.com/tags/%E5%A0%86-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
+    
+      <category term="图论基础" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   

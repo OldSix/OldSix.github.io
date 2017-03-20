@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="开发工具," />
+  <meta name="keywords" content="小坑套老坑,多线程," />
 
 
 
@@ -107,16 +107,18 @@
 
 
 
-<meta name="description" content="Microsoft isn’t evil, they just make really crappy operating systems.—— Linus Torvalds">
+<meta name="description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dynamic & Static Library">
-<meta property="og:url" content="http://yoursite.com/2017/03/20/Dynamic-Static-Library/index.html">
+<meta property="og:title" content="Linux多线程传参问题">
+<meta property="og:url" content="http://yoursite.com/2017/03/21/Linux多线程传参问题/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="Microsoft isn’t evil, they just make really crappy operating systems.—— Linus Torvalds">
-<meta property="og:updated_time" content="2017-03-20T18:01:48.883Z">
+<meta property="og:description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
+<meta property="og:image" content="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png">
+<meta property="og:updated_time" content="2017-03-20T17:48:46.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dynamic & Static Library">
-<meta name="twitter:description" content="Microsoft isn’t evil, they just make really crappy operating systems.—— Linus Torvalds">
+<meta name="twitter:title" content="Linux多线程传参问题">
+<meta name="twitter:description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
+<meta name="twitter:image" content="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png">
 
 
 
@@ -144,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/21/Linux多线程传参问题/"/>
 
 
 
 
 
-  <title> Dynamic & Static Library | Six's a Coder </title>
+  <title> Linux多线程传参问题 | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +291,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/Linux多线程传参问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
@@ -310,7 +312,7 @@
             
             
               
-                Dynamic & Static Library
+                Linux多线程传参问题
               
             
           </h1>
@@ -325,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T02:42:12+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:49:40+08:00">
+                2017-03-21
               </time>
             
 
@@ -385,34 +387,48 @@
       
         <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>Microsoft isn’t evil, they just make really crappy operating systems.<br>—— <strong>Linus Torvalds</strong><br></blockquote><br><a id="more"></a></p>
+<p><blockquote class="blockquote-center"><br>寿命的缩短与思想的虚耗成正比。<br>—— <strong>达尔文</strong><br></blockquote><br><a id="more"></a></p>
+<p>在Linux多线程创建函数<code>pthread_create</code>中, 它的最后一个参数, 允许线程回调函数中传入一个参数, 一直以来, 我们被警告尽量不要在这个参数中传递指针, 尽量进行值传递.. 但是为什么呢?</p>
+<p>下面, 我们来看这样一段代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ThreadInfo_&#123;</div><div class="line">    <span class="keyword">void</span> *handle;</div><div class="line">    <span class="keyword">int</span> iLoop;</div><div class="line">    <span class="keyword">int</span> iArrayIndex;</div><div class="line">&#125; ThreadInfo;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">start_routine</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>&#123;</div><div class="line"></div><div class="line">    ThreadInfo *threadInfo = (ThreadInfo *)arg;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; threadInfo-&gt;iLoop ; ++ i )</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"第%d线程, 第%d圈"</span>, threadInfo-&gt;iArrayIndex, i+<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">pthread_t</span> pidArray[<span class="number">1024</span>];</div><div class="line">    </div><div class="line">    ThreadInfo threadInfo;</div><div class="line">    <span class="built_in">memset</span>( &amp;threadInfo , <span class="number">0</span> , <span class="keyword">sizeof</span>(ThreadInfo) );</div><div class="line">    </div><div class="line">    <span class="keyword">void</span> *handle = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> iLoop = <span class="number">2</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )&#123;</div><div class="line">    </div><div class="line">        threadInfo.handle = handle;</div><div class="line">        threadInfo.iLoop = iLoop;</div><div class="line">        threadInfo.iArrayIndex = i+<span class="number">1</span>;</div><div class="line">        </div><div class="line">        pthread_create( &amp;pidArray[i] , <span class="literal">NULL</span> , start_routine , (<span class="keyword">void</span>*)&amp;threadInfo );</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )</div><div class="line">        pthread_join( pidArray[i] , <span class="literal">NULL</span> );</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很简单的一段逻辑, 我们有这样一个需求:</p>
 <blockquote>
-<p>本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.</p>
+<p>创建10个线程,每个线程打印: 当前线程在处理第几圈, 打印顺序当然是不确定的</p>
 </blockquote>
-<h2 id="0-动态库基础"><a href="#0-动态库基础" class="headerlink" title="0 动态库基础"></a>0 动态库基础</h2><pre><code>1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 --- xxx.so xxx.h -L -l
-</code></pre><h2 id="1-Linux"><a href="#1-Linux" class="headerlink" title="1 Linux"></a>1 Linux</h2><p>(1) 制作Linux动态库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c xxx.c -o xxx.o -fPIC</div><div class="line">gcc -shared -o libxxxtest.so xxx.o</div></pre></td></tr></table></figure>
-<p>多文件项目中,可以参看我的另一篇关于 makefile 的介绍</p>
-<p>(2) 动态库的使用</p>
-<p>lib库名.so 文件本身不能执行</p>
-<p>项目目录结构如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">src/  -- xxx.c</div><div class="line">obj/  -- xxx.o 用于tia</div><div class="line">inc/  -- xxx.h 头文件</div><div class="line">lib/  -- xxx.so / xxx.a 库</div><div class="line">media/ -- 媒体文件</div><div class="line">Makefile</div></pre></td></tr></table></figure></p>
-<p>执行命令如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">链接器:  工作于生成可重定位文件阶段,也就是生成.o文件.任务:数据合并 和 地址回填(数据位置重定位)</div><div class="line"></div><div class="line">动态链接器: 工作于加载器加载可执行文件到内存后,程序运行时查找库函数期间.加载库函数到内存,重定位函数地址(绝对地址),用LD_LIBRARY_PATH.</div></pre></td></tr></table></figure></p>
-<p>运行: ./a.out —&gt;报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原因: 动态链接器找不到加载库函数的目录位置.</div><div class="line">ldd a.out 查看链接依赖情况, 是否存在&apos;not found&apos;字样</div></pre></td></tr></table></figure></p>
-<p>解决方案:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(1) 将自定义的动态库 cp 放到 标准 c库所在目录位置: /usr/bin/lib (不推荐)</div><div class="line">(2) 在可执行文件所在目录的位置, 执行命令: export LD_LIBRARY_PATH = 库路径 (临时生效)</div><div class="line">(3) export LD_LIBRAY_PATH = 库路径 写入 ~/.bash_profile 中, source 一下 令其即时生效, 或重启.</div><div class="line"></div><div class="line">ldd 再次查看,成功显示动态库位置 ./a.out 运行即可</div></pre></td></tr></table></figure></p>
-<h2 id="2-Windows"><a href="#2-Windows" class="headerlink" title="2 Windows"></a>2 Windows</h2><p>(1) 动态库的制作:</p>
+<p>预期:</p>
+<blockquote>
+<p>“第1线程, 第1圈”<br>“第2线程, 第1圈”<br>“第3线程, 第2圈”<br>“第4线程, 第1圈”<br>“第5线程, 第2圈”<br>…</p>
+</blockquote>
+<p>实际上:</p>
+<blockquote>
+<p>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第2圈”<br>…</p>
+</blockquote>
+<p>打印的结果, 大大的出乎我们的意料, 没有按照我们之前的预想, 都是打印出第10个线程在做事.为什么会这样呢?</p>
+<p>原因其实也不难分析:</p>
+<p>我们仔细再回顾一下代码, 不难发现一个问题, 那就是threadInfo这个东西, 在主线程中, 其实只被创建了一次, 而每次for循环中, 进行修改它的内容而已.</p>
+<p>貌似问题是出在这里, 这还不够.</p>
+<p>我们还知道这样几个事实, 那就是这段代码中:</p>
 <blockquote>
 <ol>
-<li>打开vs2013 , 创建<code>win32 生成dll项目</code></li>
-<li>动态库的命名不要使用中文名</li>
-<li>导入src文件</li>
-<li>API函数导出即可<br> 只将用户使用的指定某几个函数从动态库中导出。   — xxx.lib<br> 使用 <code>__declspec(dllexport)</code> 宏，提示编译器。在编译程序的时候，需特殊处理的函数。<br> 注意： <code>.c 文件</code> 和 <code>.h 文件</code> 均需要添加该宏！！ （VS2013 要求）<br> 默认生成的动态库位于上层目录下的 Debug 目录内。</li>
+<li>主线程函数栈和子线程函数栈其实都是同一个进程的栈空间内的;</li>
+<li>主线程在创建10个子线程的整个过程中, 一直是不会被打断的;</li>
+<li>10个子线程看似是一个个创建出来的, 但是其实相当于10个线程并发着创建出来, 然后一起去抢占cpu的资源的;</li>
+<li>主线程和子线程抢占cpu的能力上, 大概是 主线程会优先90%抢占, 理论依据不足, 这里主要是经验值.</li>
 </ol>
 </blockquote>
-<p>(2) 动态库的制作结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xxx.dll  二进制目标函数集, 可被操作系统加载</div><div class="line">xxx.lib  是对dll的描述文件( 包含多少函数, 哪些被导出 )</div><div class="line">xxx.h </div><div class="line"></div><div class="line">以上三个文件提供给用户使用即可</div></pre></td></tr></table></figure></p>
-<p>(3) 动态库的调用和调试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">通知VS2013编译器，使用提供的动态库。</div><div class="line"></div><div class="line">将.dll .lib .h三个文件放置在 .c同级目录下。</div><div class="line"></div><div class="line">右键项目“属性”---“配置属性”---“链接器”---“输入”--- “附加依赖项”---下拉菜单“编辑”</div><div class="line"></div><div class="line">---- 输入【描述dll信息lib文件  xxxxx.lib】</div></pre></td></tr></table></figure></p>
-<p>常见错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1. 若xxx.lib配置错误，则VS编译器无法找到所用函数。 </div><div class="line"></div><div class="line">2. 如若在运行111.exe时，说明操作系统找不到动态库加载路径。 </div><div class="line"></div><div class="line">	(1)配置PATH;(2)将exe和动态库dll置于同一目录下即可。</div><div class="line"></div><div class="line">VS2015：</div><div class="line"></div><div class="line">	xxxx.lib  ---&gt; .c 源码 .h 头文件所在目录位置</div><div class="line"></div><div class="line">	xxxx.dll ---&gt; .exe 可执行文件所在目录位置。</div></pre></td></tr></table></figure></p>
-<p>动态库内存释放：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">遵循一个原则：谁分配，谁释放。</div><div class="line">调用动态库函数分配的内存，也一定要调用动态库函数来释放内存。</div></pre></td></tr></table></figure></p>
+<p>好, 这几个事实的基础上, 我们知道了10个子线程一起创建好了, 然后去抢占资源, 抢到了然后去执行回调函数, 处理相关的逻辑.</p>
+<p>而且, 主线程也不会等待或阻塞, 依次继续执行, 那么, 控制线程编号的变量, iArrayIndex其实本质上, 是在主线程自己的栈帧中的, 开辟关于threadInfo的一段空间, 空间里有一个 iArrayIndex 变量的内容.</p>
+<p>再看子线程空间, 线程空间中, 由于是通过指针的方式获取到 threadInfo的值, 那么,线程不断的抢占, 然后通过指针访问主线程栈帧中的一个变量中的一个属性内容, 而且, 这个内容在主线程中不断的自增变化.</p>
+<p>而且, 主线程有90%的几率优先抢占到资源, 所以整个for循环执行完, iArraryIndex 已经自增为10, 这时, 子线程们才陆陆续续抢到cpu, 然后去回调, 而且, 还是通过指针, 访问主线程的栈帧中的iArrayIndex变量, 所以打印结果当然全是<code>线程10</code>咯~~</p>
+<h2 id="如何解决呢"><a href="#如何解决呢" class="headerlink" title="如何解决呢?"></a>如何解决呢?</h2><h3 id="1-方法很简单-尽量不要指针传递"><a href="#1-方法很简单-尽量不要指针传递" class="headerlink" title="1 方法很简单, 尽量不要指针传递"></a>1 方法很简单, 尽量不要指针传递</h3><p>因为创建过程中, 被指向的对象很可能已经在主线程中发生变化, 比如本题中.<br>不变化的话, 就可以传了吗? 接着看.</p>
+<h3 id="2-一定要使用怎么办"><a href="#2-一定要使用怎么办" class="headerlink" title="2. 一定要使用怎么办"></a>2. 一定要使用怎么办</h3><blockquote>
+<p>答案就是: 内存冗余法.</p>
+</blockquote>
+<p>啥意思呢?<br>说白了, 就是避免麻烦, 避免出现本文中的出现的类似的问题, 我给每个子线程生成一个变量就好了, 每人一份, 不用抢. 当然, 这一份变量要开辟在堆空间上.</p>
+<p>其实也就是类似, 参考了 多进程中的做法, 就是fork之后, 原来父进程有的, 我几乎全copy一份( 有些PCB中的内容不会拷贝到子进程中去 ), 互不干扰.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程中的使用中, 这个传参的过程还是有点小坑的, 很多问题, 同一个线程中, 似乎很简单, 但是多线程, 而且感觉看不到摸不到, 调用时机也不明确, 会让我们觉得有点困扰. 但是仔细分析, 画图辅助, 其实问题解决起来也不难.</p>
+<hr>
+<h3 id="示意图如下"><a href="#示意图如下" class="headerlink" title="示意图如下:"></a>示意图如下:</h3><p><img src="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png" alt="3.png-67.9kB"></p>
 
       
     </div>
@@ -442,7 +458,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发工具/" rel="tag"># 开发工具</a>
+            <a href="/tags/小坑套老坑/" rel="tag"># 小坑套老坑</a>
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
       
@@ -455,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/MakeFile/" rel="next" title="MakeFile">
-                <i class="fa fa-chevron-left"></i> MakeFile
+              <a href="/2017/03/20/浅谈算法-之-并查集/" rel="next" title="浅谈算法 之 并查集">
+                <i class="fa fa-chevron-left"></i> 浅谈算法 之 并查集
               </a>
             
           </div>
@@ -465,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/20/浅谈算法-之-并查集/" rel="prev" title="浅谈算法 之 并查集">
-                浅谈算法 之 并查集 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/21/搭建自己的Blog/" rel="prev" title="搭建自己的Blog">
+                搭建自己的Blog <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-动态库基础"><span class="nav-number">1.</span> <span class="nav-text">0 动态库基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux"><span class="nav-number">2.</span> <span class="nav-text">1 Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Windows"><span class="nav-number">3.</span> <span class="nav-text">2 Windows</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决呢"><span class="nav-number">1.</span> <span class="nav-text">如何解决呢?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法很简单-尽量不要指针传递"><span class="nav-number">1.1.</span> <span class="nav-text">1 方法很简单, 尽量不要指针传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一定要使用怎么办"><span class="nav-number">1.2.</span> <span class="nav-text">2. 一定要使用怎么办</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示意图如下"><span class="nav-number">2.1.</span> <span class="nav-text">示意图如下:</span></a></li></ol></li></ol></div>
             
 
           </div>
