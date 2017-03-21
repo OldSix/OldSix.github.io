@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T19:06:17.272Z</updated>
+  <updated>2017-03-21T07:22:42.537Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>冷门小技巧 之 C/C++ 持续更新ing</title>
+    <link href="http://yoursite.com/2017/03/21/%E5%86%B7%E9%97%A8%E5%B0%8F%E6%8A%80%E5%B7%A7-%E4%B9%8B-C-C-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0ing/"/>
+    <id>http://yoursite.com/2017/03/21/冷门小技巧-之-C-C-持续更新ing/</id>
+    <published>2017-03-21T06:51:06.000Z</published>
+    <updated>2017-03-21T07:22:42.537Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>把时间用在思考上是最能节省时间的事情.<br>—— <strong>卡曾斯</strong><br></blockquote>
+
+
+<p>本文主要介绍的一些冷门的, 诡异的, C/C++方面的小技巧, 持续更新ing.</p>
+<a id="more"></a>
+<ol>
+<li>字符串不需要换行直接使用</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"hello"</span></div><div class="line">	<span class="string">"world"</span></div><div class="line">	<span class="string">"haha"</span>;</div><div class="line"></div><div class="line"><span class="comment">//效果等价于:</span></div><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"helloworldhaha"</span>;</div></pre></td></tr></table></figure>
+<p>这有什么鬼用呢?</p>
+<p>在http组包头的时候,可以直接拼就好了,而已便于观看</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"GET /xxx.html HTTP/1.1\r\n"</span></div><div class="line">	<span class="string">"Host: 127.0.0.1:80\r\n"</span></div><div class="line">	<span class="string">"Connection: keep-alive\r\n"</span></div><div class="line">	<span class="string">"\r\n"</span>;</div></pre></td></tr></table></figure>
+<p>是不是很好用?</p>
+<p>2.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;把时间用在思考上是最能节省时间的事情.&lt;br&gt;—— &lt;strong&gt;卡曾斯&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+
+&lt;p&gt;本文主要介绍的一些冷门的, 诡异的, C/C++方面的小技巧, 持续更新ing.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+  </entry>
   
   <entry>
     <title>搭建自己的Blog</title>
@@ -225,17 +268,19 @@
     <link href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/"/>
     <id>http://yoursite.com/2017/03/20/Dynamic-Static-Library/</id>
     <published>2017-03-19T18:42:12.000Z</published>
-    <updated>2017-03-20T18:01:48.883Z</updated>
+    <updated>2017-03-21T06:53:51.544Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>Microsoft isn’t evil, they just make really crappy operating systems.<br>—— <strong>Linus Torvalds</strong><br></blockquote><br><a id="more"></a></p>
+<blockquote class="blockquote-center"><br>Microsoft isn’t evil, they just make really crappy operating systems.<br>—— <strong>Linus Torvalds</strong><br></blockquote>
+
 <blockquote>
 <p>本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.</p>
 </blockquote>
 <h2 id="0-动态库基础"><a href="#0-动态库基础" class="headerlink" title="0 动态库基础"></a>0 动态库基础</h2><pre><code>1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
 2. Linux下,动态库 --- xxx.so xxx.h -L -l
-</code></pre><h2 id="1-Linux"><a href="#1-Linux" class="headerlink" title="1 Linux"></a>1 Linux</h2><p>(1) 制作Linux动态库</p>
+</code></pre><a id="more"></a>
+<h2 id="1-Linux"><a href="#1-Linux" class="headerlink" title="1 Linux"></a>1 Linux</h2><p>(1) 制作Linux动态库</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c xxx.c -o xxx.o -fPIC</div><div class="line">gcc -shared -o libxxxtest.so xxx.o</div></pre></td></tr></table></figure>
 <p>多文件项目中,可以参看我的另一篇关于 makefile 的介绍</p>
 <p>(2) 动态库的使用</p>
@@ -263,7 +308,14 @@
     
       &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
 &lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
-&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;Microsoft isn’t evil, they just make really crappy operating systems.&lt;br&gt;—— &lt;strong&gt;Linus Torvalds&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;Microsoft isn’t evil, they just make really crappy operating systems.&lt;br&gt;—— &lt;strong&gt;Linus Torvalds&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;0-动态库基础&quot;&gt;&lt;a href=&quot;#0-动态库基础&quot; class=&quot;headerlink&quot; title=&quot;0 动态库基础&quot;&gt;&lt;/a&gt;0 动态库基础&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
+2. Linux下,动态库 --- xxx.so xxx.h -L -l
+&lt;/code&gt;&lt;/pre&gt;
     
     </summary>
     
