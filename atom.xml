@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-21T07:22:42.537Z</updated>
+  <updated>2017-03-21T14:41:33.849Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/21/%E5%86%B7%E9%97%A8%E5%B0%8F%E6%8A%80%E5%B7%A7-%E4%B9%8B-C-C-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0ing/"/>
     <id>http://yoursite.com/2017/03/21/冷门小技巧-之-C-C-持续更新ing/</id>
     <published>2017-03-21T06:51:06.000Z</published>
-    <updated>2017-03-21T07:22:42.537Z</updated>
+    <updated>2017-03-21T14:41:33.849Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -29,16 +29,12 @@
 
 <p>本文主要介绍的一些冷门的, 诡异的, C/C++方面的小技巧, 持续更新ing.</p>
 <a id="more"></a>
-<ol>
-<li>字符串不需要换行直接使用</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"hello"</span></div><div class="line">	<span class="string">"world"</span></div><div class="line">	<span class="string">"haha"</span>;</div><div class="line"></div><div class="line"><span class="comment">//效果等价于:</span></div><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"helloworldhaha"</span>;</div></pre></td></tr></table></figure>
+<h2 id="1-字符串不需要换行直接使用"><a href="#1-字符串不需要换行直接使用" class="headerlink" title="1. 字符串不需要换行直接使用"></a>1. 字符串不需要换行直接使用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"hello"</span></div><div class="line">	<span class="string">"world"</span></div><div class="line">	<span class="string">"haha"</span>;</div><div class="line"></div><div class="line"><span class="comment">//效果等价于:</span></div><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"helloworldhaha"</span>;</div></pre></td></tr></table></figure>
 <p>这有什么鬼用呢?</p>
 <p>在http组包头的时候,可以直接拼就好了,而已便于观看</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buf[<span class="number">1024</span>] = <span class="string">"GET /xxx.html HTTP/1.1\r\n"</span></div><div class="line">	<span class="string">"Host: 127.0.0.1:80\r\n"</span></div><div class="line">	<span class="string">"Connection: keep-alive\r\n"</span></div><div class="line">	<span class="string">"\r\n"</span>;</div></pre></td></tr></table></figure>
 <p>是不是很好用?</p>
-<p>2.</p>
-]]></content>
+<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2>]]></content>
     
     <summary type="html">
     
@@ -63,13 +59,18 @@
     <link href="http://yoursite.com/2017/03/21/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Blog/"/>
     <id>http://yoursite.com/2017/03/21/搭建自己的Blog/</id>
     <published>2017-03-20T18:03:14.000Z</published>
-    <updated>2017-03-20T19:06:17.272Z</updated>
+    <updated>2017-03-21T14:10:32.081Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>思想以自己的言语喂养它自己，而成长起来。<br>—— <strong>泰戈尔</strong><br></blockquote><br><a id="more"></a></p>
+<blockquote class="blockquote-center"><br>思想以自己的言语喂养它自己，而成长起来。<br>—— <strong>泰戈尔</strong><br></blockquote>
+
+
+
 <h2 id="Hexo搭建记"><a href="#Hexo搭建记" class="headerlink" title="Hexo搭建记"></a>Hexo搭建记</h2><p>现在想想, 搭建个人的Blog真心是一件麻烦的事情, 每遇到一个问题, 那种痛苦的感觉, 解决了之后, 那种爽快的感觉, 其实跟编程给人的感觉差不多少.</p>
-<p>在很久之前就一直想做一个自己的blog, 也买了域名, 折腾了一会, 但是就是感觉没有一篇文章是给小白, 纯小白看的, 就好像说, <strong>把大象关进冰箱一样, 打开冰箱门, 你肯定知道, 然后大神们就告诉你说, 然后把大象放进冰箱里就行, 最后把冰箱门关上, done! 成功了有没有</strong>!<br>….<br>有些夸张, 但是有时候感受是这样的</p>
+<p>在很久之前就一直想做一个自己的blog, 也买了域名, 折腾了一会, 但是就是感觉没有一篇文章是给小白, 纯小白看的, 就好像说, <strong>把大象关进冰箱一样, 打开冰箱门, 你肯定知道, 然后大神们就告诉你说, 然后把大象放进冰箱里就行, 最后把冰箱门关上, done! 成功了有没有</strong>!<br>….</p>
+<a id="more"></a>
+<p>有些夸张, 但是有时候感受是这样的</p>
 <p>前几天,偶然的一次访问到了一位<a href="http://wuchong.me/" target="_blank" rel="external">网友的博客</a>, 博客的页面简单, 美观, 实用, 又一次燃起了我对个人主页的向往, 于是, 折腾开始了..</p>
 <p>其实, 网上也参考不少好的资料, 在本文末尾, 也一一列出, 并在此感谢各位大神的著作, 让我度过了坎坷但又很值得的几天, 人生就是要浪费在这种美好的事物上呀!</p>
 <p>下面, 我来给出我的详细搭建过程中, 遇到关于域名解析的一些问题, 进行一下简单的说明. 像简单的一些页面配置, 文章最后, 我列出的参考文献之中, 均有详细无比的配置方法, 就不在此赘述.</p>
@@ -88,6 +89,13 @@
 <h2 id="1-3-直接访问域名"><a href="#1-3-直接访问域名" class="headerlink" title="1.3 直接访问域名"></a>1.3 直接访问域名</h2><p>其实我还有一个问题, 一直没有解决, 就是我CNAME虽然按照DNSPod的方式配置, GitHub的二级域名也填好了, 是直接访问的方式, 但是我直接访问时, 却一直会跳转到狗爹的页面上去, 而不会跳转的GitHub上的部署服务器上, 但是如果使用www访问,就可以直接访问成功.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">不知道是不是我购买的域名不支持?</div><div class="line">还是DNSPod的配置还是有问题?</div><div class="line">还是GitHub上不支持?</div></pre></td></tr></table></figure></p>
 <p>唉 , 以后再慢慢来弄吧~ 先好好写点文章先..</p>
 <p><img src="http://static.zybuluo.com/zhiyu/0j064hadchlhx1uunx4xxi4x/QQ%E6%88%AA%E5%9B%BE20170321025214.png" alt="QQ截图20170321025214.png-18.1kB"></p>
+<p>———-华丽的分割线————-</p>
+<p>原来是 想访问到 xxx.me 的域名, CNAME要配置成 @ 才行, 需要将 Dnspod 上的 默认提供的 @ + ip 的访问方式删除掉(否则会提示冲突), 好吧. 现在终于可以去掉恶心的 www了 哈哈</p>
+<p><img src="http://static.zybuluo.com/zhiyu/4qj9catr9vu5xzvlq8forbl6/1.png" alt="1.png-5.6kB"></p>
+<p>还有每次部署上去的时候, 发现每次都要修改一下github仓库上的setting, 再配置上二级域名才可以, 我也觉得不应该有这么傻的操作, 但是今天终于搞清楚了:</p>
+<blockquote>
+<p><strong>在source目录下</strong>, 直接加上一个CNAME文件( 之前一直添加在根目录下的 .deploy 下的 .git 目录下, 唉), 内容就是你要重定向的地址, 也就是你的域名. </p>
+</blockquote>
 <ul>
 <li>参考文献<ul>
 <li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">Hexo你的博客</a></li>
@@ -103,7 +111,12 @@
     
       &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
 &lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
-&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;思想以自己的言语喂养它自己，而成长起来。&lt;br&gt;—— &lt;strong&gt;泰戈尔&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;思想以自己的言语喂养它自己，而成长起来。&lt;br&gt;—— &lt;strong&gt;泰戈尔&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+
+
+&lt;h2 id=&quot;Hexo搭建记&quot;&gt;&lt;a href=&quot;#Hexo搭建记&quot; class=&quot;headerlink&quot; title=&quot;Hexo搭建记&quot;&gt;&lt;/a&gt;Hexo搭建记&lt;/h2&gt;&lt;p&gt;现在想想, 搭建个人的Blog真心是一件麻烦的事情, 每遇到一个问题, 那种痛苦的感觉, 解决了之后, 那种爽快的感觉, 其实跟编程给人的感觉差不多少.&lt;/p&gt;
+&lt;p&gt;在很久之前就一直想做一个自己的blog, 也买了域名, 折腾了一会, 但是就是感觉没有一篇文章是给小白, 纯小白看的, 就好像说, &lt;strong&gt;把大象关进冰箱一样, 打开冰箱门, 你肯定知道, 然后大神们就告诉你说, 然后把大象放进冰箱里就行, 最后把冰箱门关上, done! 成功了有没有&lt;/strong&gt;!&lt;br&gt;….&lt;/p&gt;
     
     </summary>
     
