@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c++," />
+  <meta name="keywords" content="C/C++," />
 
 
 
@@ -131,7 +131,7 @@ c中的const
 对于const 修饰的局部变量来说
 
 const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量">
-<meta property="og:updated_time" content="2017-03-24T05:15:16.083Z">
+<meta property="og:updated_time" content="2017-03-24T07:10:07.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="const in c++">
 <meta name="twitter:description" content="人生中最困难者，莫过于选择。—— 莫尔
@@ -458,7 +458,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
 <p>const修饰的局部变量就是, 一个不能改变的 <strong>普通变量</strong>, 一个只读的变量</p>
 </blockquote>
 <a id="more"></a>
-<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">const</span> <span class="keyword">int</span> a;<span class="comment">// 报错; 必须初始化, 因为 const 不能被修改, 不初始化赋值的话, 将永远不能被赋值.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>局部变量通过指针修改,是可以的.</p>
 <p>但是对于全局变量而言:</p>
 <blockquote>
@@ -543,7 +543,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag"># c++</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       
@@ -663,7 +663,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -685,7 +685,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

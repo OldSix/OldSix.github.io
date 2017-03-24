@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="小坑套老坑,多线程," />
+  <meta name="keywords" content="C/C++," />
 
 
 
@@ -107,18 +107,31 @@
 
 
 
-<meta name="description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
+<meta name="description" content="在任何一个成功的后面都有着十五年到二十年的生活经验，都有着丰富的生活经验，要是没有这些经验，任何才思敏捷恐怕也不会有，而且在这里，恐怕任何天才也都无济于事。—— 巴甫连柯
+
+引用和指针引用是c++对c的重要扩充. 在c/c++中指针的作用基本是一样的, 但c++增加了另外一种给函数传递地址的途径, 就是按引用传递.
+
+
+变量名实质上是一段连续内存空间的别名, 相当于一个门牌号  一个变量可以有">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux多线程传参问题">
-<meta property="og:url" content="http://yoursite.com/2017/03/21/Linux多线程传参问题/index.html">
+<meta property="og:title" content="引用与指针">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/引用与指针/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
-<meta property="og:image" content="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png">
-<meta property="og:updated_time" content="2017-03-20T17:48:46.302Z">
+<meta property="og:description" content="在任何一个成功的后面都有着十五年到二十年的生活经验，都有着丰富的生活经验，要是没有这些经验，任何才思敏捷恐怕也不会有，而且在这里，恐怕任何天才也都无济于事。—— 巴甫连柯
+
+引用和指针引用是c++对c的重要扩充. 在c/c++中指针的作用基本是一样的, 但c++增加了另外一种给函数传递地址的途径, 就是按引用传递.
+
+
+变量名实质上是一段连续内存空间的别名, 相当于一个门牌号  一个变量可以有">
+<meta property="og:updated_time" content="2017-03-24T07:52:19.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux多线程传参问题">
-<meta name="twitter:description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
-<meta name="twitter:image" content="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png">
+<meta name="twitter:title" content="引用与指针">
+<meta name="twitter:description" content="在任何一个成功的后面都有着十五年到二十年的生活经验，都有着丰富的生活经验，要是没有这些经验，任何才思敏捷恐怕也不会有，而且在这里，恐怕任何天才也都无济于事。—— 巴甫连柯
+
+引用和指针引用是c++对c的重要扩充. 在c/c++中指针的作用基本是一样的, 但c++增加了另外一种给函数传递地址的途径, 就是按引用传递.
+
+
+变量名实质上是一段连续内存空间的别名, 相当于一个门牌号  一个变量可以有">
 
 
 
@@ -146,13 +159,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/21/Linux多线程传参问题/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/引用与指针/"/>
 
 
 
 
 
-  <title> Linux多线程传参问题 | Six's a Coder </title>
+  <title> 引用与指针 | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -325,7 +338,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/Linux多线程传参问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/引用与指针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
@@ -346,7 +359,7 @@
             
             
               
-                Linux多线程传参问题
+                引用与指针
               
             
           </h1>
@@ -361,8 +374,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:49:40+08:00">
-                2017-03-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T13:23:20+08:00">
+                2017-03-24
               </time>
             
 
@@ -371,28 +384,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -421,48 +412,68 @@
       
         <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>寿命的缩短与思想的虚耗成正比。<br>—— <strong>达尔文</strong><br></blockquote><br><a id="more"></a></p>
-<p>在Linux多线程创建函数<code>pthread_create</code>中, 它的最后一个参数, 允许线程回调函数中传入一个参数, 一直以来, 我们被警告尽量不要在这个参数中传递指针, 尽量进行值传递.. 但是为什么呢?</p>
-<p>下面, 我们来看这样一段代码:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ThreadInfo_&#123;</div><div class="line">    <span class="keyword">void</span> *handle;</div><div class="line">    <span class="keyword">int</span> iLoop;</div><div class="line">    <span class="keyword">int</span> iArrayIndex;</div><div class="line">&#125; ThreadInfo;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">start_routine</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>&#123;</div><div class="line"></div><div class="line">    ThreadInfo *threadInfo = (ThreadInfo *)arg;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; threadInfo-&gt;iLoop ; ++ i )</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"第%d线程, 第%d圈"</span>, threadInfo-&gt;iArrayIndex, i+<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">pthread_t</span> pidArray[<span class="number">1024</span>];</div><div class="line">    </div><div class="line">    ThreadInfo threadInfo;</div><div class="line">    <span class="built_in">memset</span>( &amp;threadInfo , <span class="number">0</span> , <span class="keyword">sizeof</span>(ThreadInfo) );</div><div class="line">    </div><div class="line">    <span class="keyword">void</span> *handle = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> iLoop = <span class="number">2</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )&#123;</div><div class="line">    </div><div class="line">        threadInfo.handle = handle;</div><div class="line">        threadInfo.iLoop = iLoop;</div><div class="line">        threadInfo.iArrayIndex = i+<span class="number">1</span>;</div><div class="line">        </div><div class="line">        pthread_create( &amp;pidArray[i] , <span class="literal">NULL</span> , start_routine , (<span class="keyword">void</span>*)&amp;threadInfo );</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )</div><div class="line">        pthread_join( pidArray[i] , <span class="literal">NULL</span> );</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>很简单的一段逻辑, 我们有这样一个需求:</p>
+<blockquote class="blockquote-center"><br>在任何一个成功的后面都有着十五年到二十年的生活经验，都有着丰富的生活经验，要是没有这些经验，任何才思敏捷恐怕也不会有，而且在这里，恐怕任何天才也都无济于事。<br>—— <strong>巴甫连柯</strong><br></blockquote>
+
+<h2 id="引用和指针"><a href="#引用和指针" class="headerlink" title="引用和指针"></a>引用和指针</h2><p><strong>引用是c++对c的重要扩充.</strong> 在c/c++中指针的作用基本是一样的, 但c++增加了另外一种给函数传递地址的途径, 就是按引用传递.</p>
 <blockquote>
-<p>创建10个线程,每个线程打印: 当前线程在处理第几圈, 打印顺序当然是不确定的</p>
+<ul>
+<li>变量名实质上是一段连续内存空间的别名, 相当于一个门牌号<br>  一个变量可以有n个别名</li>
+<li>程序中通过变量来申请并命名内存空间</li>
+<li>通过变量的名字可以使用存储空间</li>
+</ul>
 </blockquote>
-<p>预期:</p>
+<a id="more"></a>
+<h3 id="1-引用的基本用法"><a href="#1-引用的基本用法" class="headerlink" title="1 引用的基本用法"></a>1 引用的基本用法</h3><p>基本语法:</p>
 <blockquote>
-<p>“第1线程, 第1圈”<br>“第2线程, 第1圈”<br>“第3线程, 第2圈”<br>“第4线程, 第1圈”<br>“第5线程, 第2圈”<br>…</p>
+<p>Type&amp; ref = val;</p>
 </blockquote>
-<p>实际上:</p>
+<p>注意事项:</p>
 <blockquote>
-<p>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第2圈”<br>…</p>
+<p>1 &amp;在此不是求地址, 而是标识的作用<br>2 类型标识符是指目标变量的类型<br>3 必须在声明引用变量时进行初始化</p>
+<pre><code>int&amp; ref; // 报错
+</code></pre><p>4 引用初始化之后, 不能改变</p>
+<pre><code>int a = 20;
+int b = 30;
+int&amp; ref = a;
+ref = b; // 报错, 不能改变引用
+</code></pre><p>5 不能用NULL引用. 必须确保引用是和一块合法内存的存储单元关联</p>
 </blockquote>
-<p>打印的结果, 大大的出乎我们的意料, 没有按照我们之前的预想, 都是打印出第10个线程在做事.为什么会这样呢?</p>
-<p>原因其实也不难分析:</p>
-<p>我们仔细再回顾一下代码, 不难发现一个问题, 那就是threadInfo这个东西, 在主线程中, 其实只被创建了一次, 而每次for循环中, 进行修改它的内容而已.</p>
-<p>貌似问题是出在这里, 这还不够.</p>
-<p>我们还知道这样几个事实, 那就是这段代码中:</p>
+<p>建立数组引用:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Type&amp; ref = val;</span></div><div class="line"></div><div class="line"><span class="comment">// 方法1</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ArrRef[<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> arr[<span class="number">10</span>];</div><div class="line">ArrRef&amp; ref = arr;</div><div class="line"></div><div class="line"><span class="comment">// 方法2</span></div><div class="line"><span class="keyword">int</span>(&amp;f)[<span class="number">10</span>] = arr;</div></pre></td></tr></table></figure></p>
+<h3 id="2-引用的本质"><a href="#2-引用的本质" class="headerlink" title="2 引用的本质"></a>2 引用的本质</h3><p>引用的本质在c++内部实现是一个常指针<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Type&amp; ref = val; <span class="comment">// Type *const ref = &amp;val;</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">int</span>&amp; ref = a; <span class="comment">// 编译器自动转换为 int * const ref = &amp;a;  这也能说明,引用为什么必须初始化, 因为const变量必须被初始化</span></div><div class="line">ref = <span class="number">20</span>; <span class="comment">// 自动转换为 *ref = 20;</span></div></pre></td></tr></table></figure></p>
+<p>c++编译器在编译过程中,使用常指针作为引用的内部实现, 因此<strong>引用所占的空间大小与指针相同</strong>, 只是这个过程是编译器内部实现, 用户看不见.</p>
+<h3 id="3-指针的引用"><a href="#3-指针的引用" class="headerlink" title="3 指针的引用"></a>3 指针的引用</h3><p>在c语言中,如果想修改一个指针的指向, 而不是它所指的内容, 函数声明可能这样:</p>
 <blockquote>
-<ol>
-<li>主线程函数栈和子线程函数栈其实都是同一个进程的栈空间内的;</li>
-<li>主线程在创建10个子线程的整个过程中, 一直是不会被打断的;</li>
-<li>10个子线程看似是一个个创建出来的, 但是其实相当于10个线程并发着创建出来, 然后一起去抢占cpu的资源的;</li>
-<li>主线程和子线程抢占cpu的能力上, 大概是 主线程会优先90%抢占, 理论依据不足, 这里主要是经验值.</li>
-</ol>
+<p>void func(int **p)</p>
 </blockquote>
-<p>好, 这几个事实的基础上, 我们知道了10个子线程一起创建好了, 然后去抢占资源, 抢到了然后去执行回调函数, 处理相关的逻辑.</p>
-<p>而且, 主线程也不会等待或阻塞, 依次继续执行, 那么, 控制线程编号的变量, iArrayIndex其实本质上, 是在主线程自己的栈帧中的, 开辟关于threadInfo的一段空间, 空间里有一个 iArrayIndex 变量的内容.</p>
-<p>再看子线程空间, 线程空间中, 由于是通过指针的方式获取到 threadInfo的值, 那么,线程不断的抢占, 然后通过指针访问主线程栈帧中的一个变量中的一个属性内容, 而且, 这个内容在主线程中不断的自增变化.</p>
-<p>而且, 主线程有90%的几率优先抢占到资源, 所以整个for循环执行完, iArraryIndex 已经自增为10, 这时, 子线程们才陆陆续续抢到cpu, 然后去回调, 而且, 还是通过指针, 访问主线程的栈帧中的iArrayIndex变量, 所以打印结果当然全是<code>线程10</code>咯~~</p>
-<h2 id="如何解决呢"><a href="#如何解决呢" class="headerlink" title="如何解决呢?"></a>如何解决呢?</h2><h3 id="1-方法很简单-尽量不要指针传递"><a href="#1-方法很简单-尽量不要指针传递" class="headerlink" title="1 方法很简单, 尽量不要指针传递"></a>1 方法很简单, 尽量不要指针传递</h3><p>因为创建过程中, 被指向的对象很可能已经在主线程中发生变化, 比如本题中.<br>不变化的话, 就可以传了吗? 接着看.</p>
-<h3 id="2-一定要使用怎么办"><a href="#2-一定要使用怎么办" class="headerlink" title="2. 一定要使用怎么办"></a>2. 一定要使用怎么办</h3><blockquote>
-<p>答案就是: 内存冗余法.</p>
+<p>给指针变量取一个别名:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Type* pointer = <span class="literal">NULL</span>;</div><div class="line">Type*&amp; ref = pointer;</div></pre></td></tr></table></figure></p>
+<p>案例:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_teacher</span><span class="params">(Teacher** t)</span></span>&#123;</div><div class="line">    <span class="comment">// 初始化</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_teacher_ref</span><span class="params">(Teacher*&amp; t)</span></span>&#123;</div><div class="line">    <span class="comment">// 初始化</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    Teacher *teacher = <span class="literal">NULL</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// c语言指针用法</span></div><div class="line">    init_teacher(&amp;teacher);</div><div class="line">    </div><div class="line">    <span class="comment">// c++中的引用做法, 语法清晰, 不用再取指针的地址</span></div><div class="line">    init_teacher_ref(teacher);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4-常量的引用"><a href="#4-常量的引用" class="headerlink" title="4 常量的引用"></a>4 常量的引用</h3><p>常用引用的定义格式:</p>
+<blockquote>
+<p>const Type&amp; ref = val;</p>
 </blockquote>
-<p>啥意思呢?<br>说白了, 就是避免麻烦, 避免出现本文中的出现的类似的问题, 我给每个子线程生成一个变量就好了, 每人一份, 不用抢. 当然, 这一份变量要开辟在堆空间上.</p>
-<p>其实也就是类似, 参考了 多进程中的做法, 就是fork之后, 原来父进程有的, 我几乎全copy一份( 有些PCB中的内容不会拷贝到子进程中去 ), 互不干扰.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程中的使用中, 这个传参的过程还是有点小坑的, 很多问题, 同一个线程中, 似乎很简单, 但是多线程, 而且感觉看不到摸不到, 调用时机也不明确, 会让我们觉得有点困扰. 但是仔细分析, 画图辅助, 其实问题解决起来也不难.</p>
-<hr>
-<h3 id="示意图如下"><a href="#示意图如下" class="headerlink" title="示意图如下:"></a>示意图如下:</h3><p><img src="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png" alt="3.png-67.9kB"></p>
+<p>字面量不能赋给引用, 但可以赋值 const 引用<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span>&amp; ref = a;</div><div class="line">    <span class="comment">// ref = 200; // 报错; 常引用</span></div><div class="line">    a = <span class="number">200</span>; <span class="comment">// OK</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>const 修饰的引用, 不能修改<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    <span class="comment">// int&amp; ref = 100; // 报错; 不能把一个字面量赋给引用</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span>&amp; ref = <span class="number">100</span>;<span class="comment">// 编译器的内部处理: int temp = 200; const int&amp; ref = temp;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="5-引用使用的场景"><a href="#5-引用使用的场景" class="headerlink" title="5 引用使用的场景"></a>5 引用使用的场景</h3><p>常量引用主要用在函数的形参, 尤其是类的拷贝构造函数.</p>
+<p>将函数的形参定义常量引用的好处:</p>
+<blockquote>
+<p>1 引用不产生新的变量, <strong>减少形参与实参传递时的开销</strong></p>
+<p>2 由于引用可能导致<strong>实参随形参改变而改变</strong>, 将其定义为常量引用可以消除这种副作用.</p>
+</blockquote>
+<h3 id="6-引用使用时的注意点"><a href="#6-引用使用时的注意点" class="headerlink" title="6 引用使用时的注意点"></a>6 引用使用时的注意点</h3><p>最常看见引用的地方是在函数参数和返回值中.</p>
+<ul>
+<li>参数中:</li>
+</ul>
+<p>函数内的任何引用的修改, 将函数外的参数产生改变.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">refSwap</span><span class="params">(<span class="keyword">int</span>&amp; m, <span class="keyword">int</span>&amp; n)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> temp = m;</div><div class="line">    m = n;</div><div class="line">    n = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>返回值:</li>
+</ul>
+<p>函数中返回一个引用, 必须像从函数中返回一个指针一样的对待.当函数返回值时,引用关联的内存一定要存在.</p>
+<blockquote>
+<p>不能返回局部变量的引用</p>
+<pre><code>返回静态局部变量的引用, 就ok
+</code></pre><p>函数当左值时, 必须返回引用</p>
+<pre><code>test() = 200;// 函数做左值
+</code></pre></blockquote>
 
       
     </div>
@@ -492,9 +503,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/小坑套老坑/" rel="tag"># 小坑套老坑</a>
-          
-            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       
@@ -507,8 +516,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/20/浅谈算法-之-并查集/" rel="next" title="浅谈算法 之 并查集">
-                <i class="fa fa-chevron-left"></i> 浅谈算法 之 并查集
+              <a href="/2017/03/24/gcc-常用编译指令/" rel="next" title="gcc 常用编译指令">
+                <i class="fa fa-chevron-left"></i> gcc 常用编译指令
               </a>
             
           </div>
@@ -516,10 +525,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/21/搭建自己的Blog/" rel="prev" title="搭建自己的Blog">
-                搭建自己的Blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -689,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决呢"><span class="nav-number">1.</span> <span class="nav-text">如何解决呢?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法很简单-尽量不要指针传递"><span class="nav-number">1.1.</span> <span class="nav-text">1 方法很简单, 尽量不要指针传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一定要使用怎么办"><span class="nav-number">1.2.</span> <span class="nav-text">2. 一定要使用怎么办</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示意图如下"><span class="nav-number">2.1.</span> <span class="nav-text">示意图如下:</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用和指针"><span class="nav-number">1.</span> <span class="nav-text">引用和指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-引用的基本用法"><span class="nav-number">1.1.</span> <span class="nav-text">1 引用的基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-引用的本质"><span class="nav-number">1.2.</span> <span class="nav-text">2 引用的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-指针的引用"><span class="nav-number">1.3.</span> <span class="nav-text">3 指针的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-常量的引用"><span class="nav-number">1.4.</span> <span class="nav-text">4 常量的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-引用使用的场景"><span class="nav-number">1.5.</span> <span class="nav-text">5 引用使用的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-引用使用时的注意点"><span class="nav-number">1.6.</span> <span class="nav-text">6 引用使用时的注意点</span></a></li></ol></li></ol></div>
             
 
           </div>

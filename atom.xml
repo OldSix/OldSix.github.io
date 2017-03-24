@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-24T05:20:57.409Z</updated>
+  <updated>2017-03-24T07:52:19.295Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,101 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>引用与指针</title>
+    <link href="http://yoursite.com/2017/03/24/%E5%BC%95%E7%94%A8%E4%B8%8E%E6%8C%87%E9%92%88/"/>
+    <id>http://yoursite.com/2017/03/24/引用与指针/</id>
+    <published>2017-03-24T05:23:20.000Z</published>
+    <updated>2017-03-24T07:52:19.295Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>在任何一个成功的后面都有着十五年到二十年的生活经验，都有着丰富的生活经验，要是没有这些经验，任何才思敏捷恐怕也不会有，而且在这里，恐怕任何天才也都无济于事。<br>—— <strong>巴甫连柯</strong><br></blockquote>
+
+<h2 id="引用和指针"><a href="#引用和指针" class="headerlink" title="引用和指针"></a>引用和指针</h2><p><strong>引用是c++对c的重要扩充.</strong> 在c/c++中指针的作用基本是一样的, 但c++增加了另外一种给函数传递地址的途径, 就是按引用传递.</p>
+<blockquote>
+<ul>
+<li>变量名实质上是一段连续内存空间的别名, 相当于一个门牌号<br>  一个变量可以有n个别名</li>
+<li>程序中通过变量来申请并命名内存空间</li>
+<li>通过变量的名字可以使用存储空间</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h3 id="1-引用的基本用法"><a href="#1-引用的基本用法" class="headerlink" title="1 引用的基本用法"></a>1 引用的基本用法</h3><p>基本语法:</p>
+<blockquote>
+<p>Type&amp; ref = val;</p>
+</blockquote>
+<p>注意事项:</p>
+<blockquote>
+<p>1 &amp;在此不是求地址, 而是标识的作用<br>2 类型标识符是指目标变量的类型<br>3 必须在声明引用变量时进行初始化</p>
+<pre><code>int&amp; ref; // 报错
+</code></pre><p>4 引用初始化之后, 不能改变</p>
+<pre><code>int a = 20;
+int b = 30;
+int&amp; ref = a;
+ref = b; // 报错, 不能改变引用
+</code></pre><p>5 不能用NULL引用. 必须确保引用是和一块合法内存的存储单元关联</p>
+</blockquote>
+<p>建立数组引用:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Type&amp; ref = val;</span></div><div class="line"></div><div class="line"><span class="comment">// 方法1</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ArrRef[<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> arr[<span class="number">10</span>];</div><div class="line">ArrRef&amp; ref = arr;</div><div class="line"></div><div class="line"><span class="comment">// 方法2</span></div><div class="line"><span class="keyword">int</span>(&amp;f)[<span class="number">10</span>] = arr;</div></pre></td></tr></table></figure></p>
+<h3 id="2-引用的本质"><a href="#2-引用的本质" class="headerlink" title="2 引用的本质"></a>2 引用的本质</h3><p>引用的本质在c++内部实现是一个常指针<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Type&amp; ref = val; <span class="comment">// Type *const ref = &amp;val;</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">int</span>&amp; ref = a; <span class="comment">// 编译器自动转换为 int * const ref = &amp;a;  这也能说明,引用为什么必须初始化, 因为const变量必须被初始化</span></div><div class="line">ref = <span class="number">20</span>; <span class="comment">// 自动转换为 *ref = 20;</span></div></pre></td></tr></table></figure></p>
+<p>c++编译器在编译过程中,使用常指针作为引用的内部实现, 因此<strong>引用所占的空间大小与指针相同</strong>, 只是这个过程是编译器内部实现, 用户看不见.</p>
+<h3 id="3-指针的引用"><a href="#3-指针的引用" class="headerlink" title="3 指针的引用"></a>3 指针的引用</h3><p>在c语言中,如果想修改一个指针的指向, 而不是它所指的内容, 函数声明可能这样:</p>
+<blockquote>
+<p>void func(int **p)</p>
+</blockquote>
+<p>给指针变量取一个别名:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Type* pointer = <span class="literal">NULL</span>;</div><div class="line">Type*&amp; ref = pointer;</div></pre></td></tr></table></figure></p>
+<p>案例:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_teacher</span><span class="params">(Teacher** t)</span></span>&#123;</div><div class="line">    <span class="comment">// 初始化</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_teacher_ref</span><span class="params">(Teacher*&amp; t)</span></span>&#123;</div><div class="line">    <span class="comment">// 初始化</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    Teacher *teacher = <span class="literal">NULL</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// c语言指针用法</span></div><div class="line">    init_teacher(&amp;teacher);</div><div class="line">    </div><div class="line">    <span class="comment">// c++中的引用做法, 语法清晰, 不用再取指针的地址</span></div><div class="line">    init_teacher_ref(teacher);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4-常量的引用"><a href="#4-常量的引用" class="headerlink" title="4 常量的引用"></a>4 常量的引用</h3><p>常用引用的定义格式:</p>
+<blockquote>
+<p>const Type&amp; ref = val;</p>
+</blockquote>
+<p>字面量不能赋给引用, 但可以赋值 const 引用<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span>&amp; ref = a;</div><div class="line">    <span class="comment">// ref = 200; // 报错; 常引用</span></div><div class="line">    a = <span class="number">200</span>; <span class="comment">// OK</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>const 修饰的引用, 不能修改<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    <span class="comment">// int&amp; ref = 100; // 报错; 不能把一个字面量赋给引用</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span>&amp; ref = <span class="number">100</span>;<span class="comment">// 编译器的内部处理: int temp = 200; const int&amp; ref = temp;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="5-引用使用的场景"><a href="#5-引用使用的场景" class="headerlink" title="5 引用使用的场景"></a>5 引用使用的场景</h3><p>常量引用主要用在函数的形参, 尤其是类的拷贝构造函数.</p>
+<p>将函数的形参定义常量引用的好处:</p>
+<blockquote>
+<p>1 引用不产生新的变量, <strong>减少形参与实参传递时的开销</strong></p>
+<p>2 由于引用可能导致<strong>实参随形参改变而改变</strong>, 将其定义为常量引用可以消除这种副作用.</p>
+</blockquote>
+<h3 id="6-引用使用时的注意点"><a href="#6-引用使用时的注意点" class="headerlink" title="6 引用使用时的注意点"></a>6 引用使用时的注意点</h3><p>最常看见引用的地方是在函数参数和返回值中.</p>
+<ul>
+<li>参数中:</li>
+</ul>
+<p>函数内的任何引用的修改, 将函数外的参数产生改变.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">refSwap</span><span class="params">(<span class="keyword">int</span>&amp; m, <span class="keyword">int</span>&amp; n)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> temp = m;</div><div class="line">    m = n;</div><div class="line">    n = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>返回值:</li>
+</ul>
+<p>函数中返回一个引用, 必须像从函数中返回一个指针一样的对待.当函数返回值时,引用关联的内存一定要存在.</p>
+<blockquote>
+<p>不能返回局部变量的引用</p>
+<pre><code>返回静态局部变量的引用, 就ok
+</code></pre><p>函数当左值时, 必须返回引用</p>
+<pre><code>test() = 200;// 函数做左值
+</code></pre></blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;在任何一个成功的后面都有着十五年到二十年的生活经验，都有着丰富的生活经验，要是没有这些经验，任何才思敏捷恐怕也不会有，而且在这里，恐怕任何天才也都无济于事。&lt;br&gt;—— &lt;strong&gt;巴甫连柯&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;引用和指针&quot;&gt;&lt;a href=&quot;#引用和指针&quot; class=&quot;headerlink&quot; title=&quot;引用和指针&quot;&gt;&lt;/a&gt;引用和指针&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;引用是c++对c的重要扩充.&lt;/strong&gt; 在c/c++中指针的作用基本是一样的, 但c++增加了另外一种给函数传递地址的途径, 就是按引用传递.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;变量名实质上是一段连续内存空间的别名, 相当于一个门牌号&lt;br&gt;  一个变量可以有n个别名&lt;/li&gt;
+&lt;li&gt;程序中通过变量来申请并命名内存空间&lt;/li&gt;
+&lt;li&gt;通过变量的名字可以使用存储空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+  </entry>
   
   <entry>
     <title>gcc 常用编译指令</title>
@@ -56,7 +151,7 @@
     <link href="http://yoursite.com/2017/03/24/const-in-c/"/>
     <id>http://yoursite.com/2017/03/24/const-in-c/</id>
     <published>2017-03-24T03:08:51.000Z</published>
-    <updated>2017-03-24T05:15:16.083Z</updated>
+    <updated>2017-03-24T07:10:07.422Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -72,7 +167,7 @@
 <p>const修饰的局部变量就是, 一个不能改变的 <strong>普通变量</strong>, 一个只读的变量</p>
 </blockquote>
 <a id="more"></a>
-<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">const</span> <span class="keyword">int</span> a;<span class="comment">// 报错; 必须初始化, 因为 const 不能被修改, 不初始化赋值的话, 将永远不能被赋值.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>局部变量通过指针修改,是可以的.</p>
 <p>但是对于全局变量而言:</p>
 <blockquote>
@@ -151,7 +246,7 @@
       <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="c++" scheme="http://yoursite.com/tags/c/"/>
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
     
   </entry>
   
