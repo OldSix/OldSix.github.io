@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-21T14:41:33.849Z</updated>
+  <updated>2017-03-24T04:02:02.347Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,101 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gcc 常用编译指令</title>
+    <link href="http://yoursite.com/2017/03/24/gcc-%E5%B8%B8%E7%94%A8%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4/"/>
+    <id>http://yoursite.com/2017/03/24/gcc-常用编译指令/</id>
+    <published>2017-03-24T04:02:02.000Z</published>
+    <updated>2017-03-24T04:02:02.347Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>const in c++</title>
+    <link href="http://yoursite.com/2017/03/24/const-in-c/"/>
+    <id>http://yoursite.com/2017/03/24/const-in-c/</id>
+    <published>2017-03-24T03:08:51.000Z</published>
+    <updated>2017-03-24T05:09:50.737Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0-const概述"><a href="#0-const概述" class="headerlink" title="0 const概述"></a>0 const概述</h2><p>const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.</p>
+<h2 id="1-c-c-中const的区别"><a href="#1-c-c-中const的区别" class="headerlink" title="1 c/c++ 中const的区别"></a>1 c/c++ 中const的区别</h2><p>1 c中的const</p>
+<p><strong>对于const 修饰的局部变量来说</strong></p>
+<blockquote>
+<p>const修饰的局部变量就是, 一个不能改变的 <strong>普通变量</strong>, 一个只读的变量</p>
+</blockquote>
+<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>局部变量通过指针修改,是可以的.</p>
+<p>但是对于全局变量而言:</p>
+<blockquote>
+<ul>
+<li><p>const 修饰全部变量时, 默认是外部链接的.<br>多文件使用同一个变量名, 会造成变量重定义.</p>
+</li>
+<li><p>全局变量不能通过指针修改, 存储区域放在只读常量区, 修改会直接引发段错误.</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="2-c-中的const"><a href="#2-c-中的const" class="headerlink" title="2 c++中的const"></a>2 c++中的const</h2><p>一个概念需要引出:</p>
+<blockquote>
+<p>常量折叠</p>
+</blockquote>
+<p>其实就是类似宏替换一样,在进行完数据类型检查之后, 为了代码的高效性, 把常量替换成为它所代表的具体的值 直接 折叠到代码当中.</p>
+<p>在c++中, 一个const不必创建内存空间. 在c++中, 是否为const常量分配内存空间依赖于如何使用.<br>一般来说, 一个const仅仅用来把一个名字用一个值代替, 那么该存储空间就不必创建. </p>
+<blockquote>
+<p>这时,编译器就会把 用到const的地方, 替换为它对应值, 也就是常量折叠的概念.</p>
+</blockquote>
+<p><strong>但是,对一个const变量取地址之后, 或者把它定义为exten, 则会为该const 变量创建内存空间.</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;<span class="comment">// c++中</span></div><div class="line">    <span class="comment">// a = 10; // 报错, 尝试修改只读变量</span></div><div class="line">    </div><div class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)&amp;a;</div><div class="line">    *p = <span class="number">10</span>;</div><div class="line">    </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);<span class="comment">// 打印结果依然是100</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *(<span class="keyword">int</span>*)&amp;a); <span class="comment">// 10</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原因解析</p>
+<blockquote>
+<p>其实, 都是编译器捣的鬼而已:<br>1 变量a 在编译时, 就被常量折叠, 把所有用到a的地方都被替换成 常数 100, 除了一个地方, 也就是对a取地址的地方<br>2 变量a 的地址就在栈区, 这点跟c是一样的<br>3 指针修改的过程也都没有问题, 查看a的内存地址中的值, 发现a的值也确实被修改了.<br>4 取地址之后, a就有了真实的地址空间, 但是直接打印a时, 打印其实是一个默认的修改之前的常量.</p>
+</blockquote>
+<p>c++的编译器,真的让人很无语, 搞这种小把戏, 但是其实也可以看得出来, c++真的是不想让你修改一个const的值, 因为你使用const的意义就在于此啊.<br>而且, 更重要的是, 其实也是c/c++语言的中一个重要的思想体现:</p>
+<blockquote>
+<p>程序员被允许做你能做的一切,你想修改const, 可以, 去做吧, 前提是,你清楚的知道自己在干什么.<br>所以编译器这里所做的是什么?<br>就是为了防止意外的修改而已, 不小心使用指针进行错误修改, 那么编译器还能帮你最后一次.</p>
+</blockquote>
+<p>全局变量:</p>
+<p>跟c语言中一样,也不能修改,指针也不行.</p>
+<p>c++中的全局变量, <strong>默认也是不分配内存, 当声明extern 或者 取地址之后, 才会分配内存</strong>, 并且内存存放的地址在<code>只读常量区</code>, 修改直接段错误.</p>
+<p>区别是:</p>
+<blockquote>
+<p>c++中默认的链接属性是内部链接, 只在本文件内有效.</p>
+</blockquote>
+<h3 id="2-1-基础类型赋值与自定义类型"><a href="#2-1-基础类型赋值与自定义类型" class="headerlink" title="2.1 基础类型赋值与自定义类型"></a>2.1 基础类型赋值与自定义类型</h3><p>1 对于基础数据类型, 如果用一个变量初始化 const 变量, 如果 <code>const int a = b</code>, 那么也是会给a分配内存</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> b = <span class="number">10</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> constA = b;</div><div class="line"><span class="keyword">int</span>* p = (<span class="keyword">int</span>*)&amp;constA;</div><div class="line">*p = <span class="number">300</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"constA:"</span> &lt;&lt; constA &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"*p:"</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div></pre></td></tr></table></figure>
+<p>此时编译器不会再把 constA 的值替换了(<strong>常量折叠</strong>), 因为初始化的时候, constA 被一个变量赋值, 而不是一个常数.</p>
+<p>这时, 就跟c语言一样了.</p>
+<p>2 对于自定义数据类型, 比如类对象, 那么也会分配内存.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Person person; <span class="comment">//未初始化age</span></div><div class="line"><span class="comment">//person.age = 50; //不可修改</span></div><div class="line">Person* pPerson = (Person*)&amp;person;</div><div class="line"><span class="comment">//指针间接修改</span></div><div class="line">pPerson-&gt;age = <span class="number">100</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pPerson-&gt;age:"</span> &lt;&lt; pPerson-&gt;age &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 100</span></div><div class="line">pPerson-&gt;age = <span class="number">200</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pPerson-&gt;age:"</span> &lt;&lt; pPerson-&gt;age &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 200</span></div></pre></td></tr></table></figure>
+<p>为person分配了内存，所以可以通过指针的间接赋值修改person对象。</p>
+<blockquote>
+<p><strong>编译器其实能做的也有限, 只是常数的时候, 才可以进行替换展开, 其他情况, 它也无能为力, 指针就是这么强大呀!</strong></p>
+</blockquote>
+<h3 id="2-2-尽量使用const来替换-define"><a href="#2-2-尽量使用const来替换-define" class="headerlink" title="2.2 尽量使用const来替换 #define"></a>2.2 尽量使用const来替换 #define</h3><p>区别:</p>
+<blockquote>
+<p>1．const有类型，可进行编译器类型安全检查。#define无类型，不可进行类型检查.<br>2．const有作用域，而#define不重视作用域，默认定义处到文件结尾.如果定义在指定作用域下有效的常量，那么#define就不能用。</p>
+</blockquote>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h2><p>其实, const在c++的应用远远不止于此, 类中还有大量的使用, 类对象, 类方法中, 参数中, 返回值中, 都能见到 const 的身影.</p>
+<p>但是, 我们在使用时候坚持一点就好, <strong>如果你用了const ,那么, 你就不要尝试修改, 或者说, 你不想别人修改, 那你就使用const吧</strong>. 没人会主动想改, 除非你真的想改, c++尝试在编译器层面做了很多, 但是面对指针, 很多时候, 你也无能为力.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0-const概述&quot;&gt;&lt;a href=&quot;#0-const概述&quot; class=&quot;headerlink&quot; title=&quot;0 const概述&quot;&gt;&lt;/a&gt;0 const概述&lt;/h2&gt;&lt;p&gt;const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="c++" scheme="http://yoursite.com/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>冷门小技巧 之 C/C++ 持续更新ing</title>

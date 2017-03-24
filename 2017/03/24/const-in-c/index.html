@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="开发工具," />
+  <meta name="keywords" content="c++," />
 
 
 
@@ -107,34 +107,34 @@
 
 
 
-<meta name="description" content="Microsoft isn’t evil, they just make really crappy operating systems.—— Linus Torvalds
+<meta name="description" content="0 const概述const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.
+1 c/c++ 中const的区别1 c中的const
+对于const 修饰的局部变量来说
 
+const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量
 
-本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.
-
-0 动态库基础1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 ---">
+示例:123456void test()&amp;#123;    const">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dynamic & Static Library">
-<meta property="og:url" content="http://yoursite.com/2017/03/20/Dynamic-Static-Library/index.html">
+<meta property="og:title" content="const in c++">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/const-in-c/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="Microsoft isn’t evil, they just make really crappy operating systems.—— Linus Torvalds
+<meta property="og:description" content="0 const概述const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.
+1 c/c++ 中const的区别1 c中的const
+对于const 修饰的局部变量来说
 
+const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量
 
-本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.
-
-0 动态库基础1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 ---">
-<meta property="og:updated_time" content="2017-03-21T06:53:51.544Z">
+示例:123456void test()&amp;#123;    const">
+<meta property="og:updated_time" content="2017-03-24T05:09:50.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dynamic & Static Library">
-<meta name="twitter:description" content="Microsoft isn’t evil, they just make really crappy operating systems.—— Linus Torvalds
+<meta name="twitter:title" content="const in c++">
+<meta name="twitter:description" content="0 const概述const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.
+1 c/c++ 中const的区别1 c中的const
+对于const 修饰的局部变量来说
 
+const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量
 
-本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.
-
-0 动态库基础1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 ---">
+示例:123456void test()&amp;#123;    const">
 
 
 
@@ -162,13 +162,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/const-in-c/"/>
 
 
 
 
 
-  <title> Dynamic & Static Library | Six's a Coder </title>
+  <title> const in c++ | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -341,7 +341,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/const-in-c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
@@ -362,7 +362,7 @@
             
             
               
-                Dynamic & Static Library
+                const in c++
               
             
           </h1>
@@ -377,8 +377,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T02:42:12+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T11:08:51+08:00">
+                2017-03-24
               </time>
             
 
@@ -435,38 +435,65 @@
       
 
       
-        <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
-<!-- 其中 class="blockquote-center" 是必须的 -->
-<blockquote class="blockquote-center"><br>Microsoft isn’t evil, they just make really crappy operating systems.<br>—— <strong>Linus Torvalds</strong><br></blockquote>
-
+        <h2 id="0-const概述"><a href="#0-const概述" class="headerlink" title="0 const概述"></a>0 const概述</h2><p>const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.</p>
+<h2 id="1-c-c-中const的区别"><a href="#1-c-c-中const的区别" class="headerlink" title="1 c/c++ 中const的区别"></a>1 c/c++ 中const的区别</h2><p>1 c中的const</p>
+<p><strong>对于const 修饰的局部变量来说</strong></p>
 <blockquote>
-<p>本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.</p>
+<p>const修饰的局部变量就是, 一个不能改变的 <strong>普通变量</strong>, 一个只读的变量</p>
 </blockquote>
-<h2 id="0-动态库基础"><a href="#0-动态库基础" class="headerlink" title="0 动态库基础"></a>0 动态库基础</h2><pre><code>1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 --- xxx.so xxx.h -L -l
-</code></pre><a id="more"></a>
-<h2 id="1-Linux"><a href="#1-Linux" class="headerlink" title="1 Linux"></a>1 Linux</h2><p>(1) 制作Linux动态库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c xxx.c -o xxx.o -fPIC</div><div class="line">gcc -shared -o libxxxtest.so xxx.o</div></pre></td></tr></table></figure>
-<p>多文件项目中,可以参看我的另一篇关于 makefile 的介绍</p>
-<p>(2) 动态库的使用</p>
-<p>lib库名.so 文件本身不能执行</p>
-<p>项目目录结构如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">src/  -- xxx.c</div><div class="line">obj/  -- xxx.o 用于tia</div><div class="line">inc/  -- xxx.h 头文件</div><div class="line">lib/  -- xxx.so / xxx.a 库</div><div class="line">media/ -- 媒体文件</div><div class="line">Makefile</div></pre></td></tr></table></figure></p>
-<p>执行命令如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">链接器:  工作于生成可重定位文件阶段,也就是生成.o文件.任务:数据合并 和 地址回填(数据位置重定位)</div><div class="line"></div><div class="line">动态链接器: 工作于加载器加载可执行文件到内存后,程序运行时查找库函数期间.加载库函数到内存,重定位函数地址(绝对地址),用LD_LIBRARY_PATH.</div></pre></td></tr></table></figure></p>
-<p>运行: ./a.out —&gt;报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原因: 动态链接器找不到加载库函数的目录位置.</div><div class="line">ldd a.out 查看链接依赖情况, 是否存在&apos;not found&apos;字样</div></pre></td></tr></table></figure></p>
-<p>解决方案:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(1) 将自定义的动态库 cp 放到 标准 c库所在目录位置: /usr/bin/lib (不推荐)</div><div class="line">(2) 在可执行文件所在目录的位置, 执行命令: export LD_LIBRARY_PATH = 库路径 (临时生效)</div><div class="line">(3) export LD_LIBRAY_PATH = 库路径 写入 ~/.bash_profile 中, source 一下 令其即时生效, 或重启.</div><div class="line"></div><div class="line">ldd 再次查看,成功显示动态库位置 ./a.out 运行即可</div></pre></td></tr></table></figure></p>
-<h2 id="2-Windows"><a href="#2-Windows" class="headerlink" title="2 Windows"></a>2 Windows</h2><p>(1) 动态库的制作:</p>
+<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>局部变量通过指针修改,是可以的.</p>
+<p>但是对于全局变量而言:</p>
 <blockquote>
-<ol>
-<li>打开vs2013 , 创建<code>win32 生成dll项目</code></li>
-<li>动态库的命名不要使用中文名</li>
-<li>导入src文件</li>
-<li>API函数导出即可<br> 只将用户使用的指定某几个函数从动态库中导出。   — xxx.lib<br> 使用 <code>__declspec(dllexport)</code> 宏，提示编译器。在编译程序的时候，需特殊处理的函数。<br> 注意： <code>.c 文件</code> 和 <code>.h 文件</code> 均需要添加该宏！！ （VS2013 要求）<br> 默认生成的动态库位于上层目录下的 Debug 目录内。</li>
-</ol>
+<ul>
+<li><p>const 修饰全部变量时, 默认是外部链接的.<br>多文件使用同一个变量名, 会造成变量重定义.</p>
+</li>
+<li><p>全局变量不能通过指针修改, 存储区域放在只读常量区, 修改会直接引发段错误.</p>
+</li>
+</ul>
 </blockquote>
-<p>(2) 动态库的制作结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xxx.dll  二进制目标函数集, 可被操作系统加载</div><div class="line">xxx.lib  是对dll的描述文件( 包含多少函数, 哪些被导出 )</div><div class="line">xxx.h </div><div class="line"></div><div class="line">以上三个文件提供给用户使用即可</div></pre></td></tr></table></figure></p>
-<p>(3) 动态库的调用和调试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">通知VS2013编译器，使用提供的动态库。</div><div class="line"></div><div class="line">将.dll .lib .h三个文件放置在 .c同级目录下。</div><div class="line"></div><div class="line">右键项目“属性”---“配置属性”---“链接器”---“输入”--- “附加依赖项”---下拉菜单“编辑”</div><div class="line"></div><div class="line">---- 输入【描述dll信息lib文件  xxxxx.lib】</div></pre></td></tr></table></figure></p>
-<p>常见错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1. 若xxx.lib配置错误，则VS编译器无法找到所用函数。 </div><div class="line"></div><div class="line">2. 如若在运行111.exe时，说明操作系统找不到动态库加载路径。 </div><div class="line"></div><div class="line">	(1)配置PATH;(2)将exe和动态库dll置于同一目录下即可。</div><div class="line"></div><div class="line">VS2015：</div><div class="line"></div><div class="line">	xxxx.lib  ---&gt; .c 源码 .h 头文件所在目录位置</div><div class="line"></div><div class="line">	xxxx.dll ---&gt; .exe 可执行文件所在目录位置。</div></pre></td></tr></table></figure></p>
-<p>动态库内存释放：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">遵循一个原则：谁分配，谁释放。</div><div class="line">调用动态库函数分配的内存，也一定要调用动态库函数来释放内存。</div></pre></td></tr></table></figure></p>
+<h2 id="2-c-中的const"><a href="#2-c-中的const" class="headerlink" title="2 c++中的const"></a>2 c++中的const</h2><p>一个概念需要引出:</p>
+<blockquote>
+<p>常量折叠</p>
+</blockquote>
+<p>其实就是类似宏替换一样,在进行完数据类型检查之后, 为了代码的高效性, 把常量替换成为它所代表的具体的值 直接 折叠到代码当中.</p>
+<p>在c++中, 一个const不必创建内存空间. 在c++中, 是否为const常量分配内存空间依赖于如何使用.<br>一般来说, 一个const仅仅用来把一个名字用一个值代替, 那么该存储空间就不必创建. </p>
+<blockquote>
+<p>这时,编译器就会把 用到const的地方, 替换为它对应值, 也就是常量折叠的概念.</p>
+</blockquote>
+<p><strong>但是,对一个const变量取地址之后, 或者把它定义为exten, 则会为该const 变量创建内存空间.</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;<span class="comment">// c++中</span></div><div class="line">    <span class="comment">// a = 10; // 报错, 尝试修改只读变量</span></div><div class="line">    </div><div class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)&amp;a;</div><div class="line">    *p = <span class="number">10</span>;</div><div class="line">    </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);<span class="comment">// 打印结果依然是100</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *(<span class="keyword">int</span>*)&amp;a); <span class="comment">// 10</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原因解析</p>
+<blockquote>
+<p>其实, 都是编译器捣的鬼而已:<br>1 变量a 在编译时, 就被常量折叠, 把所有用到a的地方都被替换成 常数 100, 除了一个地方, 也就是对a取地址的地方<br>2 变量a 的地址就在栈区, 这点跟c是一样的<br>3 指针修改的过程也都没有问题, 查看a的内存地址中的值, 发现a的值也确实被修改了.<br>4 取地址之后, a就有了真实的地址空间, 但是直接打印a时, 打印其实是一个默认的修改之前的常量.</p>
+</blockquote>
+<p>c++的编译器,真的让人很无语, 搞这种小把戏, 但是其实也可以看得出来, c++真的是不想让你修改一个const的值, 因为你使用const的意义就在于此啊.<br>而且, 更重要的是, 其实也是c/c++语言的中一个重要的思想体现:</p>
+<blockquote>
+<p>程序员被允许做你能做的一切,你想修改const, 可以, 去做吧, 前提是,你清楚的知道自己在干什么.<br>所以编译器这里所做的是什么?<br>就是为了防止意外的修改而已, 不小心使用指针进行错误修改, 那么编译器还能帮你最后一次.</p>
+</blockquote>
+<p>全局变量:</p>
+<p>跟c语言中一样,也不能修改,指针也不行.</p>
+<p>c++中的全局变量, <strong>默认也是不分配内存, 当声明extern 或者 取地址之后, 才会分配内存</strong>, 并且内存存放的地址在<code>只读常量区</code>, 修改直接段错误.</p>
+<p>区别是:</p>
+<blockquote>
+<p>c++中默认的链接属性是内部链接, 只在本文件内有效.</p>
+</blockquote>
+<h3 id="2-1-基础类型赋值与自定义类型"><a href="#2-1-基础类型赋值与自定义类型" class="headerlink" title="2.1 基础类型赋值与自定义类型"></a>2.1 基础类型赋值与自定义类型</h3><p>1 对于基础数据类型, 如果用一个变量初始化 const 变量, 如果 <code>const int a = b</code>, 那么也是会给a分配内存</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> b = <span class="number">10</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> constA = b;</div><div class="line"><span class="keyword">int</span>* p = (<span class="keyword">int</span>*)&amp;constA;</div><div class="line">*p = <span class="number">300</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"constA:"</span> &lt;&lt; constA &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"*p:"</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div></pre></td></tr></table></figure>
+<p>此时编译器不会再把 constA 的值替换了(<strong>常量折叠</strong>), 因为初始化的时候, constA 被一个变量赋值, 而不是一个常数.</p>
+<p>这时, 就跟c语言一样了.</p>
+<p>2 对于自定义数据类型, 比如类对象, 那么也会分配内存.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Person person; <span class="comment">//未初始化age</span></div><div class="line"><span class="comment">//person.age = 50; //不可修改</span></div><div class="line">Person* pPerson = (Person*)&amp;person;</div><div class="line"><span class="comment">//指针间接修改</span></div><div class="line">pPerson-&gt;age = <span class="number">100</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pPerson-&gt;age:"</span> &lt;&lt; pPerson-&gt;age &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 100</span></div><div class="line">pPerson-&gt;age = <span class="number">200</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pPerson-&gt;age:"</span> &lt;&lt; pPerson-&gt;age &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 200</span></div></pre></td></tr></table></figure>
+<p>为person分配了内存，所以可以通过指针的间接赋值修改person对象。</p>
+<blockquote>
+<p><strong>编译器其实能做的也有限, 只是常数的时候, 才可以进行替换展开, 其他情况, 它也无能为力, 指针就是这么强大呀!</strong></p>
+</blockquote>
+<h3 id="2-2-尽量使用const来替换-define"><a href="#2-2-尽量使用const来替换-define" class="headerlink" title="2.2 尽量使用const来替换 #define"></a>2.2 尽量使用const来替换 #define</h3><p>区别:</p>
+<blockquote>
+<p>1．const有类型，可进行编译器类型安全检查。#define无类型，不可进行类型检查.<br>2．const有作用域，而#define不重视作用域，默认定义处到文件结尾.如果定义在指定作用域下有效的常量，那么#define就不能用。</p>
+</blockquote>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h2><p>其实, const在c++的应用远远不止于此, 类中还有大量的使用, 类对象, 类方法中, 参数中, 返回值中, 都能见到 const 的身影.</p>
+<p>但是, 我们在使用时候坚持一点就好, <strong>如果你用了const ,那么, 你就不要尝试修改, 或者说, 你不想别人修改, 那你就使用const吧</strong>. 没人会主动想改, 除非你真的想改, c++尝试在编译器层面做了很多, 但是面对指针, 很多时候, 你也无能为力.</p>
 
       
     </div>
@@ -496,7 +523,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发工具/" rel="tag"># 开发工具</a>
+            <a href="/tags/c/" rel="tag"># c++</a>
           
         </div>
       
@@ -509,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/MakeFile/" rel="next" title="MakeFile">
-                <i class="fa fa-chevron-left"></i> MakeFile
+              <a href="/2017/03/21/冷门小技巧-之-C-C-持续更新ing/" rel="next" title="冷门小技巧 之 C/C++ 持续更新ing">
+                <i class="fa fa-chevron-left"></i> 冷门小技巧 之 C/C++ 持续更新ing
               </a>
             
           </div>
@@ -519,8 +546,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/20/浅谈算法-之-并查集/" rel="prev" title="浅谈算法 之 并查集">
-                浅谈算法 之 并查集 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/24/gcc-常用编译指令/" rel="prev" title="gcc 常用编译指令">
+                gcc 常用编译指令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -691,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-动态库基础"><span class="nav-number">1.</span> <span class="nav-text">0 动态库基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux"><span class="nav-number">2.</span> <span class="nav-text">1 Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Windows"><span class="nav-number">3.</span> <span class="nav-text">2 Windows</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-const概述"><span class="nav-number">1.</span> <span class="nav-text">0 const概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-c-c-中const的区别"><span class="nav-number">2.</span> <span class="nav-text">1 c/c++ 中const的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-c-中的const"><span class="nav-number">3.</span> <span class="nav-text">2 c++中的const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基础类型赋值与自定义类型"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 基础类型赋值与自定义类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-尽量使用const来替换-define"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 尽量使用const来替换 #define</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-总结"><span class="nav-number">4.</span> <span class="nav-text">3 总结</span></a></li></ol></div>
             
 
           </div>
