@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-24T04:02:02.347Z</updated>
+  <updated>2017-03-24T05:20:57.409Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,12 +20,34 @@
     <link href="http://yoursite.com/2017/03/24/gcc-%E5%B8%B8%E7%94%A8%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4/"/>
     <id>http://yoursite.com/2017/03/24/gcc-常用编译指令/</id>
     <published>2017-03-24T04:02:02.000Z</published>
-    <updated>2017-03-24T04:02:02.347Z</updated>
+    <updated>2017-03-24T05:20:57.409Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>人生的磨难是很多的，所以我们不可对于每一件轻微的伤害都过于敏感。在生活磨难面前，精神上的坚强和无动于衷是我们抵抗罪恶和人生意外的最好武器。<br>—— <strong>洛克</strong><br></blockquote>
+
+<p>gcc全称为GNU Compiler Collection（GNU编译套件）。GNU is Not Unix。<br>GNU/Linux。</p>
+<a id="more"></a>
+<p>gcc [-c|-S|-E] [-std=standard]<br>           [-g] [-pg] [-Olevel]<br>           [-Wwarn…] [-Wpedantic]<br>           [-Idir…] [-Ldir…]<br>           [-Dmacro[=defn]…] [-Umacro]<br>           [-foption…] [-mmachine-option…]<br>           [-o outfile] [@file] infile…</p>
+<p>预处理<br>编译<br>汇编<br>链接</p>
+<p><img src="http://static.zybuluo.com/zhiyu/k4l7ob9kn1ayuby8rqpaufry/Snip20161110_9.png" alt="Snip20161110_9.png-90.4kB"></p>
+<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><p>(1) -Wall -Wextra<br>    警告全开,<br>(2) - g<br>    编译调试版本<br>(3) -save-temps<br>    保存中间生成文件</p>
+]]></content>
     
     <summary type="html">
     
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;人生的磨难是很多的，所以我们不可对于每一件轻微的伤害都过于敏感。在生活磨难面前，精神上的坚强和无动于衷是我们抵抗罪恶和人生意外的最好武器。&lt;br&gt;—— &lt;strong&gt;洛克&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;gcc全称为GNU Compiler Collection（GNU编译套件）。GNU is Not Unix。&lt;br&gt;GNU/Linux。&lt;/p&gt;
+    
     </summary>
     
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="GCC" scheme="http://yoursite.com/tags/GCC/"/>
     
   </entry>
   
@@ -34,14 +56,22 @@
     <link href="http://yoursite.com/2017/03/24/const-in-c/"/>
     <id>http://yoursite.com/2017/03/24/const-in-c/</id>
     <published>2017-03-24T03:08:51.000Z</published>
-    <updated>2017-03-24T05:09:50.737Z</updated>
+    <updated>2017-03-24T05:15:16.083Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0-const概述"><a href="#0-const概述" class="headerlink" title="0 const概述"></a>0 const概述</h2><p>const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.</p>
-<h2 id="1-c-c-中const的区别"><a href="#1-c-c-中const的区别" class="headerlink" title="1 c/c++ 中const的区别"></a>1 c/c++ 中const的区别</h2><p>1 c中的const</p>
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>人生中最困难者，莫过于选择。<br>—— <strong>莫尔</strong><br></blockquote>
+
+
+<h2 id="0-const概述"><a href="#0-const概述" class="headerlink" title="0 const概述"></a>0 const概述</h2><p>const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.</p>
+<h2 id="1-c-c-中const的区别"><a href="#1-c-c-中const的区别" class="headerlink" title="1 c/c++ 中const的区别"></a>1 c/c++ 中const的区别</h2><ul>
+<li>c中的const</li>
+</ul>
 <p><strong>对于const 修饰的局部变量来说</strong></p>
 <blockquote>
 <p>const修饰的局部变量就是, 一个不能改变的 <strong>普通变量</strong>, 一个只读的变量</p>
 </blockquote>
+<a id="more"></a>
 <p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>局部变量通过指针修改,是可以的.</p>
 <p>但是对于全局变量而言:</p>
@@ -53,7 +83,10 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="2-c-中的const"><a href="#2-c-中的const" class="headerlink" title="2 c++中的const"></a>2 c++中的const</h2><p>一个概念需要引出:</p>
+<ul>
+<li>c++中的const</li>
+</ul>
+<p>一个概念需要引出:</p>
 <blockquote>
 <p>常量折叠</p>
 </blockquote>
@@ -79,7 +112,7 @@
 <blockquote>
 <p>c++中默认的链接属性是内部链接, 只在本文件内有效.</p>
 </blockquote>
-<h3 id="2-1-基础类型赋值与自定义类型"><a href="#2-1-基础类型赋值与自定义类型" class="headerlink" title="2.1 基础类型赋值与自定义类型"></a>2.1 基础类型赋值与自定义类型</h3><p>1 对于基础数据类型, 如果用一个变量初始化 const 变量, 如果 <code>const int a = b</code>, 那么也是会给a分配内存</p>
+<h2 id="2-基础类型赋值与自定义类型"><a href="#2-基础类型赋值与自定义类型" class="headerlink" title="2 基础类型赋值与自定义类型"></a>2 基础类型赋值与自定义类型</h2><p>1 对于基础数据类型, 如果用一个变量初始化 const 变量, 如果 <code>const int a = b</code>, 那么也是会给a分配内存</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> b = <span class="number">10</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> constA = b;</div><div class="line"><span class="keyword">int</span>* p = (<span class="keyword">int</span>*)&amp;constA;</div><div class="line">*p = <span class="number">300</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"constA:"</span> &lt;&lt; constA &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"*p:"</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div></pre></td></tr></table></figure>
 <p>此时编译器不会再把 constA 的值替换了(<strong>常量折叠</strong>), 因为初始化的时候, constA 被一个变量赋值, 而不是一个常数.</p>
 <p>这时, 就跟c语言一样了.</p>
@@ -89,17 +122,29 @@
 <blockquote>
 <p><strong>编译器其实能做的也有限, 只是常数的时候, 才可以进行替换展开, 其他情况, 它也无能为力, 指针就是这么强大呀!</strong></p>
 </blockquote>
-<h3 id="2-2-尽量使用const来替换-define"><a href="#2-2-尽量使用const来替换-define" class="headerlink" title="2.2 尽量使用const来替换 #define"></a>2.2 尽量使用const来替换 #define</h3><p>区别:</p>
+<h2 id="3-尽量使用const来替换-define"><a href="#3-尽量使用const来替换-define" class="headerlink" title="3 尽量使用const来替换 #define"></a>3 尽量使用const来替换 #define</h2><p>区别:</p>
 <blockquote>
 <p>1．const有类型，可进行编译器类型安全检查。#define无类型，不可进行类型检查.<br>2．const有作用域，而#define不重视作用域，默认定义处到文件结尾.如果定义在指定作用域下有效的常量，那么#define就不能用。</p>
 </blockquote>
-<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h2><p>其实, const在c++的应用远远不止于此, 类中还有大量的使用, 类对象, 类方法中, 参数中, 返回值中, 都能见到 const 的身影.</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h2><p>其实, const在c++的应用远远不止于此, 类中还有大量的使用, 类对象, 类方法中, 参数中, 返回值中, 都能见到 const 的身影.</p>
 <p>但是, 我们在使用时候坚持一点就好, <strong>如果你用了const ,那么, 你就不要尝试修改, 或者说, 你不想别人修改, 那你就使用const吧</strong>. 没人会主动想改, 除非你真的想改, c++尝试在编译器层面做了很多, 但是面对指针, 很多时候, 你也无能为力.</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0-const概述&quot;&gt;&lt;a href=&quot;#0-const概述&quot; class=&quot;headerlink&quot; title=&quot;0 const概述&quot;&gt;&lt;/a&gt;0 const概述&lt;/h2&gt;&lt;p&gt;const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;人生中最困难者，莫过于选择。&lt;br&gt;—— &lt;strong&gt;莫尔&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+
+&lt;h2 id=&quot;0-const概述&quot;&gt;&lt;a href=&quot;#0-const概述&quot; class=&quot;headerlink&quot; title=&quot;0 const概述&quot;&gt;&lt;/a&gt;0 const概述&lt;/h2&gt;&lt;p&gt;const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.&lt;/p&gt;
+&lt;h2 id=&quot;1-c-c-中const的区别&quot;&gt;&lt;a href=&quot;#1-c-c-中const的区别&quot; class=&quot;headerlink&quot; title=&quot;1 c/c++ 中const的区别&quot;&gt;&lt;/a&gt;1 c/c++ 中const的区别&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;c中的const&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;对于const 修饰的局部变量来说&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;const修饰的局部变量就是, 一个不能改变的 &lt;strong&gt;普通变量&lt;/strong&gt;, 一个只读的变量&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
