@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-24T07:52:19.295Z</updated>
+  <updated>2017-04-02T17:36:27.389Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,132 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++模板原理简单剖析</title>
+    <link href="http://yoursite.com/2017/03/24/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1-%E4%B9%8B-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/"/>
+    <id>http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/</id>
+    <published>2017-03-24T08:12:17.000Z</published>
+    <updated>2017-04-02T17:36:27.389Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。<br>—— <strong>罗·科林伍德</strong><br></blockquote>
+
+
+<p>c++提供了两种机制: <strong>函数模板</strong> 和 <strong>类模板</strong>.</p>
+<p>总结:</p>
+<blockquote>
+<p>(1) 模板把函数或类要处理的数据类型<strong>参数化</strong>, 表现为参数的多态性, 成为类属, 又称参数模板<br>(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为<br>(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><p>简单使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mySwap</span><span class="params">(T&amp; a, T&amp; b)</span></span>&#123;</div><div class="line">    T temp = a;</div><div class="line">    a = b;</div><div class="line">    b = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line">    <span class="keyword">int</span> b = <span class="number">20</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 函数模板可以自动推导参数类型 --&gt; int</span></div><div class="line">    mySwap(a,b);</div><div class="line">    </div><div class="line">    <span class="keyword">char</span> c1 = <span class="string">'a'</span>;</div><div class="line">    <span class="keyword">char</span> c2 = <span class="string">'b'</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 函数模板可以自动类型推导, 也可以显示指定类型</span></div><div class="line">    mySwap&lt;<span class="keyword">char</span>&gt;(c1,c2);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="函数模板和普通函数的区别"><a href="#函数模板和普通函数的区别" class="headerlink" title="函数模板和普通函数的区别"></a>函数模板和普通函数的区别</h3><ul>
+<li>函数模板不允许自动化类型转化, 必须严格匹配类型, 也就是不允许隐式转换, 比如 char 转 int ; 普通函数可以自动转换;</li>
+</ul>
+<h3 id="函数模板和普通函数的调用规则"><a href="#函数模板和普通函数的调用规则" class="headerlink" title="函数模板和普通函数的调用规则"></a>函数模板和普通函数的调用规则</h3><ul>
+<li>函数模板可以像普通函数那样被重载</li>
+<li>都能匹配的话, c++编译器优先考虑普通函数</li>
+<li>如果函数模板可以产生一个更好的匹配(比如<strong>不需要隐式类型转换</strong>), 那么选择模板</li>
+<li>可以通过<strong>空模板实参列表</strong>的语法, 限定编译器只能通过模板匹配<ul>
+<li>myPlus&lt;&gt;(a, b)</li>
+</ul>
+</li>
+</ul>
+<h2 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h2><ul>
+<li>类模板用于实现类所需数据的类型参数化</li>
+<li>类模板在表示如数组, 表, 图等数据结构显得特别重要, 这些数据结构的表示和算法不受所包含的数据类型的影响.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> NameType, <span class="keyword">class</span> AgeType&gt;</div><div class="line"><span class="keyword">class</span> Person&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Person(NameType name, AgeTye age)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mName = name;</div><div class="line">        <span class="keyword">this</span>-&gt;mAge = age;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PrintPerson</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Name: "</span> &lt;&lt; <span class="keyword">this</span>-&gt;mName &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    NameType mName;</div><div class="line">    AgeType mAge;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    Person&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; p(<span class="string">"John"</span>, <span class="number">30</span>);</div><div class="line">    p.PrintPerson();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="模板机制剖析"><a href="#模板机制剖析" class="headerlink" title="模板机制剖析"></a>模板机制剖析</h2><p>或者说, 模板为什么不能跨文件编写?</p>
+<h3 id="原因一-编译器的独立编译原则"><a href="#原因一-编译器的独立编译原则" class="headerlink" title="原因一: 编译器的独立编译原则"></a>原因一: 编译器的独立编译原则</h3><ul>
+<li>编译当前文件时, 不关心也不知道, 另一个文件的情况<ul>
+<li>比如, 当前文件调用了另一个文件的方法, 但是编译到当前文件时, 并不关心这个方法是否真的实现, 或者实现中有什么错误, 只是单纯的认为, 存在的就是对的. 如果没有实现, 那么交给链接时, 再去报错.</li>
+</ul>
+</li>
+</ul>
+<h3 id="原因二-模板的二次编译"><a href="#原因二-模板的二次编译" class="headerlink" title="原因二: 模板的二次编译"></a>原因二: 模板的二次编译</h3><ul>
+<li>编译器会对模板进行两次编译, 在声明的地方对模板代码本身进行编译, 在调用的地方对参数替换后的代码进行编译.<ul>
+<li>模板, 其实也是c++编译器做的众多小动作中一个而已.语法上提供了一些简便的写法–写入一个typename即可替代所有类型. 真正的底层原因就是二次编译, 模板还是模板, 但是在其被<strong>真正使用或调用的那一刻</strong>, 那么编译器就会为它具体<strong>生成一个具体的类型实现</strong>.</li>
+<li>但是问题来了, 如果分开文件实现, 那么在实现文件中, 由于<strong>编译器的单独编译特性</strong>, 所以编译到实现文件时, 并不知道当前模板被调用的情况, 因为调用通常是在其他文件. <strong>在模板不知道自己被调用时, 编译器不会为其生成具体的实现</strong>, 所以模板调用处, 才产生<strong>链接错误, 方法找不到实现</strong>.</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。&lt;br&gt;—— &lt;strong&gt;罗·科林伍德&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+
+&lt;p&gt;c++提供了两种机制: &lt;strong&gt;函数模板&lt;/strong&gt; 和 &lt;strong&gt;类模板&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;总结:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(1) 模板把函数或类要处理的数据类型&lt;strong&gt;参数化&lt;/strong&gt;, 表现为参数的多态性, 成为类属, 又称参数模板&lt;br&gt;(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为&lt;br&gt;(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+      <category term="模板" scheme="http://yoursite.com/tags/%E6%A8%A1%E6%9D%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>struct 与 class in C/C++</title>
+    <link href="http://yoursite.com/2017/03/24/struct-%E4%B8%8E-class-in-C-C/"/>
+    <id>http://yoursite.com/2017/03/24/struct-与-class-in-C-C/</id>
+    <published>2017-03-24T08:03:48.000Z</published>
+    <updated>2017-03-24T08:09:04.124Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>当你看到不可理解的现象，感到迷惑时，真理可能已经披着面纱悄悄地站在你的面前。<br>—— <strong>巴尔扎克</strong><br></blockquote>
+
+
+<h2 id="C-和-C-中的-struct-区别"><a href="#C-和-C-中的-struct-区别" class="headerlink" title="C 和 C++ 中的 struct 区别"></a>C 和 C++ 中的 struct 区别</h2><ul>
+<li><p>c语言中, struct 只有变量</p>
+</li>
+<li><p>c++语言中, struct 既可以有变量, 也可以有函数</p>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="struct-与-class-区别"><a href="#struct-与-class-区别" class="headerlink" title="struct 与 class 区别"></a>struct 与 class 区别</h3><blockquote>
+<p>class的默认权限为private, struct的默认权限是public</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;当你看到不可理解的现象，感到迷惑时，真理可能已经披着面纱悄悄地站在你的面前。&lt;br&gt;—— &lt;strong&gt;巴尔扎克&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+
+&lt;h2 id=&quot;C-和-C-中的-struct-区别&quot;&gt;&lt;a href=&quot;#C-和-C-中的-struct-区别&quot; class=&quot;headerlink&quot; title=&quot;C 和 C++ 中的 struct 区别&quot;&gt;&lt;/a&gt;C 和 C++ 中的 struct 区别&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;c语言中, struct 只有变量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;c++语言中, struct 既可以有变量, 也可以有函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>引用与指针</title>
@@ -367,7 +493,7 @@ ref = b; // 报错, 不能改变引用
     <link href="http://yoursite.com/2017/03/21/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BC%A0%E5%8F%82%E9%97%AE%E9%A2%98/"/>
     <id>http://yoursite.com/2017/03/21/Linux多线程传参问题/</id>
     <published>2017-03-20T16:49:40.000Z</published>
-    <updated>2017-03-20T17:48:46.302Z</updated>
+    <updated>2017-03-24T08:02:55.292Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -429,6 +555,8 @@ ref = b; // 报错, 不能改变引用
       <category term="小坑套老坑" scheme="http://yoursite.com/tags/%E5%B0%8F%E5%9D%91%E5%A5%97%E8%80%81%E5%9D%91/"/>
     
       <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
@@ -713,9 +841,9 @@ ref = b; // 报错, 不能改变引用
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="堆/优先队列" scheme="http://yoursite.com/tags/%E5%A0%86-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
-    
       <category term="图论基础" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="堆/优先队列" scheme="http://yoursite.com/tags/%E5%A0%86-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
     
   </entry>
   

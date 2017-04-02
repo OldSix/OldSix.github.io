@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C/C++," />
+  <meta name="keywords" content="C/C++,模板," />
 
 
 
@@ -107,43 +107,34 @@
 
 
 
-<meta name="description" content="人生中最困难者，莫过于选择。—— 莫尔
+<meta name="description" content="真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。—— 罗·科林伍德
 
 
-0 const概述const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.
-1 c/c++ 中const的区别
-c中的const
+c++提供了两种机制: 函数模板 和 类模板.
+总结:
 
-对于const 修饰的局部变量来说
-
-const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量">
+(1) 模板把函数或类要处理的数据类型参数化, 表现为参数的多态性, 成为类属, 又称参数模板(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="const in c++">
-<meta property="og:url" content="http://yoursite.com/2017/03/24/const-in-c/index.html">
+<meta property="og:title" content="C++模板原理简单剖析">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="人生中最困难者，莫过于选择。—— 莫尔
+<meta property="og:description" content="真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。—— 罗·科林伍德
 
 
-0 const概述const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.
-1 c/c++ 中const的区别
-c中的const
+c++提供了两种机制: 函数模板 和 类模板.
+总结:
 
-对于const 修饰的局部变量来说
-
-const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量">
-<meta property="og:updated_time" content="2017-03-24T07:10:07.422Z">
+(1) 模板把函数或类要处理的数据类型参数化, 表现为参数的多态性, 成为类属, 又称参数模板(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性">
+<meta property="og:updated_time" content="2017-04-02T17:36:27.389Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="const in c++">
-<meta name="twitter:description" content="人生中最困难者，莫过于选择。—— 莫尔
+<meta name="twitter:title" content="C++模板原理简单剖析">
+<meta name="twitter:description" content="真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。—— 罗·科林伍德
 
 
-0 const概述const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.
-1 c/c++ 中const的区别
-c中的const
+c++提供了两种机制: 函数模板 和 类模板.
+总结:
 
-对于const 修饰的局部变量来说
-
-const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只读的变量">
+(1) 模板把函数或类要处理的数据类型参数化, 表现为参数的多态性, 成为类属, 又称参数模板(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性">
 
 
 
@@ -171,13 +162,13 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/24/const-in-c/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/"/>
 
 
 
 
 
-  <title> const in c++ | Six's a Coder </title>
+  <title> C++模板原理简单剖析 | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -350,7 +341,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/const-in-c/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
@@ -371,7 +362,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
             
             
               
-                const in c++
+                C++模板原理简单剖析
               
             
           </h1>
@@ -386,7 +377,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T11:08:51+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T16:12:17+08:00">
                 2017-03-24
               </time>
             
@@ -446,74 +437,48 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
       
         <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<blockquote class="blockquote-center"><br>人生中最困难者，莫过于选择。<br>—— <strong>莫尔</strong><br></blockquote>
+<blockquote class="blockquote-center"><br>真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。<br>—— <strong>罗·科林伍德</strong><br></blockquote>
 
 
-<h2 id="0-const概述"><a href="#0-const概述" class="headerlink" title="0 const概述"></a>0 const概述</h2><p>const字面的意思为常数的,不变的.它是c/c++中的一个关键字,是一个限定符,用来限定一个变量不允许改变,它将一个对象转换成一个常量.</p>
-<h2 id="1-c-c-中const的区别"><a href="#1-c-c-中const的区别" class="headerlink" title="1 c/c++ 中const的区别"></a>1 c/c++ 中const的区别</h2><ul>
-<li>c中的const</li>
-</ul>
-<p><strong>对于const 修饰的局部变量来说</strong></p>
+<p>c++提供了两种机制: <strong>函数模板</strong> 和 <strong>类模板</strong>.</p>
+<p>总结:</p>
 <blockquote>
-<p>const修饰的局部变量就是, 一个不能改变的 <strong>普通变量</strong>, 一个只读的变量</p>
+<p>(1) 模板把函数或类要处理的数据类型<strong>参数化</strong>, 表现为参数的多态性, 成为类属, 又称参数模板<br>(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为<br>(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性</p>
 </blockquote>
 <a id="more"></a>
-<p>示例:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">const</span> <span class="keyword">int</span> a;<span class="comment">// 报错; 必须初始化, 因为 const 不能被修改, 不初始化赋值的话, 将永远不能被赋值.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    a = <span class="number">10</span>; <span class="comment">// 报错, 尝试修改只读变量</span></div><div class="line"></div><div class="line">    <span class="comment">// a的地址就在栈区, 而不是常量区,因为它只是一个变量,但是标记为只读.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>局部变量通过指针修改,是可以的.</p>
-<p>但是对于全局变量而言:</p>
-<blockquote>
-<ul>
-<li><p>const 修饰全部变量时, 默认是外部链接的.<br>多文件使用同一个变量名, 会造成变量重定义.</p>
-</li>
-<li><p>全局变量不能通过指针修改, 存储区域放在只读常量区, 修改会直接引发段错误.</p>
+<h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><p>简单使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mySwap</span><span class="params">(T&amp; a, T&amp; b)</span></span>&#123;</div><div class="line">    T temp = a;</div><div class="line">    a = b;</div><div class="line">    b = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line">    <span class="keyword">int</span> b = <span class="number">20</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 函数模板可以自动推导参数类型 --&gt; int</span></div><div class="line">    mySwap(a,b);</div><div class="line">    </div><div class="line">    <span class="keyword">char</span> c1 = <span class="string">'a'</span>;</div><div class="line">    <span class="keyword">char</span> c2 = <span class="string">'b'</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 函数模板可以自动类型推导, 也可以显示指定类型</span></div><div class="line">    mySwap&lt;<span class="keyword">char</span>&gt;(c1,c2);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="函数模板和普通函数的区别"><a href="#函数模板和普通函数的区别" class="headerlink" title="函数模板和普通函数的区别"></a>函数模板和普通函数的区别</h3><ul>
+<li>函数模板不允许自动化类型转化, 必须严格匹配类型, 也就是不允许隐式转换, 比如 char 转 int ; 普通函数可以自动转换;</li>
+</ul>
+<h3 id="函数模板和普通函数的调用规则"><a href="#函数模板和普通函数的调用规则" class="headerlink" title="函数模板和普通函数的调用规则"></a>函数模板和普通函数的调用规则</h3><ul>
+<li>函数模板可以像普通函数那样被重载</li>
+<li>都能匹配的话, c++编译器优先考虑普通函数</li>
+<li>如果函数模板可以产生一个更好的匹配(比如<strong>不需要隐式类型转换</strong>), 那么选择模板</li>
+<li>可以通过<strong>空模板实参列表</strong>的语法, 限定编译器只能通过模板匹配<ul>
+<li>myPlus&lt;&gt;(a, b)</li>
+</ul>
 </li>
 </ul>
-</blockquote>
-<ul>
-<li>c++中的const</li>
+<h2 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h2><ul>
+<li>类模板用于实现类所需数据的类型参数化</li>
+<li>类模板在表示如数组, 表, 图等数据结构显得特别重要, 这些数据结构的表示和算法不受所包含的数据类型的影响.</li>
 </ul>
-<p>一个概念需要引出:</p>
-<blockquote>
-<p>常量折叠</p>
-</blockquote>
-<p>其实就是类似宏替换一样,在进行完数据类型检查之后, 为了代码的高效性, 把常量替换成为它所代表的具体的值 直接 折叠到代码当中.</p>
-<p>在c++中, 一个const不必创建内存空间. 在c++中, 是否为const常量分配内存空间依赖于如何使用.<br>一般来说, 一个const仅仅用来把一个名字用一个值代替, 那么该存储空间就不必创建. </p>
-<blockquote>
-<p>这时,编译器就会把 用到const的地方, 替换为它对应值, 也就是常量折叠的概念.</p>
-</blockquote>
-<p><strong>但是,对一个const变量取地址之后, 或者把它定义为exten, 则会为该const 变量创建内存空间.</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">100</span>;<span class="comment">// c++中</span></div><div class="line">    <span class="comment">// a = 10; // 报错, 尝试修改只读变量</span></div><div class="line">    </div><div class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)&amp;a;</div><div class="line">    *p = <span class="number">10</span>;</div><div class="line">    </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);<span class="comment">// 打印结果依然是100</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *(<span class="keyword">int</span>*)&amp;a); <span class="comment">// 10</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>原因解析</p>
-<blockquote>
-<p>其实, 都是编译器捣的鬼而已:<br>1 变量a 在编译时, 就被常量折叠, 把所有用到a的地方都被替换成 常数 100, 除了一个地方, 也就是对a取地址的地方<br>2 变量a 的地址就在栈区, 这点跟c是一样的<br>3 指针修改的过程也都没有问题, 查看a的内存地址中的值, 发现a的值也确实被修改了.<br>4 取地址之后, a就有了真实的地址空间, 但是直接打印a时, 打印其实是一个默认的修改之前的常量.</p>
-</blockquote>
-<p>c++的编译器,真的让人很无语, 搞这种小把戏, 但是其实也可以看得出来, c++真的是不想让你修改一个const的值, 因为你使用const的意义就在于此啊.<br>而且, 更重要的是, 其实也是c/c++语言的中一个重要的思想体现:</p>
-<blockquote>
-<p>程序员被允许做你能做的一切,你想修改const, 可以, 去做吧, 前提是,你清楚的知道自己在干什么.<br>所以编译器这里所做的是什么?<br>就是为了防止意外的修改而已, 不小心使用指针进行错误修改, 那么编译器还能帮你最后一次.</p>
-</blockquote>
-<p>全局变量:</p>
-<p>跟c语言中一样,也不能修改,指针也不行.</p>
-<p>c++中的全局变量, <strong>默认也是不分配内存, 当声明extern 或者 取地址之后, 才会分配内存</strong>, 并且内存存放的地址在<code>只读常量区</code>, 修改直接段错误.</p>
-<p>区别是:</p>
-<blockquote>
-<p>c++中默认的链接属性是内部链接, 只在本文件内有效.</p>
-</blockquote>
-<h2 id="2-基础类型赋值与自定义类型"><a href="#2-基础类型赋值与自定义类型" class="headerlink" title="2 基础类型赋值与自定义类型"></a>2 基础类型赋值与自定义类型</h2><p>1 对于基础数据类型, 如果用一个变量初始化 const 变量, 如果 <code>const int a = b</code>, 那么也是会给a分配内存</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> b = <span class="number">10</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> constA = b;</div><div class="line"><span class="keyword">int</span>* p = (<span class="keyword">int</span>*)&amp;constA;</div><div class="line">*p = <span class="number">300</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"constA:"</span> &lt;&lt; constA &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"*p:"</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 300</span></div></pre></td></tr></table></figure>
-<p>此时编译器不会再把 constA 的值替换了(<strong>常量折叠</strong>), 因为初始化的时候, constA 被一个变量赋值, 而不是一个常数.</p>
-<p>这时, 就跟c语言一样了.</p>
-<p>2 对于自定义数据类型, 比如类对象, 那么也会分配内存.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Person person; <span class="comment">//未初始化age</span></div><div class="line"><span class="comment">//person.age = 50; //不可修改</span></div><div class="line">Person* pPerson = (Person*)&amp;person;</div><div class="line"><span class="comment">//指针间接修改</span></div><div class="line">pPerson-&gt;age = <span class="number">100</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pPerson-&gt;age:"</span> &lt;&lt; pPerson-&gt;age &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 100</span></div><div class="line">pPerson-&gt;age = <span class="number">200</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pPerson-&gt;age:"</span> &lt;&lt; pPerson-&gt;age &lt;&lt; <span class="built_in">endl</span>;<span class="comment">// 200</span></div></pre></td></tr></table></figure>
-<p>为person分配了内存，所以可以通过指针的间接赋值修改person对象。</p>
-<blockquote>
-<p><strong>编译器其实能做的也有限, 只是常数的时候, 才可以进行替换展开, 其他情况, 它也无能为力, 指针就是这么强大呀!</strong></p>
-</blockquote>
-<h2 id="3-尽量使用const来替换-define"><a href="#3-尽量使用const来替换-define" class="headerlink" title="3 尽量使用const来替换 #define"></a>3 尽量使用const来替换 #define</h2><p>区别:</p>
-<blockquote>
-<p>1．const有类型，可进行编译器类型安全检查。#define无类型，不可进行类型检查.<br>2．const有作用域，而#define不重视作用域，默认定义处到文件结尾.如果定义在指定作用域下有效的常量，那么#define就不能用。</p>
-</blockquote>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h2><p>其实, const在c++的应用远远不止于此, 类中还有大量的使用, 类对象, 类方法中, 参数中, 返回值中, 都能见到 const 的身影.</p>
-<p>但是, 我们在使用时候坚持一点就好, <strong>如果你用了const ,那么, 你就不要尝试修改, 或者说, 你不想别人修改, 那你就使用const吧</strong>. 没人会主动想改, 除非你真的想改, c++尝试在编译器层面做了很多, 但是面对指针, 很多时候, 你也无能为力.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> NameType, <span class="keyword">class</span> AgeType&gt;</div><div class="line"><span class="keyword">class</span> Person&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Person(NameType name, AgeTye age)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mName = name;</div><div class="line">        <span class="keyword">this</span>-&gt;mAge = age;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PrintPerson</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Name: "</span> &lt;&lt; <span class="keyword">this</span>-&gt;mName &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    NameType mName;</div><div class="line">    AgeType mAge;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    Person&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; p(<span class="string">"John"</span>, <span class="number">30</span>);</div><div class="line">    p.PrintPerson();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="模板机制剖析"><a href="#模板机制剖析" class="headerlink" title="模板机制剖析"></a>模板机制剖析</h2><p>或者说, 模板为什么不能跨文件编写?</p>
+<h3 id="原因一-编译器的独立编译原则"><a href="#原因一-编译器的独立编译原则" class="headerlink" title="原因一: 编译器的独立编译原则"></a>原因一: 编译器的独立编译原则</h3><ul>
+<li>编译当前文件时, 不关心也不知道, 另一个文件的情况<ul>
+<li>比如, 当前文件调用了另一个文件的方法, 但是编译到当前文件时, 并不关心这个方法是否真的实现, 或者实现中有什么错误, 只是单纯的认为, 存在的就是对的. 如果没有实现, 那么交给链接时, 再去报错.</li>
+</ul>
+</li>
+</ul>
+<h3 id="原因二-模板的二次编译"><a href="#原因二-模板的二次编译" class="headerlink" title="原因二: 模板的二次编译"></a>原因二: 模板的二次编译</h3><ul>
+<li>编译器会对模板进行两次编译, 在声明的地方对模板代码本身进行编译, 在调用的地方对参数替换后的代码进行编译.<ul>
+<li>模板, 其实也是c++编译器做的众多小动作中一个而已.语法上提供了一些简便的写法–写入一个typename即可替代所有类型. 真正的底层原因就是二次编译, 模板还是模板, 但是在其被<strong>真正使用或调用的那一刻</strong>, 那么编译器就会为它具体<strong>生成一个具体的类型实现</strong>.</li>
+<li>但是问题来了, 如果分开文件实现, 那么在实现文件中, 由于<strong>编译器的单独编译特性</strong>, 所以编译到实现文件时, 并不知道当前模板被调用的情况, 因为调用通常是在其他文件. <strong>在模板不知道自己被调用时, 编译器不会为其生成具体的实现</strong>, 所以模板调用处, 才产生<strong>链接错误, 方法找不到实现</strong>.</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -545,6 +510,8 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
           
             <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
+            <a href="/tags/模板/" rel="tag"># 模板</a>
+          
         </div>
       
 
@@ -556,8 +523,8 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/21/冷门小技巧-之-C-C-持续更新ing/" rel="next" title="冷门小技巧 之 C/C++ 持续更新ing">
-                <i class="fa fa-chevron-left"></i> 冷门小技巧 之 C/C++ 持续更新ing
+              <a href="/2017/03/24/struct-与-class-in-C-C/" rel="next" title="struct 与 class in C/C++">
+                <i class="fa fa-chevron-left"></i> struct 与 class in C/C++
               </a>
             
           </div>
@@ -565,10 +532,6 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/24/gcc-常用编译指令/" rel="prev" title="gcc 常用编译指令">
-                gcc 常用编译指令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -738,7 +701,7 @@ const修饰的局部变量就是, 一个不能改变的 普通变量, 一个只�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-const概述"><span class="nav-number">1.</span> <span class="nav-text">0 const概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-c-c-中const的区别"><span class="nav-number">2.</span> <span class="nav-text">1 c/c++ 中const的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-基础类型赋值与自定义类型"><span class="nav-number">3.</span> <span class="nav-text">2 基础类型赋值与自定义类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-尽量使用const来替换-define"><span class="nav-number">4.</span> <span class="nav-text">3 尽量使用const来替换 #define</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-总结"><span class="nav-number">5.</span> <span class="nav-text">4 总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数模板"><span class="nav-number">1.</span> <span class="nav-text">函数模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板和普通函数的区别"><span class="nav-number">1.1.</span> <span class="nav-text">函数模板和普通函数的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板和普通函数的调用规则"><span class="nav-number">1.2.</span> <span class="nav-text">函数模板和普通函数的调用规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类模板"><span class="nav-number">2.</span> <span class="nav-text">类模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板机制剖析"><span class="nav-number">3.</span> <span class="nav-text">模板机制剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因一-编译器的独立编译原则"><span class="nav-number">3.1.</span> <span class="nav-text">原因一: 编译器的独立编译原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因二-模板的二次编译"><span class="nav-number">3.2.</span> <span class="nav-text">原因二: 模板的二次编译</span></a></li></ol></li></ol></div>
             
 
           </div>
