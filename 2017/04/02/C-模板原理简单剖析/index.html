@@ -116,7 +116,7 @@ c++提供了两种机制: 函数模板 和 类模板.
 (1) 模板把函数或类要处理的数据类型参数化, 表现为参数的多态性, 成为类属, 又称参数模板(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++模板原理简单剖析">
-<meta property="og:url" content="http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/04/02/C-模板原理简单剖析/index.html">
 <meta property="og:site_name" content="Six's a Coder">
 <meta property="og:description" content="真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。—— 罗·科林伍德
 
@@ -125,7 +125,7 @@ c++提供了两种机制: 函数模板 和 类模板.
 总结:
 
 (1) 模板把函数或类要处理的数据类型参数化, 表现为参数的多态性, 成为类属, 又称参数模板(2) 模板用于表达逻辑结构相同, 但具体数据元素类型不同的数据对象的通用行为(3) 用模板实现泛型, 可以减轻编程的工作量, 增强函数的重用性">
-<meta property="og:updated_time" content="2017-04-02T17:36:27.389Z">
+<meta property="og:updated_time" content="2017-04-03T08:47:25.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++模板原理简单剖析">
 <meta name="twitter:description" content="真正的自由属于那些自食其力的人，并且在自己的工作中有所作为的人。—— 罗·科林伍德
@@ -162,7 +162,7 @@ c++提供了两种机制: 函数模板 和 类模板.
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/02/C-模板原理简单剖析/"/>
 
 
 
@@ -341,7 +341,7 @@ c++提供了两种机制: 函数模板 和 类模板.
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/类与对象-之-对象的构造和析构/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/02/C-模板原理简单剖析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
@@ -377,8 +377,8 @@ c++提供了两种机制: 函数模板 和 类模板.
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T16:12:17+08:00">
-                2017-03-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T16:12:17+08:00">
+                2017-04-02
               </time>
             
 
@@ -465,6 +465,25 @@ c++提供了两种机制: 函数模板 和 类模板.
 <li>类模板在表示如数组, 表, 图等数据结构显得特别重要, 这些数据结构的表示和算法不受所包含的数据类型的影响.</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> NameType, <span class="keyword">class</span> AgeType&gt;</div><div class="line"><span class="keyword">class</span> Person&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Person(NameType name, AgeTye age)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mName = name;</div><div class="line">        <span class="keyword">this</span>-&gt;mAge = age;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PrintPerson</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Name: "</span> &lt;&lt; <span class="keyword">this</span>-&gt;mName &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    NameType mName;</div><div class="line">    AgeType mAge;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    Person&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; p(<span class="string">"John"</span>, <span class="number">30</span>);</div><div class="line">    p.PrintPerson();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类模板做函数参数"><a href="#类模板做函数参数" class="headerlink" title="类模板做函数参数"></a>类模板做函数参数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">doBusiness</span><span class="params">(T&amp; p)</span></span></div><div class="line">&#123;</div><div class="line">    p.mAge += <span class="number">20</span>;</div><div class="line">    p.mName += <span class="string">"vip"</span>;</div><div class="line">    p.PrintPerson();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T1, <span class="keyword">class</span> T2&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">doBusiness</span><span class="params">(Person&lt;T1, T2&gt;&amp; p)</span></span></div><div class="line">&#123;</div><div class="line">    p.mAge += <span class="number">20</span>;</div><div class="line">    p.mName += <span class="string">"vip"</span>;</div><div class="line">    p.PrintPerson();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类模板派生普通类"><a href="#类模板派生普通类" class="headerlink" title="类模板派生普通类"></a>类模板派生普通类</h3><p>子类实例化的时候, 需要具体化的父类, 这样c++编译器才能知道给子类分配多少内存</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> SubClass: <span class="keyword">public</span> MyClass&lt;<span class="keyword">int</span>&gt;&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    SubClass(<span class="keyword">int</span> b): MyClass&lt;<span class="keyword">int</span>&gt;(<span class="number">20</span>)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mB = b;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> mB;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类模板派生类模板"><a href="#类模板派生类模板" class="headerlink" title="类模板派生类模板"></a>类模板派生类模板</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> MyClass&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    MyClass(T property)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mProperty = property;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    T mProperty;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> SubClass : <span class="keyword">public</span> MyClass&lt;T&gt;&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    SubClass(T b) : MyClass&lt;T&gt;(b) &#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mB = b;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    T mB;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类模板碰上友元函数"><a href="#类模板碰上友元函数" class="headerlink" title="类模板碰上友元函数"></a>类模板碰上友元函数</h3><p>按照常规, 在类外实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person&#123;</div><div class="line">    <span class="comment">// 首先, 编译器紧把这个友元函数, 当作是一个普通函数, 不会根据具体类型, 去产生具体的实现体, 即使外部给出了函数模板实现体</span></div><div class="line">    <span class="comment">// 其次, 友元函数其实并不是函数声明, 只是告诉编译器, 这个函数是我的一个朋友, 仅此而已. 并没有对实现进行检查, 所以调用时, 编译器根本不知道有这样一个函数声明</span></div><div class="line">    <span class="comment">// 外部调用时, 会直接当成普通函数, 去查找其实现体, 而类外的实现仅是为函数模板生成具体实现, 普通函数不会为其实现</span></div><div class="line">    <span class="comment">// 所以, 会直接产生错误, 找不到函数的声明和实现</span></div><div class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">FriendPerson</span><span class="params">(Person&lt;T&gt; &amp;p)</span></span>;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Person(T p)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mProperty = p;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    T mProperty;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">FriendPerson</span><span class="params">(Person&lt;T&gt; &amp;p)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; p.mProperty &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    Person&lt;<span class="keyword">int</span>&gt; p (<span class="number">20</span>);</div><div class="line">    Friend(p);<span class="comment">// 错误, 没有声明, 也没有实现</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改为, 两步:</p>
+<ol>
+<li>告诉编译这个友元函数要优先匹配函数模板, 不要先找普通函数</li>
+<li>需要给出友元函数的函数声明, 因为类内的friend仅是一个标识, 告诉编译器这个函数是我哥们, 可以访问所有私有数据</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class</span> Person; <span class="comment">// person类前向声明</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">FriendPerson</span><span class="params">(Person&lt;T&gt; &amp;person)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person&#123;</div><div class="line">    <span class="comment">// 要修改为匹配模板调用</span></div><div class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> FriendPerson&lt;&gt;(Person&lt;T&gt; &amp;p);</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Person(T p)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mProperty = p;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    T mProperty;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>改成<strong>友元函数模板声明</strong>, 最终版:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person&#123;</div><div class="line">    <span class="comment">// 将friend方法声明为函数模板, 其他不变, 编译通过, 运行无误</span></div><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T2&gt; <span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">FriendPerson</span><span class="params">(Person&lt;T2&gt; &amp;p)</span></span>;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Person(T p)&#123;</div><div class="line">        <span class="keyword">this</span>-&gt;mProperty = p;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    T mProperty;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>总结:</p>
+<blockquote>
+<p>如果是类内实现友元函数的话, 友元的类名声明, 可以不加<strong>template</strong>标识, 建议这样来写, 简单方便.</p>
+<p>如果类外实现的话, 友元的类内声明, 一定要加<strong>template</strong>标识, 否则就要friend处标识匹配模板实现, 另外还有额外声明友元函数, 可能还要进行前置声明.</p>
+</blockquote>
 <h2 id="模板机制剖析"><a href="#模板机制剖析" class="headerlink" title="模板机制剖析"></a>模板机制剖析</h2><p>或者说, 模板为什么不能跨文件编写?</p>
 <h3 id="原因一-编译器的独立编译原则"><a href="#原因一-编译器的独立编译原则" class="headerlink" title="原因一: 编译器的独立编译原则"></a>原因一: 编译器的独立编译原则</h3><ul>
 <li>编译当前文件时, 不关心也不知道, 另一个文件的情况<ul>
@@ -523,8 +542,8 @@ c++提供了两种机制: 函数模板 和 类模板.
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/24/struct-与-class-in-C-C/" rel="next" title="struct 与 class in C/C++">
-                <i class="fa fa-chevron-left"></i> struct 与 class in C/C++
+              <a href="/2017/03/24/类与对象-之-对象的构造和析构/" rel="next" title="C++模板原理简单剖析">
+                <i class="fa fa-chevron-left"></i> C++模板原理简单剖析
               </a>
             
           </div>
@@ -533,8 +552,8 @@ c++提供了两种机制: 函数模板 和 类模板.
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/02/C-模板原理简单剖析/" rel="prev" title="C++模板原理简单剖析">
-                C++模板原理简单剖析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/03/Python2-7-基础知识-一/" rel="prev" title="Python2.7 基础知识(一)">
+                Python2.7 基础知识(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -705,7 +724,7 @@ c++提供了两种机制: 函数模板 和 类模板.
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数模板"><span class="nav-number">1.</span> <span class="nav-text">函数模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板和普通函数的区别"><span class="nav-number">1.1.</span> <span class="nav-text">函数模板和普通函数的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板和普通函数的调用规则"><span class="nav-number">1.2.</span> <span class="nav-text">函数模板和普通函数的调用规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类模板"><span class="nav-number">2.</span> <span class="nav-text">类模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板机制剖析"><span class="nav-number">3.</span> <span class="nav-text">模板机制剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因一-编译器的独立编译原则"><span class="nav-number">3.1.</span> <span class="nav-text">原因一: 编译器的独立编译原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因二-模板的二次编译"><span class="nav-number">3.2.</span> <span class="nav-text">原因二: 模板的二次编译</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数模板"><span class="nav-number">1.</span> <span class="nav-text">函数模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板和普通函数的区别"><span class="nav-number">1.1.</span> <span class="nav-text">函数模板和普通函数的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板和普通函数的调用规则"><span class="nav-number">1.2.</span> <span class="nav-text">函数模板和普通函数的调用规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类模板"><span class="nav-number">2.</span> <span class="nav-text">类模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类模板做函数参数"><span class="nav-number">2.1.</span> <span class="nav-text">类模板做函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类模板派生普通类"><span class="nav-number">2.2.</span> <span class="nav-text">类模板派生普通类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类模板派生类模板"><span class="nav-number">2.3.</span> <span class="nav-text">类模板派生类模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类模板碰上友元函数"><span class="nav-number">2.4.</span> <span class="nav-text">类模板碰上友元函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板机制剖析"><span class="nav-number">3.</span> <span class="nav-text">模板机制剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因一-编译器的独立编译原则"><span class="nav-number">3.1.</span> <span class="nav-text">原因一: 编译器的独立编译原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因二-模板的二次编译"><span class="nav-number">3.2.</span> <span class="nav-text">原因二: 模板的二次编译</span></a></li></ol></li></ol></div>
             
 
           </div>
