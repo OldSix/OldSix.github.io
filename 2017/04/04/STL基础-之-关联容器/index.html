@@ -107,16 +107,24 @@
 
 
 
-<meta name="description" content="Dream Big, Work Hard.">
+<meta name="description" content="青春留不住，白发自然生。—— 杜牧
+
+关联式容器 – set &amp;amp; map.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STL基础 之 关联容器">
 <meta property="og:url" content="http://yoursite.com/2017/04/04/STL基础-之-关联容器/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="Dream Big, Work Hard.">
-<meta property="og:updated_time" content="2017-04-03T17:02:41.082Z">
+<meta property="og:description" content="青春留不住，白发自然生。—— 杜牧
+
+关联式容器 – set &amp;amp; map.">
+<meta property="og:image" content="http://static.zybuluo.com/zhiyu/qrjjiz5vauurej4z43k8dba0/1.png">
+<meta property="og:updated_time" content="2017-04-04T08:53:43.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL基础 之 关联容器">
-<meta name="twitter:description" content="Dream Big, Work Hard.">
+<meta name="twitter:description" content="青春留不住，白发自然生。—— 杜牧
+
+关联式容器 – set &amp;amp; map.">
+<meta name="twitter:image" content="http://static.zybuluo.com/zhiyu/qrjjiz5vauurej4z43k8dba0/1.png">
 
 
 
@@ -417,7 +425,75 @@
       
 
       
-        
+        <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>青春留不住，白发自然生。<br>—— <strong>杜牧</strong><br></blockquote>
+
+<p>关联式容器 – set &amp; map.</p>
+<a id="more"></a>
+<h2 id="set-amp-multiset"><a href="#set-amp-multiset" class="headerlink" title="set &amp; multiset"></a>set &amp; multiset</h2><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><p>set的特性是: 所有特性都会根据元素的键值自动被排序. set不允许两个元素有相同的键值.</p>
+<blockquote>
+<p>迭代器: set的迭代器是一种const_iterator. 也就是说, 不能根据set的迭代器改变set元素的值.</p>
+</blockquote>
+<p>multiset特性与set基本一致, 唯一的差别是它允许键值重复.</p>
+<p>set和multiset的底层实现是红黑树, 是平衡二叉树的一种, 是一种高级数据结构.</p>
+<h3 id="2-set常用API"><a href="#2-set常用API" class="headerlink" title="2. set常用API"></a>2. set常用API</h3><p>set 构造函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span>&lt;T&gt; st;</div><div class="line"><span class="built_in">multiset</span>&lt;T&gt; mst;</div><div class="line"><span class="built_in">set</span>(<span class="keyword">const</span> <span class="built_in">set</span> &amp;st);</div></pre></td></tr></table></figure>
+<p>set 赋值函数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span>&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="built_in">set</span> &amp;st);</div><div class="line">swap(st);</div></pre></td></tr></table></figure></p>
+<p>set 大小操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">size()</div><div class="line">empty()</div></pre></td></tr></table></figure></p>
+<p>set 插入和删除<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">insert(elem);</div><div class="line">clear();</div><div class="line">erase(pos);</div><div class="line">erase(beg, end);</div><div class="line">erase(elem);</div></pre></td></tr></table></figure></p>
+<p>set 查找操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">find(key);</div><div class="line">count(key);</div><div class="line">lower_bound(keyElem);</div><div class="line">upper_bound(keyElem);</div><div class="line">equal_range(keyElem);</div></pre></td></tr></table></figure></p>
+<p>set 的返回值和指定set排序规则<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> MyCompare02&#123;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> v1, <span class="keyword">int</span> v2)</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> v1 &gt; v2;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">srand((<span class="keyword">unsigned</span> <span class="keyword">int</span>)time(<span class="literal">NULL</span>));</div><div class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>, MyCompare02&gt; s;</div><div class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++i )&#123;</div><div class="line">	s.insert(rand()%<span class="number">100</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>( <span class="built_in">set</span>&lt;<span class="keyword">int</span>, MyCompare02&gt;::iterator it = s.begin() ; it != s.end() ; ++it )&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</div><div class="line">&#125;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
+<p>pair对组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line">pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair1(<span class="built_in">string</span>(<span class="string">"name"</span>), <span class="number">20</span>);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; pair1.first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; pair1.second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line"><span class="comment">// 第二种</span></div><div class="line">pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair2 = make_pair(<span class="string">"name"</span>, <span class="number">30</span>);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; pair2.first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; pair2.second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line"><span class="comment">// 赋值</span></div><div class="line">pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair3 = pair2;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; pair3.first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; pair3.second &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<h2 id="map-multimap"><a href="#map-multimap" class="headerlink" title="map/multimap"></a>map/multimap</h2><h3 id="1-基本概念-1"><a href="#1-基本概念-1" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><p>map的特性是, 所有元素都会根据元素的键值自动排序. map的所有元素都是pair, 同时拥有<br>实值和键值, pair的第一个元素是键值, pair的第二个元素被视为实值, map不允许两个元素有相同的键值.</p>
+<blockquote>
+<p>迭代器: 不能通过map的迭代器改变map的键值.</p>
+</blockquote>
+<p>multimap和map操作一致, 唯一区别是multimap键值可重复.<br>multimap和map都是以红黑树为底层实现机制的.</p>
+<h3 id="2-map-multimap-常用API"><a href="#2-map-multimap-常用API" class="headerlink" title="2. map/multimap 常用API"></a>2. map/multimap 常用API</h3><p>构造函数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">map</span>&lt;T1, T2&gt; maptt;</div><div class="line"><span class="built_in">map</span>(<span class="keyword">const</span> <span class="built_in">map</span>&amp; mp);</div></pre></td></tr></table></figure></p>
+<p>赋值函数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">map</span>&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="built_in">map</span>&amp; mp);</div><div class="line">swap(mp);</div></pre></td></tr></table></figure></p>
+<p>map大小操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">size();</div><div class="line"><span class="built_in">map</span>();</div></pre></td></tr></table></figure></p>
+<p>map插入数据<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">map</span>.insert(...);</div><div class="line"></div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt; mapStu;</div><div class="line">mapStu.insert(pair&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">3</span>, <span class="string">"小张"</span>));</div><div class="line">mapStu.insert(make_pair(<span class="number">-1</span>, <span class="string">"校长"</span>));</div><div class="line">mapStu.insert(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;::value_type(<span class="number">1</span>, <span class="string">"小李"</span>));</div><div class="line"></div><div class="line">mapStu[<span class="number">3</span>] = <span class="string">"小刘"</span>;</div><div class="line">mapStu[<span class="number">5</span>] = <span class="string">"小王"</span>;</div></pre></td></tr></table></figure></p>
+<p>map删除操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">clear();</div><div class="line">erase();</div><div class="line">erase(beg, end);</div><div class="line">erase(elem);</div></pre></td></tr></table></figure></p>
+<p>map查找操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">find(key);</div><div class="line">count(keyElem);</div><div class="line">lower_bound(keyElem);</div><div class="line">upper_bound(keyElem);</div><div class="line">equal_range(keyElem);</div></pre></td></tr></table></figure></p>
+<h2 id="STL容器元素深-浅拷贝问题"><a href="#STL容器元素深-浅拷贝问题" class="headerlink" title="STL容器元素深/浅拷贝问题"></a>STL容器元素深/浅拷贝问题</h2><p>stl容器所提供的都是值寓意, 而非引用寓意, 也就是说当我们往容器中插入元素的时候, 容器内部实施了拷贝动作,<br>将我们插入的元素再另行拷贝一份放入容器中, 而不是将原数据元素直接放进容器中, 也就是我们提供的元素必须能够被拷贝.</p>
+<h2 id="STL容器使用时机"><a href="#STL容器使用时机" class="headerlink" title="STL容器使用时机"></a>STL容器使用时机</h2><p><img src="http://static.zybuluo.com/zhiyu/qrjjiz5vauurej4z43k8dba0/1.png" alt="1.png-93.1kB"></p>
+<ul>
+<li>vector的使用场景<ul>
+<li>比如软件历史操作记录的存储, 我们经常要查看历史记录, 而不会去删除记录.</li>
+</ul>
+</li>
+<li><p>deque的使用场景</p>
+<ul>
+<li><p>排队购票系统, 支持头端的快速移除, 尾端的快速添加.</p>
+</li>
+<li><p>vector 与 deque 的比较:</p>
+<ul>
+<li>vector.at() 比 deque.at()效率高</li>
+<li>如果有大量释放操作, vector花的时间更少</li>
+<li>deque支持头部的快速插入与快速移除, 这是deque的优点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>list使用场景</p>
+<ul>
+<li>公交车乘客的存储, 随时可能有乘客下车, 支持频繁的不确定位置元素的移除插入.</li>
+</ul>
+</li>
+<li><p>set使用场景</p>
+<ul>
+<li>手机游戏的个人得分纪录, 存储要求从高到低顺序排列</li>
+</ul>
+</li>
+<li><p>map的使用场景</p>
+<ul>
+<li>按ID号存储10万用户, 想要快速通过ID查找到对应的用户.</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
 
@@ -539,8 +615,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -620,6 +705,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#set-amp-multiset"><span class="nav-number">1.</span> <span class="nav-text">set & multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-set常用API"><span class="nav-number">1.2.</span> <span class="nav-text">2. set常用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-multimap"><span class="nav-number">2.</span> <span class="nav-text">map/multimap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本概念-1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-map-multimap-常用API"><span class="nav-number">2.2.</span> <span class="nav-text">2. map/multimap 常用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL容器元素深-浅拷贝问题"><span class="nav-number">3.</span> <span class="nav-text">STL容器元素深/浅拷贝问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL容器使用时机"><span class="nav-number">4.</span> <span class="nav-text">STL容器使用时机</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
