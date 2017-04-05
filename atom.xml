@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-05T12:35:48.850Z</updated>
+  <updated>2017-04-05T13:21:31.325Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,110 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>STL基础 之 常用算法2</title>
+    <link href="http://yoursite.com/2017/04/05/STL%E5%9F%BA%E7%A1%80-%E4%B9%8B-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%952/"/>
+    <id>http://yoursite.com/2017/04/05/STL基础-之-常用算法2/</id>
+    <published>2017-04-05T12:37:43.000Z</published>
+    <updated>2017-04-05T13:21:31.325Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>真理是时间的孩子，不是权威的孩子。<br>—— <strong>布莱希特</strong><br></blockquote>
+
+<h2 id="常用遍历算法"><a href="#常用遍历算法" class="headerlink" title="常用遍历算法:"></a>常用遍历算法:</h2><ul>
+<li><p>for_each(iterator_beg, iterator_end, _callback);</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">_callback 可以是函数对象(最好是, 效率更高), 也可以是普通函数</div><div class="line">for_each的返回值是函数对象</div></pre></td></tr></table></figure>
+</li>
+<li><p>transform(iterator_beg1, iterator_end1, iterator_beg2, _callback);</p>
+</li>
+<li>transform(iterator_beg1, iterator_end1, iterator_beg2, iterator_dst_beg3, _callback);<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">将指定容器区间元素, 搬运到另一容器中.</div><div class="line">注意: transform不会给目标容器分配内存, 所以我们需要提前分配好内存.</div><div class="line">transform的返回值是目标容器的迭代器.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="常用查找算法"><a href="#常用查找算法" class="headerlink" title="常用查找算法:"></a>常用查找算法:</h2><ul>
+<li><p>find(iterator_beg, iterator_end, value)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find的返回值, 返回查找元素位置, 查找不到返回 iterator.end()</div></pre></td></tr></table></figure>
+</li>
+<li><p>find_if(iterator_beg, iterator_end, _callback);</p>
+</li>
+<li><p>adjacent_find(iterator_beg, iterator_end, _callback);</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">查找相邻重复的元素</div></pre></td></tr></table></figure>
+</li>
+<li><p>bool binary_search(iterator_beg, iterator_end, value);</p>
+</li>
+<li><p>count(iterator_beg, iterator_end, value);</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">统计元素出现的次数</div><div class="line">返回元素的个数</div></pre></td></tr></table></figure>
+</li>
+<li><p>count_if(iterator_beg, iterator_end, value);</p>
+</li>
+</ul>
+<h2 id="常用排序算法"><a href="#常用排序算法" class="headerlink" title="常用排序算法"></a>常用排序算法</h2><ul>
+<li><p>merge(iterator_beg1, iterator_end1, iterator_beg2, _iterator_end2, iterator_dst_begin);</p>
+</li>
+<li><p>sort(iterator_beg, iterator_end, _callback);</p>
+</li>
+<li><p>random_shuffle(iterator_beg, iterator_end);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">随机调整范围内元素的次序.</div></pre></td></tr></table></figure>
+</li>
+<li><p>reverse(iterator_beg, iterator_end);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">逆序排列范围内的顺序.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="常用拷贝和替换算法"><a href="#常用拷贝和替换算法" class="headerlink" title="常用拷贝和替换算法"></a>常用拷贝和替换算法</h2><ul>
+<li>copy(iterator_beg, iterator_end, iterator_dst);</li>
+<li>replace(iterator_beg, iterator_end, oldvalue, newvalue);</li>
+<li>replace_if(iterator_beg, iterator_end, _callback, newvalue);</li>
+<li>swap(container c1, container c2);</li>
+</ul>
+<h2 id="常用算数生成算法"><a href="#常用算数生成算法" class="headerlink" title="常用算数生成算法"></a>常用算数生成算法</h2><ul>
+<li><p>accumulate(iterator_beg, iterator_end, value);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">累计范围内元素的总和</div></pre></td></tr></table></figure>
+</li>
+<li><p>fill(iterator_beg, iterator_end, value);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">向容器范围内添加元素</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="常用集合算法"><a href="#常用集合算法" class="headerlink" title="常用集合算法"></a>常用集合算法</h2><ul>
+<li><p>set_intersection(iterator_beg1, iterator_end1, iterator_beg2, iterator_end2, iterator_dst_beg);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">求两个set集合的交集</div></pre></td></tr></table></figure>
+</li>
+<li><p>set_union(iterator_beg1, iterator_end1, iterator_beg2, iterator_end2, iterator_dst_2);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">求两个set集合的合集</div></pre></td></tr></table></figure>
+</li>
+<li><p>set_difference(iterator_beg1, iterator_end1, iterator_beg2, iterator_end2, iterator_dst_2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">求两个set集合的差集</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;真理是时间的孩子，不是权威的孩子。&lt;br&gt;—— &lt;strong&gt;布莱希特&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;常用遍历算法&quot;&gt;&lt;a href=&quot;#常用遍历算法&quot; class=&quot;headerlink&quot; title=&quot;常用遍历算法:&quot;&gt;&lt;/a&gt;常用遍历算法:&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;for_each(iterator_beg, iterator_end, _callback);&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;_callback 可以是函数对象(最好是, 效率更高), 也可以是普通函数&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;for_each的返回值是函数对象&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;transform(iterator_beg1, iterator_end1, iterator_beg2, _callback);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;transform(iterator_beg1, iterator_end1, iterator_beg2, iterator_dst_beg3, _callback);&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;将指定容器区间元素, 搬运到另一容器中.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;注意: transform不会给目标容器分配内存, 所以我们需要提前分配好内存.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;transform的返回值是目标容器的迭代器.&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
+    
+  </entry>
   
   <entry>
     <title>STL基础 之 常用算法1</title>
@@ -97,7 +201,7 @@
     <link href="http://yoursite.com/2017/04/04/STL%E5%9F%BA%E7%A1%80-%E4%B9%8B-%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/"/>
     <id>http://yoursite.com/2017/04/04/STL基础-之-关联容器/</id>
     <published>2017-04-03T17:01:52.000Z</published>
-    <updated>2017-04-04T08:53:43.549Z</updated>
+    <updated>2017-04-04T09:28:43.443Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
