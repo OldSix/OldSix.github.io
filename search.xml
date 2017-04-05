@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[Vim 总结]]></title>
+      <url>%2F2017%2F04%2F06%2FVim-%E6%80%BB%E7%BB%93%2F</url>
+      <content type="text"><![CDATA[Vim: 编译器之神Emacs: 神的编译器]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[STL基础 之 常用算法2]]></title>
       <url>%2F2017%2F04%2F05%2FSTL%E5%9F%BA%E7%A1%80-%E4%B9%8B-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%952%2F</url>
       <content type="text"><![CDATA[真理是时间的孩子，不是权威的孩子。—— 布莱希特 常用遍历算法: for_each(iterator_beg, iterator_end, _callback); 12_callback 可以是函数对象(最好是, 效率更高), 也可以是普通函数for_each的返回值是函数对象 transform(iterator_beg1, iterator_end1, iterator_beg2, _callback); transform(iterator_beg1, iterator_end1, iterator_beg2, iterator_dst_beg3, _callback);123将指定容器区间元素, 搬运到另一容器中.注意: transform不会给目标容器分配内存, 所以我们需要提前分配好内存.transform的返回值是目标容器的迭代器. 常用查找算法: find(iterator_beg, iterator_end, value) 1find的返回值, 返回查找元素位置, 查找不到返回 iterator.end() find_if(iterator_beg, iterator_end, _callback); adjacent_find(iterator_beg, iterator_end, _callback); 1查找相邻重复的元素 bool binary_search(iterator_beg, iterator_end, value); count(iterator_beg, iterator_end, value); 12统计元素出现的次数返回元素的个数 count_if(iterator_beg, iterator_end, value); 常用排序算法 merge(iterator_beg1, iterator_end1, iterator_beg2, _iterator_end2, iterator_dst_begin); sort(iterator_beg, iterator_end, _callback); random_shuffle(iterator_beg, iterator_end); 1随机调整范围内元素的次序. reverse(iterator_beg, iterator_end); 1逆序排列范围内的顺序. 常用拷贝和替换算法 copy(iterator_beg, iterator_end, iterator_dst); replace(iterator_beg, iterator_end, oldvalue, newvalue); replace_if(iterator_beg, iterator_end, _callback, newvalue); swap(container c1, container c2); 常用算数生成算法 accumulate(iterator_beg, iterator_end, value); 1累计范围内元素的总和 fill(iterator_beg, iterator_end, value); 1向容器范围内添加元素 常用集合算法 set_intersection(iterator_beg1, iterator_end1, iterator_beg2, iterator_end2, iterator_dst_beg); 1求两个set集合的交集 set_union(iterator_beg1, iterator_end1, iterator_beg2, iterator_end2, iterator_dst_2); 1求两个set集合的合集 set_difference(iterator_beg1, iterator_end1, iterator_beg2, iterator_end2, iterator_dst_2) 1求两个set集合的差集]]></content>
