@@ -1,0 +1,996 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Fira Code:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python2.7," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Six's a Coder" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="信仰是心中的绿洲，思想的骆驼队是永远走不到的。—— 纪伯伦
+
+Python 元类metaclass 被称作是Python面向对象里最难理解, 也是最难使用的魔术代码. 正常情况下, 也不会碰到需要metaclass的情况.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python2.7进阶 之 面向对象(3)">
+<meta property="og:url" content="http://yoursite.com/2017/04/09/Python2-7进阶-之-面向对象-3/index.html">
+<meta property="og:site_name" content="Six's a Coder">
+<meta property="og:description" content="信仰是心中的绿洲，思想的骆驼队是永远走不到的。—— 纪伯伦
+
+Python 元类metaclass 被称作是Python面向对象里最难理解, 也是最难使用的魔术代码. 正常情况下, 也不会碰到需要metaclass的情况.">
+<meta property="og:updated_time" content="2017-04-09T07:39:52.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python2.7进阶 之 面向对象(3)">
+<meta name="twitter:description" content="信仰是心中的绿洲，思想的骆驼队是永远走不到的。—— 纪伯伦
+
+Python 元类metaclass 被称作是Python面向对象里最难理解, 也是最难使用的魔术代码. 正常情况下, 也不会碰到需要metaclass的情况.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6399845734870418000',
+      author: 'Six'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/09/Python2-7进阶-之-面向对象-3/"/>
+
+
+
+
+
+  <title> Python2.7进阶 之 面向对象(3) | Six's a Coder </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Six's a Coder</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/Python2-7进阶-之-面向对象-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Six">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Six's a Coder">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python2.7进阶 之 面向对象(3)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T13:18:00+08:00">
+                2017-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>信仰是心中的绿洲，思想的骆驼队是永远走不到的。<br>—— <strong>纪伯伦</strong><br></blockquote>
+
+<h2 id="Python-元类"><a href="#Python-元类" class="headerlink" title="Python 元类"></a>Python 元类</h2><p>metaclass 被称作是Python面向对象里最难理解, 也是最难使用的魔术代码. 正常情况下, 也不会碰到需要metaclass的情况.</p>
+<a id="more"></a>
+<h3 id="type-函数"><a href="#type-函数" class="headerlink" title="type()函数"></a>type()函数</h3><p>使用元类之前, 我们先来看看 type() 函数以及一些动态语言的特性.</p>
+<p>python作为动态语言与静态语言最大的不同, 就是函数和类的定义不是编译时定义的, 而是运行时动态创建的.</p>
+<p>比如要定义一个<code>Person</code>的class, 就写一个 <code>person_demo.py</code> 的模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(self, name=<span class="string">'world'</span>)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'Hello, &#123;&#125;'</span>.format(name)</div></pre></td></tr></table></figure></p>
+<p>而type()函数的强大之处, 就在于既可以返回一个对象的类型, 又可以创建出新的类型, 而无需通过 <code>class Person(object) ..</code> 的定义:<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">type(object) -&gt; the object's type</div><div class="line">type(name, bases, dict) -&gt; a new type</div><div class="line"></div><div class="line">def func(self, name='world'):</div><div class="line">	print 'Hello, &#123;&#125;!'.format(name)</div><div class="line"></div><div class="line">Hello = type('Hello', (object,), dict(hello=func)) # 创建Hello class</div><div class="line"></div><div class="line">h = Hello()</div><div class="line">h.hello() # Hello, world!</div></pre></td></tr></table></figure></p>
+<p>type()函数的三个参数:</p>
+<ul>
+<li>要创建的class的名称 </li>
+<li>继承的父类的结合, 因为python中支持多继承, 单个父类, 记得要使用tuple单元素的写法</li>
+<li>class的方法名称与函数绑定, 这里把func与成员方法hello绑定</li>
+</ul>
+<p>通过type()函数创建的类与直接写class是完全一样的, 因为python解释器遇到class定义时, 底层也是调用type函数来进行创建class类型.</p>
+<h3 id="metaclass"><a href="#metaclass" class="headerlink" title="metaclass"></a>metaclass</h3><p>除了使用type()函数动态创建类以外, 要控制类的创建行为, 还可以使用metaclass.<br>简单的理解就是:<br>先定义metaclass, 就可以创建类, 然后创建实例.<br>或者说, </p>
+<blockquote>
+<p>类就是metaclass创建出来的”实例”.</p>
+</blockquote>
+<p>先看一个简单的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListMetaClass</span><span class="params">(type)</span>:</span> <span class="comment"># 元类的类名惯例上, 总是以metaclass结尾</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, attrs)</span>:</span></div><div class="line">		attrs[<span class="string">'add'</span>] = <span class="keyword">lambda</span> self, value: self.append(value) <span class="comment"># 向类中增加一个 add 方法</span></div><div class="line">		<span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span><span class="params">(list)</span>:</span></div><div class="line">	__metaclass__ = ListMetaClass <span class="comment"># 指示使用ListMetaClass来定制类</span></div></pre></td></tr></table></figure></p>
+<p>在写下 <code>__metaclass__ = ListMetaClass</code> 语句时, 魔法就生效了, 它会指示python解释器, 在创建MyList时, 要通过ListMetaClass.<strong>new</strong>()来创建,<br>我们可以修改类的定义, 比如加上新的方法, 然后, 返回修改后的定义</p>
+<p><strong>new</strong>()方法接收的参数依次是:</p>
+<ol>
+<li>准备创建的类的对象</li>
+<li>类的名字</li>
+<li>类继承的父类集合</li>
+<li>类的方法集合</li>
+</ol>
+<p>这样的例子, 可能本身并没有什么实际的作用, 因为通过 metaclass 来添加一个方法, 实在太复杂, 不如简单类中自己定义一个方法就好了.</p>
+<p>但是总会遇到需要通过 metaclass 来修改类定义的. 比如 ORM</p>
+<h3 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h3><p>ORM 全称 “Object Relational Mapping”, 即对象关系映射, 就是把数据库关系的一行映射为一个对象, 也就是一个类对应一个表, 这样写代码更简单, 不用直接操作 SQL 语言.</p>
+<p>期望达到这样的效果:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Model)</span>:</span></div><div class="line">	<span class="comment"># 定义类属性到列的映射</span></div><div class="line">	id = IntegerField(<span class="string">'id'</span>)</div><div class="line">	name = StringField(<span class="string">'username'</span>)</div><div class="line">	email = StringField(<span class="string">'email'</span>)</div><div class="line">	password = StringField(<span class="string">'password'</span>)</div><div class="line"></div><div class="line">u = User(id=<span class="number">12345</span>, name=<span class="string">'Six'</span>, email=<span class="string">'zhiyupan.me'</span>, password=<span class="string">'xxxx'</span>)</div><div class="line">u.save()</div></pre></td></tr></table></figure></p>
+<p>其中, 父类Model和属性类型StringField, IntegerField 是由 ORM框架提供的, 剩下的魔术方法 比如 save 全部由metaclass自动完成.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*-coding: utf-8-*-</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Field</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, column_type)</span>:</span></div><div class="line">        self.name = name</div><div class="line">        self.column_type = column_type</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'&lt;&#123;&#125;:&#123;&#125;&gt;'</span>.format(self.__class__.__name__, self.name)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StringField</span><span class="params">(Field)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></div><div class="line">        super(StringField, self).__init__(name, <span class="string">'varchar(100)'</span>)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IntegerField</span><span class="params">(Field)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></div><div class="line">        super(IntegerField, self).__init__(name, <span class="string">'bigint'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">################### ModelMetaclass #########################################</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMetaclass</span><span class="params">(type)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, attrs)</span>:</span></div><div class="line">        </div><div class="line">        <span class="keyword">print</span> name </div><div class="line">        </div><div class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> attrs.iteritems():</div><div class="line">            <span class="keyword">print</span> k,v</div><div class="line">        <span class="keyword">print</span> <span class="string">'*'</span>*<span class="number">30</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> name == <span class="string">'Model'</span>:</div><div class="line">            <span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</div><div class="line"></div><div class="line">        mappings = dict()</div><div class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> attrs.iteritems():</div><div class="line">            <span class="keyword">print</span> k, v</div><div class="line">            <span class="keyword">print</span> <span class="string">'='</span>*<span class="number">20</span></div><div class="line">            <span class="keyword">if</span> isinstance(v, Field):</div><div class="line">                <span class="keyword">print</span> <span class="string">'Found mapping: &#123;&#125;==&gt;&#123;&#125;'</span>.format(k,v)</div><div class="line">                mappings[k] = v</div><div class="line">    </div><div class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> mappings.iterkeys():</div><div class="line">            attrs.pop(k)</div><div class="line"></div><div class="line">        attrs[<span class="string">'__table__'</span>] = name <span class="comment"># 表名设置为类名</span></div><div class="line">        attrs[<span class="string">'__mappings__'</span>] = mappings <span class="comment"># 保存属性和列的映射关系</span></div><div class="line">        <span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">################### Model #########################################</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span><span class="params">(dict)</span>:</span></div><div class="line">    __metaclass__ = ModelMetaclass <span class="comment"># metaclass可以隐式地继承到子类</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kw)</span>:</span></div><div class="line">        super(Model, self).__init__(**kw)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'in Model.__getattr__: &#123;&#125;'</span>.format(key)</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> self[key]</div><div class="line">        <span class="keyword">except</span> KeyError:</div><div class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">r"'Model' object has no attribute '%s'"</span>% key)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'in Model.__setattr__: &#123;&#125;: &#123;&#125;'</span>.format(key, value)</div><div class="line">        self[key] = value</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(self)</span>:</span></div><div class="line">        fields = []</div><div class="line">        params = []</div><div class="line">        args = []</div><div class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> self.__mappings__.iteritems():</div><div class="line">            <span class="keyword">print</span> k</div><div class="line">            <span class="keyword">print</span> v</div><div class="line">            fields.append(v.name)</div><div class="line">            params.append(<span class="string">'?'</span>)</div><div class="line">            args.append(getattr(self, k, <span class="keyword">None</span>))</div><div class="line">        sql = <span class="string">'insert into %s (%s) values (%s)'</span> % (self.__table__, <span class="string">','</span>.join(fields), <span class="string">','</span>.join(params))</div><div class="line">        <span class="keyword">print</span> <span class="string">'SQL: %s'</span> % sql</div><div class="line">        <span class="keyword">print</span> <span class="string">'ARGS: %s'</span> % str(args)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 调用处</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Model)</span>:</span></div><div class="line">    id = IntegerField(<span class="string">'id'</span>)</div><div class="line">    name = StringField(<span class="string">'name'</span>)</div><div class="line"></div><div class="line">u = User(id=<span class="number">1234</span>, name=<span class="string">'six'</span>)</div><div class="line">u.save()</div></pre></td></tr></table></figure>
+<p>大致的过程如下:</p>
+<ul>
+<li>python解释器遇到User类, 会优先在它的定义中查找是否存在__metaclass__, 如果没有, 就在它的父类中查找, 找到了, 就按照Model中定义的__metaclass__的ModelMetaclass来创建User类</li>
+<li>ModelMetaclass中, 一共做了几件事:<ul>
+<li>排除对Model类的修改, 因为它是Model的基类</li>
+<li>在当前类(比如User)中查找定义的类的所有属性, 如果找到一个Field属性, 那么保存在__mappings__的字典中, 同时从类属性中删除该属性, 否则会造成运行时错误</li>
+<li>表名保存在__table__中, 默认为类名</li>
+</ul>
+</li>
+</ul>
+<p>注意:</p>
+<blockquote>
+<ol>
+<li>观察User类本身, 其实添加的 id 和 name 都是User的类属性, 并且也并没有给出实例化 __init__ 方法</li>
+<li>这2个类属性, 通过元类将其添加到 __mappings__ 中, 并且从类属性中剔除掉, 之后再从实例化对象时, 将属性传到实例属性处.</li>
+<li>另外, Model基类本身是继承自 dict 基类, 通过 User(id=1234, name=six) 语句自动为实例对象, 添加了两个键值对, {id: 1234}, {name: six}</li>
+</ol>
+</blockquote>
+<p>通过 metaclas 这样的设计, 使得ORM在使用起来, 异常简单明了.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python2-7/" rel="tag"># python2.7</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/08/Python2-7进阶-之-面向对象-2/" rel="next" title="Python2.7进阶 之 面向对象(2)">
+                <i class="fa fa-chevron-left"></i> Python2.7进阶 之 面向对象(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Six" />
+          <p class="site-author-name" itemprop="name">Six</p>
+           
+              <p class="site-description motion-element" itemprop="description">Dream Big, Work Hard.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/OldSix" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-元类"><span class="nav-number">1.</span> <span class="nav-text">Python 元类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#type-函数"><span class="nav-number">1.1.</span> <span class="nav-text">type()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#metaclass"><span class="nav-number">1.2.</span> <span class="nav-text">metaclass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORM"><span class="nav-number">1.3.</span> <span class="nav-text">ORM</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Six</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
