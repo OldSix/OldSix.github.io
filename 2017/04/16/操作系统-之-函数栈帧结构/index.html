@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="小坑套老坑,多线程,Linux," />
+  <meta name="keywords" content="操作系统," />
 
 
 
@@ -107,18 +107,24 @@
 
 
 
-<meta name="description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
+<meta name="description" content="真正的敏捷是一件很有价值的事。因为时间是衡量事业的标准，如金钱是衡量货物的标准。—— 弗·培根
+
+机器用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复, 以及本地存储, 为单个过程分配的那部分栈称为: 栈帧 (stack frame).">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux多线程传参问题">
-<meta property="og:url" content="http://yoursite.com/2017/03/21/Linux多线程传参问题/index.html">
+<meta property="og:title" content="操作系统 之 函数栈帧结构">
+<meta property="og:url" content="http://yoursite.com/2017/04/16/操作系统-之-函数栈帧结构/index.html">
 <meta property="og:site_name" content="Six's a Coder">
-<meta property="og:description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
-<meta property="og:image" content="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png">
-<meta property="og:updated_time" content="2017-03-24T08:02:55.292Z">
+<meta property="og:description" content="真正的敏捷是一件很有价值的事。因为时间是衡量事业的标准，如金钱是衡量货物的标准。—— 弗·培根
+
+机器用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复, 以及本地存储, 为单个过程分配的那部分栈称为: 栈帧 (stack frame).">
+<meta property="og:image" content="http://static.zybuluo.com/zhiyu/uga0iwt9cyq71e0if1dk7j30/timg.jpg">
+<meta property="og:updated_time" content="2017-04-16T14:54:00.819Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux多线程传参问题">
-<meta name="twitter:description" content="寿命的缩短与思想的虚耗成正比。—— 达尔文">
-<meta name="twitter:image" content="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png">
+<meta name="twitter:title" content="操作系统 之 函数栈帧结构">
+<meta name="twitter:description" content="真正的敏捷是一件很有价值的事。因为时间是衡量事业的标准，如金钱是衡量货物的标准。—— 弗·培根
+
+机器用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复, 以及本地存储, 为单个过程分配的那部分栈称为: 栈帧 (stack frame).">
+<meta name="twitter:image" content="http://static.zybuluo.com/zhiyu/uga0iwt9cyq71e0if1dk7j30/timg.jpg">
 
 
 
@@ -146,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/21/Linux多线程传参问题/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/16/操作系统-之-函数栈帧结构/"/>
 
 
 
 
 
-  <title> Linux多线程传参问题 | Six's a Coder </title>
+  <title> 操作系统 之 函数栈帧结构 | Six's a Coder </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -325,7 +331,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/Linux多线程传参问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/操作系统-之-函数栈帧结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Six">
@@ -346,7 +352,7 @@
             
             
               
-                Linux多线程传参问题
+                操作系统 之 函数栈帧结构
               
             
           </h1>
@@ -361,8 +367,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:49:40+08:00">
-                2017-03-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-16T21:33:39+08:00">
+                2017-04-16
               </time>
             
 
@@ -421,49 +427,32 @@
       
         <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>寿命的缩短与思想的虚耗成正比。<br>—— <strong>达尔文</strong><br></blockquote><br><a id="more"></a></p>
-<p>在Linux多线程创建函数<code>pthread_create</code>中, 它的最后一个参数, 允许线程回调函数中传入一个参数, 一直以来, 我们被警告尽量不要在这个参数中传递指针, 尽量进行值传递.. 但是为什么呢?</p>
-<p>下面, 我们来看这样一段代码:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ThreadInfo_&#123;</div><div class="line">    <span class="keyword">void</span> *handle;</div><div class="line">    <span class="keyword">int</span> iLoop;</div><div class="line">    <span class="keyword">int</span> iArrayIndex;</div><div class="line">&#125; ThreadInfo;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">start_routine</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>&#123;</div><div class="line"></div><div class="line">    ThreadInfo *threadInfo = (ThreadInfo *)arg;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; threadInfo-&gt;iLoop ; ++ i )</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"第%d线程, 第%d圈"</span>, threadInfo-&gt;iArrayIndex, i+<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">pthread_t</span> pidArray[<span class="number">1024</span>];</div><div class="line">    </div><div class="line">    ThreadInfo threadInfo;</div><div class="line">    <span class="built_in">memset</span>( &amp;threadInfo , <span class="number">0</span> , <span class="keyword">sizeof</span>(ThreadInfo) );</div><div class="line">    </div><div class="line">    <span class="keyword">void</span> *handle = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> iLoop = <span class="number">2</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )&#123;</div><div class="line">    </div><div class="line">        threadInfo.handle = handle;</div><div class="line">        threadInfo.iLoop = iLoop;</div><div class="line">        threadInfo.iArrayIndex = i+<span class="number">1</span>;</div><div class="line">        </div><div class="line">        pthread_create( &amp;pidArray[i] , <span class="literal">NULL</span> , start_routine , (<span class="keyword">void</span>*)&amp;threadInfo );</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )</div><div class="line">        pthread_join( pidArray[i] , <span class="literal">NULL</span> );</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>很简单的一段逻辑, 我们有这样一个需求:</p>
-<blockquote>
-<p>创建10个线程,每个线程打印: 当前线程在处理第几圈, 打印顺序当然是不确定的</p>
-</blockquote>
-<p>预期:</p>
-<blockquote>
-<p>“第1线程, 第1圈”<br>“第2线程, 第1圈”<br>“第3线程, 第2圈”<br>“第4线程, 第1圈”<br>“第5线程, 第2圈”<br>…</p>
-</blockquote>
-<p>实际上:</p>
-<blockquote>
-<p>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第2圈”<br>…</p>
-</blockquote>
-<p>打印的结果, 大大的出乎我们的意料, 没有按照我们之前的预想, 都是打印出第10个线程在做事.为什么会这样呢?</p>
-<p>原因其实也不难分析:</p>
-<p>我们仔细再回顾一下代码, 不难发现一个问题, 那就是threadInfo这个东西, 在主线程中, 其实只被创建了一次, 而每次for循环中, 进行修改它的内容而已.</p>
-<p>貌似问题是出在这里, 这还不够.</p>
-<p>我们还知道这样几个事实, 那就是这段代码中:</p>
-<blockquote>
-<ol>
-<li>主线程函数栈和子线程函数栈其实都是同一个进程的栈空间内的;</li>
-<li>主线程在创建10个子线程的整个过程中, 一直是不会被打断的;</li>
-<li>10个子线程看似是一个个创建出来的, 但是其实相当于10个线程并发着创建出来, 然后一起去抢占cpu的资源的;</li>
-<li>主线程和子线程抢占cpu的能力上, 大概是 主线程会优先90%抢占, 理论依据不足, 这里主要是经验值.</li>
-</ol>
-</blockquote>
-<p>好, 这几个事实的基础上, 我们知道了10个子线程一起创建好了, 然后去抢占资源, 抢到了然后去执行回调函数, 处理相关的逻辑.</p>
-<p>而且, 主线程也不会等待或阻塞, 依次继续执行, 那么, 控制线程编号的变量, iArrayIndex其实本质上, 是在主线程自己的栈帧中的, 开辟关于threadInfo的一段空间, 空间里有一个 iArrayIndex 变量的内容.</p>
-<p>再看子线程空间, 线程空间中, 由于是通过指针的方式获取到 threadInfo的值, 那么,线程不断的抢占, 然后通过指针访问主线程栈帧中的一个变量中的一个属性内容, 而且, 这个内容在主线程中不断的自增变化.</p>
-<p>而且, 主线程有90%的几率优先抢占到资源, 所以整个for循环执行完, iArraryIndex 已经自增为10, 这时, 子线程们才陆陆续续抢到cpu, 然后去回调, 而且, 还是通过指针, 访问主线程的栈帧中的iArrayIndex变量, 所以打印结果当然全是<code>线程10</code>咯~~</p>
-<h2 id="如何解决呢"><a href="#如何解决呢" class="headerlink" title="如何解决呢?"></a>如何解决呢?</h2><h3 id="1-方法很简单-尽量不要指针传递"><a href="#1-方法很简单-尽量不要指针传递" class="headerlink" title="1 方法很简单, 尽量不要指针传递"></a>1 方法很简单, 尽量不要指针传递</h3><p>因为创建过程中, 被指向的对象很可能已经在主线程中发生变化, 比如本题中.<br>不变化的话, 就可以传了吗? 接着看.</p>
-<h3 id="2-一定要使用怎么办"><a href="#2-一定要使用怎么办" class="headerlink" title="2. 一定要使用怎么办"></a>2. 一定要使用怎么办</h3><blockquote>
-<p>答案就是: 内存冗余法.</p>
-</blockquote>
-<p>啥意思呢?<br>说白了, 就是避免麻烦, 避免出现本文中的出现的类似的问题, 我给每个子线程生成一个变量就好了, 每人一份, 不用抢. 当然, 这一份变量要开辟在堆空间上.</p>
-<p>其实也就是类似, 参考了 多进程中的做法, 就是fork之后, 原来父进程有的, 我几乎全copy一份( 有些PCB中的内容不会拷贝到子进程中去 ), 互不干扰.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程中的使用中, 这个传参的过程还是有点小坑的, 很多问题, 同一个线程中, 似乎很简单, 但是多线程, 而且感觉看不到摸不到, 调用时机也不明确, 会让我们觉得有点困扰. 但是仔细分析, 画图辅助, 其实问题解决起来也不难.</p>
-<hr>
-<h3 id="示意图如下"><a href="#示意图如下" class="headerlink" title="示意图如下:"></a>示意图如下:</h3><p><img src="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png" alt="3.png-67.9kB"></p>
+<blockquote class="blockquote-center"><br>真正的敏捷是一件很有价值的事。因为时间是衡量事业的标准，如金钱是衡量货物的标准。<br>—— <strong>弗·培根</strong><br></blockquote>
 
+<p>机器用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复, 以及本地存储, 为单个过程分配的那部分栈<br>称为: 栈帧 (stack frame).</p>
+<a id="more"></a>
+<h2 id="函数调用栈概述"><a href="#函数调用栈概述" class="headerlink" title="函数调用栈概述"></a>函数调用栈概述</h2><p>函数调用栈是一个优雅特殊的设计, 是一个栈顶朝下的栈, 栈底为高地址, 所以栈向低地址方向增长. 而%esp指针指向栈顶元素, 可以利用pushl将数据存入栈中并利用popl指令从栈中取出. 将栈指针的值<br>减小适当值可以分配没有指定的初始值的数据的空间. 类似地, 也可以通过增加栈指针来释放空间.</p>
+<h2 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h2><p>栈帧结构主要是就是用来 传递参数 , 存储返回信息, 保存寄存器, 以及本地存储.</p>
+<p>下图描绘了栈帧的通用结构, 最顶端的栈帧以两个指针为界定, 寄存器%ebp为帧指针, 而<br>寄存器%esp为栈指针. 当程序执行时, 栈指针可以移动, 因此大多数信息的访问都是相对于<br>帧指针的. </p>
+<p><img src="http://static.zybuluo.com/zhiyu/uga0iwt9cyq71e0if1dk7j30/timg.jpg" alt="timg.jpg-35.4kB"></p>
+<p>假设过程P(调用者)调用过程Q(被调用者), 则Q的参数放在P的栈帧中. 另外, 调用Q时, P<br>中的返回地址被压入栈中, 形成 P 的栈帧的末尾.</p>
+<p>返回地址就是当程序从Q返回时应该继续执行的地方. Q的栈帧从保存的帧指针的值(寄存器%ebp的副本)开始,<br>后面是保存的其他寄存器的值.</p>
+<p>过程Q也用栈来保存其他不能存放在寄存器中的局部变量. 原因如下:</p>
+<pre><code>- 没有足够多的寄存器存放所有的局部变量;
+- 有些局部变量是数组或结构, 因为必须通过数组或者结构引用来访问;
+- 要对一个局部变量使用地址操作符 &apos;&amp;&apos; ,我们必须能够为它生成一个地址.
+</code></pre><p>另外, Q会用栈帧来存放它调用的其他过程参数, 在被调用的过程中, 第一个参数放在相对于<br>%ebp偏移量为8的位置处, 剩下的参数(假设它们的数据类型需要的字节不超过4个)存储在后续的4字节块中,<br>所以参数i就在相对于%ebp偏移量为4+4i的地方.较大的参数(比如结构和较大的数字格式)需要栈上更大的区域.</p>
+<h2 id="打印出线程函数调用栈-iOS中"><a href="#打印出线程函数调用栈-iOS中" class="headerlink" title="打印出线程函数调用栈(iOS中)"></a>打印出线程函数调用栈(iOS中)</h2><p>思路: 挂起线程, 定位当线程的执行地址, 并从这个地址一级级回溯到线程的入口地址</p>
+<pre><code>- 线程被挂起时, 会保存线程运行时的状态, 由一个结构体
+    - thread_get_state
+    - vm_read_overwrite
+    - _STRUCT_MCONTEXT
+    - _STRUCT_MCONTEXT.__ss 得到当前线程的执行函数地址
+    _STRUCT_MCONTEXT.__ss.__fp 得到执行函数的前一个帧指针以及当前的帧指针
+    帧指针的地址就是调用函数的地址, 保存地址, 再通过内存镜像的符号表, 
+    从符号表中反向解析出地址对应的符号名, 也就是函数名
+    - _STRUCT_MCONTEXT.__es
+</code></pre>
       
     </div>
 
@@ -492,11 +481,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/小坑套老坑/" rel="tag"># 小坑套老坑</a>
-          
-            <a href="/tags/多线程/" rel="tag"># 多线程</a>
-          
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
         </div>
       
@@ -509,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/20/浅谈算法-之-并查集/" rel="next" title="浅谈算法 之 并查集">
-                <i class="fa fa-chevron-left"></i> 浅谈算法 之 并查集
+              <a href="/2017/04/09/Python2-7进阶-之-面向对象-3/" rel="next" title="Python2.7进阶 之 面向对象(3)">
+                <i class="fa fa-chevron-left"></i> Python2.7进阶 之 面向对象(3)
               </a>
             
           </div>
@@ -518,10 +503,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/21/搭建自己的Blog/" rel="prev" title="搭建自己的Blog">
-                搭建自己的Blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -691,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决呢"><span class="nav-number">1.</span> <span class="nav-text">如何解决呢?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法很简单-尽量不要指针传递"><span class="nav-number">1.1.</span> <span class="nav-text">1 方法很简单, 尽量不要指针传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一定要使用怎么办"><span class="nav-number">1.2.</span> <span class="nav-text">2. 一定要使用怎么办</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示意图如下"><span class="nav-number">2.1.</span> <span class="nav-text">示意图如下:</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用栈概述"><span class="nav-number">1.</span> <span class="nav-text">函数调用栈概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈帧结构"><span class="nav-number">2.</span> <span class="nav-text">栈帧结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打印出线程函数调用栈-iOS中"><span class="nav-number">3.</span> <span class="nav-text">打印出线程函数调用栈(iOS中)</span></a></li></ol></div>
             
 
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-09T07:39:52.638Z</updated>
+  <updated>2017-04-16T14:54:00.819Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,64 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>操作系统 之 函数栈帧结构</title>
+    <link href="http://yoursite.com/2017/04/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E4%B9%8B-%E5%87%BD%E6%95%B0%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84/"/>
+    <id>http://yoursite.com/2017/04/16/操作系统-之-函数栈帧结构/</id>
+    <published>2017-04-16T13:33:39.000Z</published>
+    <updated>2017-04-16T14:54:00.819Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>真正的敏捷是一件很有价值的事。因为时间是衡量事业的标准，如金钱是衡量货物的标准。<br>—— <strong>弗·培根</strong><br></blockquote>
+
+<p>机器用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复, 以及本地存储, 为单个过程分配的那部分栈<br>称为: 栈帧 (stack frame).</p>
+<a id="more"></a>
+<h2 id="函数调用栈概述"><a href="#函数调用栈概述" class="headerlink" title="函数调用栈概述"></a>函数调用栈概述</h2><p>函数调用栈是一个优雅特殊的设计, 是一个栈顶朝下的栈, 栈底为高地址, 所以栈向低地址方向增长. 而%esp指针指向栈顶元素, 可以利用pushl将数据存入栈中并利用popl指令从栈中取出. 将栈指针的值<br>减小适当值可以分配没有指定的初始值的数据的空间. 类似地, 也可以通过增加栈指针来释放空间.</p>
+<h2 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h2><p>栈帧结构主要是就是用来 传递参数 , 存储返回信息, 保存寄存器, 以及本地存储.</p>
+<p>下图描绘了栈帧的通用结构, 最顶端的栈帧以两个指针为界定, 寄存器%ebp为帧指针, 而<br>寄存器%esp为栈指针. 当程序执行时, 栈指针可以移动, 因此大多数信息的访问都是相对于<br>帧指针的. </p>
+<p><img src="http://static.zybuluo.com/zhiyu/uga0iwt9cyq71e0if1dk7j30/timg.jpg" alt="timg.jpg-35.4kB"></p>
+<p>假设过程P(调用者)调用过程Q(被调用者), 则Q的参数放在P的栈帧中. 另外, 调用Q时, P<br>中的返回地址被压入栈中, 形成 P 的栈帧的末尾.</p>
+<p>返回地址就是当程序从Q返回时应该继续执行的地方. Q的栈帧从保存的帧指针的值(寄存器%ebp的副本)开始,<br>后面是保存的其他寄存器的值.</p>
+<p>过程Q也用栈来保存其他不能存放在寄存器中的局部变量. 原因如下:</p>
+<pre><code>- 没有足够多的寄存器存放所有的局部变量;
+- 有些局部变量是数组或结构, 因为必须通过数组或者结构引用来访问;
+- 要对一个局部变量使用地址操作符 &apos;&amp;&apos; ,我们必须能够为它生成一个地址.
+</code></pre><p>另外, Q会用栈帧来存放它调用的其他过程参数, 在被调用的过程中, 第一个参数放在相对于<br>%ebp偏移量为8的位置处, 剩下的参数(假设它们的数据类型需要的字节不超过4个)存储在后续的4字节块中,<br>所以参数i就在相对于%ebp偏移量为4+4i的地方.较大的参数(比如结构和较大的数字格式)需要栈上更大的区域.</p>
+<h2 id="打印出线程函数调用栈-iOS中"><a href="#打印出线程函数调用栈-iOS中" class="headerlink" title="打印出线程函数调用栈(iOS中)"></a>打印出线程函数调用栈(iOS中)</h2><p>思路: 挂起线程, 定位当线程的执行地址, 并从这个地址一级级回溯到线程的入口地址</p>
+<pre><code>- 线程被挂起时, 会保存线程运行时的状态, 由一个结构体
+    - thread_get_state
+    - vm_read_overwrite
+    - _STRUCT_MCONTEXT
+    - _STRUCT_MCONTEXT.__ss 得到当前线程的执行函数地址
+    _STRUCT_MCONTEXT.__ss.__fp 得到执行函数的前一个帧指针以及当前的帧指针
+    帧指针的地址就是调用函数的地址, 保存地址, 再通过内存镜像的符号表, 
+    从符号表中反向解析出地址对应的符号名, 也就是函数名
+    - _STRUCT_MCONTEXT.__es
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;真正的敏捷是一件很有价值的事。因为时间是衡量事业的标准，如金钱是衡量货物的标准。&lt;br&gt;—— &lt;strong&gt;弗·培根&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;机器用栈来传递过程参数, 存储返回信息, 保存寄存器用于以后恢复, 以及本地存储, 为单个过程分配的那部分栈&lt;br&gt;称为: 栈帧 (stack frame).&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="操作系统" scheme="http://yoursite.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python2.7进阶 之 面向对象(3)</title>
     <link href="http://yoursite.com/2017/04/09/Python2-7%E8%BF%9B%E9%98%B6-%E4%B9%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-3/"/>
     <id>http://yoursite.com/2017/04/09/Python2-7进阶-之-面向对象-3/</id>
     <published>2017-04-09T05:18:00.000Z</published>
-    <updated>2017-04-09T07:39:52.638Z</updated>
+    <updated>2017-04-09T07:49:48.557Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -1526,69 +1579,6 @@ ref = b; // 报错, 不能改变引用
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="图论基础" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Dynamic &amp; Static Library</title>
-    <link href="http://yoursite.com/2017/03/20/Dynamic-Static-Library/"/>
-    <id>http://yoursite.com/2017/03/20/Dynamic-Static-Library/</id>
-    <published>2017-03-19T18:42:12.000Z</published>
-    <updated>2017-03-21T06:53:51.544Z</updated>
-    
-    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
-<!-- 其中 class="blockquote-center" 是必须的 -->
-<blockquote class="blockquote-center"><br>Microsoft isn’t evil, they just make really crappy operating systems.<br>—— <strong>Linus Torvalds</strong><br></blockquote>
-
-<blockquote>
-<p>本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.</p>
-</blockquote>
-<h2 id="0-动态库基础"><a href="#0-动态库基础" class="headerlink" title="0 动态库基础"></a>0 动态库基础</h2><pre><code>1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 --- xxx.so xxx.h -L -l
-</code></pre><a id="more"></a>
-<h2 id="1-Linux"><a href="#1-Linux" class="headerlink" title="1 Linux"></a>1 Linux</h2><p>(1) 制作Linux动态库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c xxx.c -o xxx.o -fPIC</div><div class="line">gcc -shared -o libxxxtest.so xxx.o</div></pre></td></tr></table></figure>
-<p>多文件项目中,可以参看我的另一篇关于 makefile 的介绍</p>
-<p>(2) 动态库的使用</p>
-<p>lib库名.so 文件本身不能执行</p>
-<p>项目目录结构如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">src/  -- xxx.c</div><div class="line">obj/  -- xxx.o 用于tia</div><div class="line">inc/  -- xxx.h 头文件</div><div class="line">lib/  -- xxx.so / xxx.a 库</div><div class="line">media/ -- 媒体文件</div><div class="line">Makefile</div></pre></td></tr></table></figure></p>
-<p>执行命令如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">链接器:  工作于生成可重定位文件阶段,也就是生成.o文件.任务:数据合并 和 地址回填(数据位置重定位)</div><div class="line"></div><div class="line">动态链接器: 工作于加载器加载可执行文件到内存后,程序运行时查找库函数期间.加载库函数到内存,重定位函数地址(绝对地址),用LD_LIBRARY_PATH.</div></pre></td></tr></table></figure></p>
-<p>运行: ./a.out —&gt;报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原因: 动态链接器找不到加载库函数的目录位置.</div><div class="line">ldd a.out 查看链接依赖情况, 是否存在&apos;not found&apos;字样</div></pre></td></tr></table></figure></p>
-<p>解决方案:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(1) 将自定义的动态库 cp 放到 标准 c库所在目录位置: /usr/bin/lib (不推荐)</div><div class="line">(2) 在可执行文件所在目录的位置, 执行命令: export LD_LIBRARY_PATH = 库路径 (临时生效)</div><div class="line">(3) export LD_LIBRAY_PATH = 库路径 写入 ~/.bash_profile 中, source 一下 令其即时生效, 或重启.</div><div class="line"></div><div class="line">ldd 再次查看,成功显示动态库位置 ./a.out 运行即可</div></pre></td></tr></table></figure></p>
-<h2 id="2-Windows"><a href="#2-Windows" class="headerlink" title="2 Windows"></a>2 Windows</h2><p>(1) 动态库的制作:</p>
-<blockquote>
-<ol>
-<li>打开vs2013 , 创建<code>win32 生成dll项目</code></li>
-<li>动态库的命名不要使用中文名</li>
-<li>导入src文件</li>
-<li>API函数导出即可<br> 只将用户使用的指定某几个函数从动态库中导出。   — xxx.lib<br> 使用 <code>__declspec(dllexport)</code> 宏，提示编译器。在编译程序的时候，需特殊处理的函数。<br> 注意： <code>.c 文件</code> 和 <code>.h 文件</code> 均需要添加该宏！！ （VS2013 要求）<br> 默认生成的动态库位于上层目录下的 Debug 目录内。</li>
-</ol>
-</blockquote>
-<p>(2) 动态库的制作结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xxx.dll  二进制目标函数集, 可被操作系统加载</div><div class="line">xxx.lib  是对dll的描述文件( 包含多少函数, 哪些被导出 )</div><div class="line">xxx.h </div><div class="line"></div><div class="line">以上三个文件提供给用户使用即可</div></pre></td></tr></table></figure></p>
-<p>(3) 动态库的调用和调试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">通知VS2013编译器，使用提供的动态库。</div><div class="line"></div><div class="line">将.dll .lib .h三个文件放置在 .c同级目录下。</div><div class="line"></div><div class="line">右键项目“属性”---“配置属性”---“链接器”---“输入”--- “附加依赖项”---下拉菜单“编辑”</div><div class="line"></div><div class="line">---- 输入【描述dll信息lib文件  xxxxx.lib】</div></pre></td></tr></table></figure></p>
-<p>常见错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1. 若xxx.lib配置错误，则VS编译器无法找到所用函数。 </div><div class="line"></div><div class="line">2. 如若在运行111.exe时，说明操作系统找不到动态库加载路径。 </div><div class="line"></div><div class="line">	(1)配置PATH;(2)将exe和动态库dll置于同一目录下即可。</div><div class="line"></div><div class="line">VS2015：</div><div class="line"></div><div class="line">	xxxx.lib  ---&gt; .c 源码 .h 头文件所在目录位置</div><div class="line"></div><div class="line">	xxxx.dll ---&gt; .exe 可执行文件所在目录位置。</div></pre></td></tr></table></figure></p>
-<p>动态库内存释放：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">遵循一个原则：谁分配，谁释放。</div><div class="line">调用动态库函数分配的内存，也一定要调用动态库函数来释放内存。</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
-&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;Microsoft isn’t evil, they just make really crappy operating systems.&lt;br&gt;—— &lt;strong&gt;Linus Torvalds&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;本文是一篇干货,主要展示了Linux和Windows下,静态库和动态库的生成方法.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;0-动态库基础&quot;&gt;&lt;a href=&quot;#0-动态库基础&quot; class=&quot;headerlink&quot; title=&quot;0 动态库基础&quot;&gt;&lt;/a&gt;0 动态库基础&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1. win下,动态库 -- xxx.dll  / xxx.lib xxx.h 
-2. Linux下,动态库 --- xxx.so xxx.h -L -l
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="开发工具" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
