@@ -324,6 +324,164 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/二叉树的遍历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Six">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Six's a Coder">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/11/二叉树的遍历/" itemprop="url">
+                  二叉树的遍历
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T18:44:28+08:00">
+                2017-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>较高级复杂的劳动，是这样一种劳动力的表现，这种劳动力比较普通的劳动力需要较高的教育费用，它的生产需要花费较多的劳动时间。因此，具有较高的价值。<br>—— <strong>马克思</strong><br></blockquote>
+
+<p>本文重要介绍一些二叉树的遍历—分为递归遍历和非递归遍历两种情况进行讨论。</p>
+<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><p>前序遍历，优先访问根节点，然后再分别访问左孩子和右孩子。</p>
+<h3 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">( TreeNode * root )</span></span>&#123;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;root-&gt;data&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    preOrder(root-&gt;leftNode);</div><div class="line">    preOrder(root-&gt;rightNode);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="非递归版本"><a href="#非递归版本" class="headerlink" title="非递归版本"></a>非递归版本</h3><p>思路：使用stack作为辅助容器。入栈根节点的左孩子，左孩子还有左孩子依次循环入栈，然后pop出栈顶节点，再压入栈顶节点的右孩子，再去找这个右孩子的左孩子，依次类推。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder2</span><span class="params">( TreeNode * root , <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path )</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</div><div class="line">    TreeNode *p = root;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span>( p != <span class="literal">NULL</span> || !s.empty() )&#123;</div><div class="line">        <span class="keyword">while</span>( p != <span class="literal">NULL</span> )&#123;<span class="comment">// 节点的左孩子入栈，左孩子还有左孩子继续入栈</span></div><div class="line">            path.push_back(p-&gt;val);</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="built_in">endl</span>;<span class="comment">// 输出，也就相当于遍历了该节点（入栈前就打印）</span></div><div class="line">            s.push(p);</div><div class="line">            p = p-&gt;leftNode;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>( !s.empty() )&#123;</div><div class="line">            p = s.top();</div><div class="line">            s.pop();<span class="comment">// pop出栈顶元素</span></div><div class="line">            p = p-&gt;rightNode;<span class="comment">// 如果栈顶元素有右孩子，那么去这个右孩子的左孩子。。没有，再找下一个栈顶节点</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p>中序遍历与前序区别不大：前序是入栈时打印，中序是出栈时打印。</p>
+<h3 id="递归版本-1"><a href="#递归版本-1" class="headerlink" title="递归版本"></a>递归版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">( TreeNode * root )</span></span>&#123;</div><div class="line">    inOrder(root-&gt;leftNode);</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;root-&gt;data&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    inOrder(root-&gt;rightNode);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="非递归版本-1"><a href="#非递归版本-1" class="headerlink" title="非递归版本"></a>非递归版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">inOrder2</span><span class="params">( TreeNode * root , <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path )</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</div><div class="line">    TreeNode *p = root;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span>( p != <span class="literal">NULL</span> || !s.empty() )&#123;</div><div class="line">        <span class="keyword">while</span>( p != <span class="literal">NULL</span> )&#123;<span class="comment">// 节点的左孩子入栈，左孩子还有左孩子继续入栈</span></div><div class="line">            s.push(p);</div><div class="line">            p = p-&gt;leftNode;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>( !s.empty() )&#123;</div><div class="line">            p = s.top();</div><div class="line">            s.pop();<span class="comment">// pop出栈顶元素</span></div><div class="line">            path.push_back(p-&gt;val);</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="built_in">endl</span>;<span class="comment">// 输出，也就相当于遍历了该节点（入栈前就打印）</span></div><div class="line">            p = p-&gt;rightNode;<span class="comment">// 如果栈顶元素有右孩子，那么去这个右孩子的左孩子。。没有，再找下一个栈顶节点</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><p>应用之一：树的销毁。</p>
+<h3 id="递归版本-2"><a href="#递归版本-2" class="headerlink" title="递归版本"></a>递归版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">( TreeNode * root )</span></span>&#123;</div><div class="line">    postOrder(root-&gt;leftNode);</div><div class="line">    postOrder(root-&gt;rightNode);</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;root-&gt;data&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="非递归版本-2"><a href="#非递归版本-2" class="headerlink" title="非递归版本"></a>非递归版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">( TreeNode * root , <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path )</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; s;</div><div class="line">    TreeNode *p = root;</div><div class="line">    TreeNode *temp;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span>( p != <span class="literal">NULL</span> || !s.empty() )&#123;</div><div class="line">        <span class="keyword">while</span>( p != <span class="literal">NULL</span> )&#123; <span class="comment">//沿左子树一直往下搜索，直至出现没有左子树的结点</span></div><div class="line">            TreeNode *tempNode = <span class="keyword">new</span> TreeNode;</div><div class="line">            tempNode-&gt;btnode = p;</div><div class="line">            tempNode-&gt;isFirst = <span class="literal">true</span>;</div><div class="line">            s.push(tempNode);</div><div class="line">            p = p-&gt;left;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>( !s.empty() )&#123;</div><div class="line">            temp = s.top();</div><div class="line">            s.pop();</div><div class="line">            <span class="keyword">if</span>(temp-&gt;isFirst == <span class="literal">true</span>)&#123;   <span class="comment">//表示是第一次出现在栈顶</span></div><div class="line">                temp-&gt;isFirst = <span class="literal">false</span>;</div><div class="line">                s.push(temp);</div><div class="line">                p = temp-&gt;btnode-&gt;right;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;  <span class="comment">//第二次出现在栈顶</span></div><div class="line">                <span class="built_in">cout</span>&lt;&lt;node-&gt;data&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">                path.push_back(temp-&gt;btnode-&gt;val);</div><div class="line">                p = <span class="literal">NULL</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><p>使用queue做辅助容器。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">( TreeNode * root )</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</div><div class="line">    q.push(root);</div><div class="line">    <span class="keyword">while</span>( !q.empty() )&#123;</div><div class="line">        </div><div class="line">        TreeNode *node = q.front();</div><div class="line">        q.pop();</div><div class="line">        </div><div class="line">        <span class="built_in">cout</span>&lt;&lt;node-&gt;data&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>( node-&gt;left )</div><div class="line">            q.push( node-&gt;left );</div><div class="line">        <span class="keyword">if</span>( node-&gt;right )</div><div class="line">            q.push( node-&gt;right );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/操作系统-之-函数栈帧结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1699,157 +1857,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/03/Python2-7-基础知识-一/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Six">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Six's a Coder">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/03/Python2-7-基础知识-一/" itemprop="url">
-                  Python2.7 基础知识(一)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-03T03:14:13+08:00">
-                2017-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
-<!-- 其中 class="blockquote-center" 是必须的 -->
-<blockquote class="blockquote-center"><br>道德普遍地被认为是人类的最高目的，因此也是教育的最高目的.<br>—— <strong>赫尔巴特</strong><br></blockquote>
-
-<h2 id="Python2-7基础（一）"><a href="#Python2-7基础（一）" class="headerlink" title="Python2.7基础（一）"></a>Python2.7基础（一）</h2><h3 id="拿什么写python"><a href="#拿什么写python" class="headerlink" title="拿什么写python"></a>拿什么写python</h3><p>（1） python官方IDE<br>（2） ipython<br>（3） sublime text<br>（4） Atom<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/03/Python2-7-基础知识-一/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1899,7 +1906,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1921,7 +1928,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
