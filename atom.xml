@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-12T18:13:14.289Z</updated>
+  <updated>2017-05-12T18:19:32.408Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/05/11/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/"/>
     <id>http://yoursite.com/2017/05/11/二叉树的遍历/</id>
     <published>2017-05-11T10:44:28.000Z</published>
-    <updated>2017-05-12T18:13:14.289Z</updated>
+    <updated>2017-05-12T18:19:32.408Z</updated>
     
     <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
@@ -29,6 +29,7 @@
 <p>本文重要介绍一些二叉树的遍历—分为递归遍历和非递归遍历两种情况进行讨论。</p>
 <h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><p>前序遍历，优先访问根节点，然后再分别访问左孩子和右孩子。</p>
 <h3 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">( TreeNode * root )</span></span>&#123;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;root-&gt;data&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    preOrder(root-&gt;leftNode);</div><div class="line">    preOrder(root-&gt;rightNode);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="非递归版本"><a href="#非递归版本" class="headerlink" title="非递归版本"></a>非递归版本</h3><p>思路：使用stack作为辅助容器。入栈根节点的左孩子，左孩子还有左孩子依次循环入栈，然后pop出栈顶节点，再压入栈顶节点的右孩子，再去找这个右孩子的左孩子，依次类推。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder2</span><span class="params">( TreeNode * root , <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path )</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</div><div class="line">    TreeNode *p = root;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span>( p != <span class="literal">NULL</span> || !s.empty() )&#123;</div><div class="line">        <span class="keyword">while</span>( p != <span class="literal">NULL</span> )&#123;<span class="comment">// 节点的左孩子入栈，左孩子还有左孩子继续入栈</span></div><div class="line">            path.push_back(p-&gt;val);</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="built_in">endl</span>;<span class="comment">// 输出，也就相当于遍历了该节点（入栈前就打印）</span></div><div class="line">            s.push(p);</div><div class="line">            p = p-&gt;leftNode;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>( !s.empty() )&#123;</div><div class="line">            p = s.top();</div><div class="line">            s.pop();<span class="comment">// pop出栈顶元素</span></div><div class="line">            p = p-&gt;rightNode;<span class="comment">// 如果栈顶元素有右孩子，那么去这个右孩子的左孩子。。没有，再找下一个栈顶节点</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p>中序遍历与前序区别不大：前序是入栈时打印，中序是出栈时打印。</p>
@@ -44,7 +45,11 @@
     
       &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
 &lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;较高级复杂的劳动，是
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;较高级复杂的劳动，是这样一种劳动力的表现，这种劳动力比较普通的劳动力需要较高的教育费用，它的生产需要花费较多的劳动时间。因此，具有较高的价值。&lt;br&gt;—— &lt;strong&gt;马克思&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;本文重要介绍一些二叉树的遍历—分为递归遍历和非递归遍历两种情况进行讨论。&lt;/p&gt;
+&lt;h2 id=&quot;前序遍历&quot;&gt;&lt;a href=&quot;#前序遍历&quot; class=&quot;headerlink&quot; title=&quot;前序遍历&quot;&gt;&lt;/a&gt;前序遍历&lt;/h2&gt;&lt;p&gt;前序遍历，优先访问根节点，然后再分别访问左孩子和右孩子。&lt;/p&gt;
+&lt;h3 id=&quot;递归版本&quot;&gt;&lt;a href=&quot;#递归版本&quot; class=&quot;headerlink&quot; title=&quot;递归版本&quot;&gt;&lt;/a&gt;递归版本&lt;/h3&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;preOrder&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;( TreeNode * root )&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt;&amp;lt;&amp;lt;root-&amp;gt;data&amp;lt;&amp;lt;&lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    preOrder(root-&amp;gt;leftNode);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    preOrder(root-&amp;gt;rightNode);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
