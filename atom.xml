@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-12T18:19:32.408Z</updated>
+  <updated>2017-05-14T08:42:45.808Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>多线程--死锁</title>
+    <link href="http://yoursite.com/2017/05/13/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81/"/>
+    <id>http://yoursite.com/2017/05/13/多线程-死锁/</id>
+    <published>2017-05-12T18:20:49.000Z</published>
+    <updated>2017-05-14T08:42:45.808Z</updated>
+    
+    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
+<!-- 其中 class="blockquote-center" 是必须的 -->
+<blockquote class="blockquote-center"><br>寿命的缩短与思想的虚耗成正比。<br>—— <strong>达尔文</strong><br></blockquote>
+
+<p>本文将简要介绍，死锁的基本概念以及造成死锁的原因和解决方法。</p>
+<h2 id="死锁的概念"><a href="#死锁的概念" class="headerlink" title="死锁的概念"></a>死锁的概念</h2><p>在计算机系统中有很多一次只能由一个进程使用的资源，如打印机，磁带机，一个文件的I节点等。<br>在多道程序设计环境中，若干进程往往要共享这类资源，而且一个进程所需要的资源不止一个。<br>这样，就会出现若干进程竞争有限资源，又推进顺序不当，从而构成无限期循环等待的局面。<br>这种状态就是死锁。<br><a id="more"></a></p>
+<p>死锁是进程死锁的简称，是由Dijkstra于1965年研究银行家算法时首先提出来的。它是计算机操作系统乃至并发程序设计中最难处理的问题之一。实际上，死锁问题不仅在计算机系统中存在，在我们日常生活中它也广泛存在。</p>
+<h3 id="什么是死锁"><a href="#什么是死锁" class="headerlink" title="什么是死锁"></a>什么是死锁</h3><p>先看2个例子：<br>1.在一条河上，有一座桥，桥面比较窄，只能容纳一辆汽车通过，无法两辆汽车并行。如果此时恰好有<br>两辆汽车分别在桥的两端驶上该桥，对A车来说，它走过桥的一段路（或者说占有了桥的一部分资源），要想通过桥还需等待B车让出另一端桥面，此时A车不能前进；对于B车来说，它走过桥的一段路（或者说占有了桥的一部分资源），要想通过桥还需等待A车让出另一端桥面，此时B车也不能前进。两边的车都不倒车，就导致造成互相等待对方让出桥面（资源），但是谁也不让路，就会无休止的等下去，这种现象就是死锁。<br>如果把汽车比喻成进程（或者线程），桥面比作资源，那么上述问题就描述为：进程A占有资源R1，等待进程B占有的资源R2；进程B占有资源R2，等待进程A占有的资源R1。而且资源R1和R2只允许一个进程占用，即，不允许两个进程同时占用。结果，两个进程都不能继续执行，若不采取其他措施，这种循环等待状况会无限期的持续下去，就发生了进程死锁。<br>2.在计算机系统中，涉及软件，硬件资源都可能发生死锁。例如：系统中只有一台CD-ROM驱动器和一台打印机，某一个进程占有了CD-ROM驱动器，又申请打印机；另一个进程占有了打印机，还申请CD-ROM。结果，两个进程都被阻塞，永远不能自行解除。</p>
+<p>所谓死锁，就是指多个进程循环等待它方占有的资源而无限期地僵持下去的局面。很显然，如果没有外力的作用，那么死锁涉及到的各个进程将永远处于封锁状态。</p>
+<h3 id="死锁的必要条件"><a href="#死锁的必要条件" class="headerlink" title="死锁的必要条件"></a>死锁的必要条件</h3><p>以下四个条件只要有一个不具备，那么系统就不会出现死锁：</p>
+<p>（1）互斥条件。即某个资源在一段时间内只能由一个进程占有，不能同时被两个或两个以上的进程占有。这种独占资源如CD-ROM驱动器，打印机等等，必须在占有该资源的进程主动释放它只会，其它进程才能占有该资源。这是由资源本身的属性所决定。</p>
+<p>（2）不可抢占条件。进程所获得的资源在未使用完毕之前，资源申请者不能强行地从资源占有者手中夺取资源，而只能由该资源的占有者进程自行释放。如过独木桥的人不能强迫对方后退，也不能非法地将对方推下桥，必须是桥上的人自己过桥后空出桥面（即主动释放占有资源），对方的人才能过桥。</p>
+<p>（3）占有且申请条件。进程至少已经占有一个资源，但又申请新的资源；由于该资源已被另外进程占有此时该进程阻塞；而且，它在等待新资源的同时，仍在继续占用已占有的资源。</p>
+<p>（4）循环等待条件。存在一个进程等待的序列（P1,P2,…,Pn）,其中P1等待P2所占有的某一资源，P2等待P3所占有的某一资源，…，而Pn等待P1所占有的某一资源，形成一个进程循环等待环。</p>
+<p>只有上述四个条件在死锁时会同时发生，也就是说，只要有一个必要条件不满足，则死锁就可以排除。</p>
+<h2 id="死锁的预防"><a href="#死锁的预防" class="headerlink" title="死锁的预防"></a>死锁的预防</h2><p>前面介绍了死锁的四个必要条件，那么只要破坏这四个必要条件中任意一个条件，那么死锁就不会发生。这就为解决死锁问题提供了可能。</p>
+<p>（1）打破互斥条件。即允许进程同时访问某些资源。但是，有的资源是不允许被同时访问的，像打印机等等，这是由资源本身的属性所决定的。所以，这种办法并无使用价值。</p>
+<p>（2）打破不可抢占条件。即允许进程强行从占有者那里夺取某些资源。就是说，当一个进程已占有了某些资源，它又申请了新的资源，但不能立即被满足时，它必须释放所占有的全部资源，以后再重新申请。它所释放的资源可以分配给其它进程。这就相当于该进程占有的资源被隐蔽地强占了。这种预防死锁的方法实现起来苦难，会降低系统性能。</p>
+<p>（3）打破占有且申请条件。可以实行资源预先分配策略。即进程在运行前一次性地向系统申请它所需要的全部资源。如果某个进程所需的全部资源得不到满足，则不分配任何资源，此进程暂不运行。只有当系统能够满足当前进程的全部资源需求时，才一次性地将所申请的资源全部分配给该进程。由于运行的进程已占有了它所需的全部资源，所以不会发生占有资源又申请资源的现象，因此不会发生死锁。但是，这种策略也有如下缺点：</p>
+<ul>
+<li>在许多情况下，一个进程在执行之前不可能知道它所需要的全部资源。这是由于进程在执行时是动态的，可不预测的；</li>
+<li>资源利用率低。无论所分资源何时用到，一个进程只有在占有所需的全部资源后才能执行。即使有些资源最后才被该进程用到一次，在该进程在生存期间却一直占有它们，造成长期占着不用的状况。这显然是一种极大的资源浪费。</li>
+<li>降低了进程的并发性。因为资源有限，又加上存在浪费，能分配到所需的全部资源的进程个数就必然少了。</li>
+</ul>
+<p>（4）打破循环等待条件。实行资源有序分配策略。采用这种策略，即把资源事先分类编号，按号分配，使进程在申请，占用资源时不会形成环路。所有进程对资源的请求必须严格按照资源序号递增的顺序提出。进程占用了小号资源，才能申请大号资源，就不会产生环路，从而预防了死锁。这种策略与前面的策略相比，资源的利用率和系统吞吐量都有很大提高，但是也存在以下缺点：</p>
+<ul>
+<li>限制了进程对资源的请求，同时给系统中所有资源合理编号也是件困难事，并增加了系统开销；</li>
+<li>为了遵循按编号申请的次序，暂不使用的资源也需要提前申请，从而增加了进程对资源的占用时间。</li>
+</ul>
+<h2 id="死锁的避免"><a href="#死锁的避免" class="headerlink" title="死锁的避免"></a>死锁的避免</h2><p>上面我们讲到的死锁预防是排除死锁的静态策略，它使产生死锁的四个必要条件不能同时具备，从而对进程申请资源的活动加以限制，以保证死锁不会发生。下面我们介绍排除死锁的动态策略–死锁的避免，它不限制进程有关申请资源的命令，而是对进程所发出的每一个申请资源命令加以动态地检查，并根据检查结果决定是否进行资源分配。就是说，在资源分配过程中若预测有发生死锁的可能性，则加以避免。这种方法的关键是确定资源分配的安全性。</p>
+<h3 id="安全序列"><a href="#安全序列" class="headerlink" title="安全序列"></a>安全序列</h3><p>我们首先引入安全序列的定义：所谓系统是安全的，是指系统中所有进程能够按照某一种次序分配资源。并且依次地运行完毕，这种进程序列（P1，P2，…，Pn）就是安全序列。如果存在这样一个安全序列，则系统就是安全的；如果不存在这样一个安全序列，则系统是不安全的。</p>
+<p>安全序列『P1，P2，…，Pn』是这样组成的：若对每一个进程Pi，它需要的附加资源可以被系统中当前可用资源加上所有进程Pj当前所占有资源之和所满足，则{P1,P2,…Pn}为一个安全序列，这时系统处于安全状态，不会进入死锁状态。</p>
+<p>虽然存在安全序列时一定不会有死锁发生，但是系统进入不了不安全状态（四个死锁的必要条件同时发生）也未必会产生死锁。当然，产生死锁后，系统一定处于不安全状态。</p>
+<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><p>这是一个著名的避免死锁的算法，是由Dijstra首先提出来并加以解决的。</p>
+<p><strong>背景知识</strong>：<br>一个银行家如何将一定数目的资金安全地借给若干客户，使这些客户既能借到钱完成要干的事，同时银行家又能收回全部资金而不至于破产，这就是银行家问题，这个问题同操作系统中资源分配问题十分相似：银行家就像一个操作系统，客户就像运行时的进程，银行家的资金就是系统的资源。</p>
+<p><strong>问题的描述</strong></p>
+<p>一个银行家拥有一定数量的资金，有若干个客户要贷款。每个客户须在一开始就声明他所需贷款的总额。若该客户贷款总额不超过银行家的资金总数，银行家可以接收客户的要求。客户贷款是以每次一个资金单位的方式进行的，客户在借满所需的全部单位款额之前可能会等待，但银行家保证这种等待是有限的，可完成的。</p>
+<p>例如：有三个客户C1，C2，C3，向银行家贷款，该银行家的资金总额为10个资金单位，其中C1客户要借9个资金单位，C2客户要借3个资金单位，C3要借8个资金单位，总计20个资金单位。某一时刻的状态图所示：</p>
+<p><img src="http://static.zybuluo.com/zhiyu/tg9d07hncpmyrhxi0dgfqa2m/QQ%E6%88%AA%E5%9B%BE20170514163934.jpg" alt="QQ截图20170514163934.jpg-13.6kB"></p>
+<p>  对于a图的状态，按照安全序列的要求，我们选的第一个客户应满足该客户所需的贷款小于等于银行家当前所剩余的钱款，可以看出只有C2客户能被满足：C2客户需1个资金单位，小银行家手中的2个资金单位，于是银行家把1个资金单位借给C2客户，使之完成工作并归还所借的3个资金单位的钱，进入b图。同理，银行家把4个资金单位借给C3客户，使其完成工作，在c图中，只剩一个客户C1，它需7个资金单位，这时银行家有8个资金单位，所以C1也能顺利借到钱并完成工作。最后（见图d）银行家收回全部10个资金单位，保证不赔本。那麽客户序列{C1，C2，C3}就是个安全序列，按照这个序列贷款，银行家才是安全的。否则的话，若在图b状态时，银行家把手中的4个资金单位借给了C1，则出现不安全状态：这时C1，C3均不能完成工作，而银行家手中又没有钱了，系统陷入僵持局面，银行家也不能收回投资。</p>
+<p>  综上所述，银行家算法是从当前状态出发，逐个按安全序列检查各客户谁能完成其工作，然后假定其完成工作且归还全部贷款，再进而检查下一个能完成工作的客户，……。如果所有客户都能完成工作，则找到一个安全序列，银行家才是安全的。</p>
+<p>  从上面分析看出，银行家算法允许死锁必要条件中的互斥条件，占有且申请条件，不可抢占条件的存在，这样，它与预防死锁的几种方法相比较，限制条件少了，资源利用程度提高了。</p>
+<p>参考文献：<a href="http://blog.csdn.net/abigale1011/article/details/6450845" target="_blank" rel="external">什么是死锁及死锁的必要条件和解决方法</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
+&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;寿命的缩短与思想的虚耗成正比。&lt;br&gt;—— &lt;strong&gt;达尔文&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;本文将简要介绍，死锁的基本概念以及造成死锁的原因和解决方法。&lt;/p&gt;
+&lt;h2 id=&quot;死锁的概念&quot;&gt;&lt;a href=&quot;#死锁的概念&quot; class=&quot;headerlink&quot; title=&quot;死锁的概念&quot;&gt;&lt;/a&gt;死锁的概念&lt;/h2&gt;&lt;p&gt;在计算机系统中有很多一次只能由一个进程使用的资源，如打印机，磁带机，一个文件的I节点等。&lt;br&gt;在多道程序设计环境中，若干进程往往要共享这类资源，而且一个进程所需要的资源不止一个。&lt;br&gt;这样，就会出现若干进程竞争有限资源，又推进顺序不当，从而构成无限期循环等待的局面。&lt;br&gt;这种状态就是死锁。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="死锁" scheme="http://yoursite.com/tags/%E6%AD%BB%E9%94%81/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树的遍历</title>
@@ -1475,78 +1547,6 @@ ref = b; // 报错, 不能改变引用
     
     
       <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux多线程传参问题</title>
-    <link href="http://yoursite.com/2017/03/21/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BC%A0%E5%8F%82%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2017/03/21/Linux多线程传参问题/</id>
-    <published>2017-03-20T16:49:40.000Z</published>
-    <updated>2017-03-24T08:02:55.292Z</updated>
-    
-    <content type="html"><![CDATA[<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
-<!-- 其中 class="blockquote-center" 是必须的 -->
-<p><blockquote class="blockquote-center"><br>寿命的缩短与思想的虚耗成正比。<br>—— <strong>达尔文</strong><br></blockquote><br><a id="more"></a></p>
-<p>在Linux多线程创建函数<code>pthread_create</code>中, 它的最后一个参数, 允许线程回调函数中传入一个参数, 一直以来, 我们被警告尽量不要在这个参数中传递指针, 尽量进行值传递.. 但是为什么呢?</p>
-<p>下面, 我们来看这样一段代码:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ThreadInfo_&#123;</div><div class="line">    <span class="keyword">void</span> *handle;</div><div class="line">    <span class="keyword">int</span> iLoop;</div><div class="line">    <span class="keyword">int</span> iArrayIndex;</div><div class="line">&#125; ThreadInfo;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">start_routine</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>&#123;</div><div class="line"></div><div class="line">    ThreadInfo *threadInfo = (ThreadInfo *)arg;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; threadInfo-&gt;iLoop ; ++ i )</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"第%d线程, 第%d圈"</span>, threadInfo-&gt;iArrayIndex, i+<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">pthread_t</span> pidArray[<span class="number">1024</span>];</div><div class="line">    </div><div class="line">    ThreadInfo threadInfo;</div><div class="line">    <span class="built_in">memset</span>( &amp;threadInfo , <span class="number">0</span> , <span class="keyword">sizeof</span>(ThreadInfo) );</div><div class="line">    </div><div class="line">    <span class="keyword">void</span> *handle = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> iLoop = <span class="number">2</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )&#123;</div><div class="line">    </div><div class="line">        threadInfo.handle = handle;</div><div class="line">        threadInfo.iLoop = iLoop;</div><div class="line">        threadInfo.iArrayIndex = i+<span class="number">1</span>;</div><div class="line">        </div><div class="line">        pthread_create( &amp;pidArray[i] , <span class="literal">NULL</span> , start_routine , (<span class="keyword">void</span>*)&amp;threadInfo );</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; ++ i )</div><div class="line">        pthread_join( pidArray[i] , <span class="literal">NULL</span> );</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>很简单的一段逻辑, 我们有这样一个需求:</p>
-<blockquote>
-<p>创建10个线程,每个线程打印: 当前线程在处理第几圈, 打印顺序当然是不确定的</p>
-</blockquote>
-<p>预期:</p>
-<blockquote>
-<p>“第1线程, 第1圈”<br>“第2线程, 第1圈”<br>“第3线程, 第2圈”<br>“第4线程, 第1圈”<br>“第5线程, 第2圈”<br>…</p>
-</blockquote>
-<p>实际上:</p>
-<blockquote>
-<p>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第1圈”<br>“第10线程, 第2圈”<br>“第10线程, 第2圈”<br>…</p>
-</blockquote>
-<p>打印的结果, 大大的出乎我们的意料, 没有按照我们之前的预想, 都是打印出第10个线程在做事.为什么会这样呢?</p>
-<p>原因其实也不难分析:</p>
-<p>我们仔细再回顾一下代码, 不难发现一个问题, 那就是threadInfo这个东西, 在主线程中, 其实只被创建了一次, 而每次for循环中, 进行修改它的内容而已.</p>
-<p>貌似问题是出在这里, 这还不够.</p>
-<p>我们还知道这样几个事实, 那就是这段代码中:</p>
-<blockquote>
-<ol>
-<li>主线程函数栈和子线程函数栈其实都是同一个进程的栈空间内的;</li>
-<li>主线程在创建10个子线程的整个过程中, 一直是不会被打断的;</li>
-<li>10个子线程看似是一个个创建出来的, 但是其实相当于10个线程并发着创建出来, 然后一起去抢占cpu的资源的;</li>
-<li>主线程和子线程抢占cpu的能力上, 大概是 主线程会优先90%抢占, 理论依据不足, 这里主要是经验值.</li>
-</ol>
-</blockquote>
-<p>好, 这几个事实的基础上, 我们知道了10个子线程一起创建好了, 然后去抢占资源, 抢到了然后去执行回调函数, 处理相关的逻辑.</p>
-<p>而且, 主线程也不会等待或阻塞, 依次继续执行, 那么, 控制线程编号的变量, iArrayIndex其实本质上, 是在主线程自己的栈帧中的, 开辟关于threadInfo的一段空间, 空间里有一个 iArrayIndex 变量的内容.</p>
-<p>再看子线程空间, 线程空间中, 由于是通过指针的方式获取到 threadInfo的值, 那么,线程不断的抢占, 然后通过指针访问主线程栈帧中的一个变量中的一个属性内容, 而且, 这个内容在主线程中不断的自增变化.</p>
-<p>而且, 主线程有90%的几率优先抢占到资源, 所以整个for循环执行完, iArraryIndex 已经自增为10, 这时, 子线程们才陆陆续续抢到cpu, 然后去回调, 而且, 还是通过指针, 访问主线程的栈帧中的iArrayIndex变量, 所以打印结果当然全是<code>线程10</code>咯~~</p>
-<h2 id="如何解决呢"><a href="#如何解决呢" class="headerlink" title="如何解决呢?"></a>如何解决呢?</h2><h3 id="1-方法很简单-尽量不要指针传递"><a href="#1-方法很简单-尽量不要指针传递" class="headerlink" title="1 方法很简单, 尽量不要指针传递"></a>1 方法很简单, 尽量不要指针传递</h3><p>因为创建过程中, 被指向的对象很可能已经在主线程中发生变化, 比如本题中.<br>不变化的话, 就可以传了吗? 接着看.</p>
-<h3 id="2-一定要使用怎么办"><a href="#2-一定要使用怎么办" class="headerlink" title="2. 一定要使用怎么办"></a>2. 一定要使用怎么办</h3><blockquote>
-<p>答案就是: 内存冗余法.</p>
-</blockquote>
-<p>啥意思呢?<br>说白了, 就是避免麻烦, 避免出现本文中的出现的类似的问题, 我给每个子线程生成一个变量就好了, 每人一份, 不用抢. 当然, 这一份变量要开辟在堆空间上.</p>
-<p>其实也就是类似, 参考了 多进程中的做法, 就是fork之后, 原来父进程有的, 我几乎全copy一份( 有些PCB中的内容不会拷贝到子进程中去 ), 互不干扰.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程中的使用中, 这个传参的过程还是有点小坑的, 很多问题, 同一个线程中, 似乎很简单, 但是多线程, 而且感觉看不到摸不到, 调用时机也不明确, 会让我们觉得有点困扰. 但是仔细分析, 画图辅助, 其实问题解决起来也不难.</p>
-<hr>
-<h3 id="示意图如下"><a href="#示意图如下" class="headerlink" title="示意图如下:"></a>示意图如下:</h3><p><img src="http://static.zybuluo.com/zhiyu/ha2tfj9qio5kb19j2le6c5k2/3.png" alt="3.png-67.9kB"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;
-&lt;!-- 其中 class=&quot;blockquote-center&quot; 是必须的 --&gt;
-&lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;br&gt;寿命的缩短与思想的虚耗成正比。&lt;br&gt;—— &lt;strong&gt;达尔文&lt;/strong&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="小坑套老坑" scheme="http://yoursite.com/tags/%E5%B0%8F%E5%9D%91%E5%A5%97%E8%80%81%E5%9D%91/"/>
-    
-      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
